@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Footer } from '../components/Footer';
 import { MaskedLine } from '../components/Chapter';
 import { ProductVisual } from '../components/ProductVisual';
+import { SeriesGrid } from '../components/SeriesGrid';
+import { TrustedBy } from '../components/TrustedBy';
 
 const SPECS = [
     { k: 'STANDARD', v: 'Wi-Fi 7 (802.11be)' },
@@ -11,6 +13,8 @@ const SPECS = [
     { k: 'LINK OPERATION', v: 'Multi-Link Operation (MLO)' },
     { k: 'WAN', v: '10G SFP+ / 2.5G Ethernet' },
     { k: 'MESH', v: 'EasyMesh certified' },
+    { k: 'CELLULAR', v: 'e-SIM + physical SIM options' },
+    { k: 'VOICE', v: 'FXS telephone port' },
     { k: 'MANAGEMENT', v: 'TR-369 / USP + Xunison Cloud' },
 ];
 
@@ -20,7 +24,7 @@ export default function ProductPage() {
             <section className="pt-36 pb-24 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto">
                 <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mb-6 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
-                    PRODUCT // D71 GATEWAY
+                    FLAGSHIP // D71 — D SERIES · LATEST
                 </div>
                 <h1 className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.04]">
                     <MaskedLine>THE GATEWAY,</MaskedLine>
@@ -87,6 +91,60 @@ export default function ProductPage() {
                     </div>
                 </div>
             </section>
+            <section className="bg-[#0B1120] text-white py-24 px-6 sm:px-12 md:px-24 border-t border-white/5">
+                <div className="max-w-7xl mx-auto">
+                    <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6 flex items-center gap-3">
+                        <span className="w-8 h-px bg-current" />
+                        THE LINEUP // D · M · Q · O
+                    </div>
+                    <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl max-w-2xl leading-tight mb-12">
+                        Four series. One platform.
+                    </h2>
+                    <SeriesGrid dark />
+                </div>
+            </section>
+
+            <section className="py-24 px-6 sm:px-12 md:px-24 bg-[#F8FAFC]">
+                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mb-6 flex items-center gap-3">
+                            <span className="w-8 h-px bg-current" />
+                            BUILT TO ORDER // PER OPERATOR
+                        </div>
+                        <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl leading-tight">
+                            Shaped by your market, not the other way around.
+                        </h2>
+                        <p className="mt-6 text-base md:text-lg leading-relaxed text-slate-600 max-w-lg">
+                            Every deployment is configured around the operator's demand, demography and market size —
+                            from radio bands and firmware to casing and branding. You define the business case; we build the hardware to match.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                        {[
+                            { k: 'E-SIM', v: 'Programmable carrier profiles, remotely provisioned' },
+                            { k: 'PHYSICAL SIM', v: 'Dual-SIM failover for cellular-backed series' },
+                            { k: 'FXS TELEPHONE', v: 'RJ11 voice port for landline replacement' },
+                            { k: 'BAND PLANS', v: 'Regional spectrum matched to market' },
+                            { k: 'FIRMWARE', v: 'Operator-branded UI, TR-369 fleet control' },
+                            { k: 'BRANDING', v: 'Casing, colorway and packaging per operator' },
+                        ].map((s, i) => (
+                            <motion.div
+                                key={s.k}
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: i * 0.05 }}
+                                className="border-l-2 border-[#0066FF]/30 pl-4"
+                            >
+                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-400">{s.k}</div>
+                                <div className="font-display font-medium mt-1 text-sm sm:text-base">{s.v}</div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <TrustedBy />
             <Footer />
         </div>
     );

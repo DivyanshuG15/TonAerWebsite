@@ -24,6 +24,11 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-08-29, update 2)
+- Product lineup expansion: D / M / Q / O series grid (D71 flagged as LATEST flagship), "Built to order" B2B customization section (e-SIM, physical SIM failover, FXS telephone port, regional band plans, operator firmware, casing/branding), TrustedBy client strip (Earthlink, Orangeburg IQ, Hitron, STC) on Product page + homepage after the experience
+- Nav/Footer relabeled "Products"
+- D71 spec grid extended with CELLULAR (e-SIM + SIM) and VOICE (FXS) rows
+
 ## Implemented (2026-08-29)
 - Full 8-scene scroll experience with branded loading screen (XUNISON + signal pulse + counter)
 - Procedural D71 (unibody, vents, ports, pulsing cyan LED, logo dot) with GLB swap architecture

@@ -4,7 +4,7 @@ import { scrollStore } from '../experience/store';
 
 const LINKS = [
     { to: '/', label: 'Experience', testId: 'nav-experience-link' },
-    { to: '/product', label: 'D71 Gateway', testId: 'nav-product-link' },
+    { to: '/product', label: 'Products', testId: 'nav-product-link' },
     { to: '/technology', label: 'Technology', testId: 'nav-technology-link' },
     { to: '/support', label: 'Support', testId: 'nav-support-link' },
 ];

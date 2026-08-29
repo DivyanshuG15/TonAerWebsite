@@ -7,6 +7,7 @@ import { Chapter, MaskedLine } from '../components/Chapter';
 import { Marquee } from '../components/Marquee';
 import { LeadForm } from '../components/LeadForm';
 import { Footer } from '../components/Footer';
+import { TrustedBy } from '../components/TrustedBy';
 
 function HeroLine({ ready, delay, className = '', children }) {
     return (
@@ -210,6 +211,7 @@ export default function HomePage() {
                     </div>
                 </section>
             </main>
+            <TrustedBy />
             <Footer />
         </div>
     );

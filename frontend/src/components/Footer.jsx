@@ -16,7 +16,7 @@ export function Footer() {
                 <div>
                     <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-500 mb-4">PRODUCT</div>
                     <ul className="space-y-2 text-sm">
-                        <li><Link to="/product" className="hover:text-white transition-colors" data-testid="footer-product-link">D71 Gateway</Link></li>
+                        <li><Link to="/product" className="hover:text-white transition-colors" data-testid="footer-product-link">Product Series</Link></li>
                         <li><Link to="/technology" className="hover:text-white transition-colors" data-testid="footer-technology-link">Technology</Link></li>
                         <li><Link to="/#contact" className="hover:text-white transition-colors" data-testid="footer-demo-link">Request Demo</Link></li>
                     </ul>
