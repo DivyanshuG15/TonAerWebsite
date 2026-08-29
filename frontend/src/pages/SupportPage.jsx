@@ -1,0 +1,74 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Footer } from '../components/Footer';
+import { MaskedLine } from '../components/Chapter';
+
+const FAQS = [
+    {
+        q: 'How do I set up my D71 gateway?',
+        a: 'Connect the D71 to your fibre ONT or modem via the 2.5G WAN port, power on, and wait for the LED strip to turn solid cyan. The Xunison app walks you through the rest in under two minutes — or your provider can zero-touch provision it before it ships.',
+    },
+    {
+        q: 'What do the LED colors mean?',
+        a: 'Pulsing cyan: connecting. Solid cyan: online and healthy. Amber: a band is degraded — the AI engine is usually already rebalancing. Rose: no upstream connection; check your WAN cable or contact your provider.',
+    },
+    {
+        q: 'How do firmware updates work?',
+        a: 'Updates are delivered automatically from the Xunison Cloud during low-usage windows. There is nothing to download or install, and your network stays online throughout.',
+    },
+    {
+        q: 'Can I extend coverage with mesh?',
+        a: 'Yes. The D71 is EasyMesh certified — add any EasyMesh node or additional D71 units and they self-organize into one seamless network with client steering.',
+    },
+    {
+        q: 'I am a service provider. Where is the ISP portal?',
+        a: 'Fleet management, telemetry, remote diagnostics and AI optimization controls live in the Xunison Cloud portal. Request access via the demo form and our team will provision your operator account.',
+    },
+];
+
+export default function SupportPage() {
+    return (
+        <div className="bg-[#F8FAFC] text-slate-900" data-testid="support-page">
+            <section className="pt-36 pb-16 px-6 sm:px-12 md:px-24 max-w-5xl mx-auto">
+                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mb-6 flex items-center gap-3">
+                    <span className="w-8 h-px bg-current" />
+                    SUPPORT // HELP CENTER
+                </div>
+                <h1 className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.04]">
+                    <MaskedLine>ANSWERS,</MaskedLine>
+                    <MaskedLine delay={0.12}>INSTANTLY.</MaskedLine>
+                </h1>
+            </section>
+            <section className="px-6 sm:px-12 md:px-24 max-w-5xl mx-auto pb-24 space-y-4">
+                {FAQS.map((f, i) => (
+                    <motion.details
+                        key={i}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: i * 0.05 }}
+                        className="group rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-xl px-6 py-5 open:border-[#0066FF]/40 open:shadow-lg open:shadow-[#0066FF]/5 transition-all duration-300"
+                        data-testid={`faq-item-${i}`}
+                    >
+                        <summary className="cursor-pointer list-none flex items-center justify-between font-display font-medium text-base sm:text-lg">
+                            {f.q}
+                            <span className="ml-4 font-mono-xu text-[#0066FF] transition-transform duration-300 group-open:rotate-45">+</span>
+                        </summary>
+                        <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">{f.a}</p>
+                    </motion.details>
+                ))}
+                <div className="pt-10 text-center">
+                    <p className="text-slate-500 text-sm mb-5">Still stuck? Our team responds within one business day.</p>
+                    <Link
+                        to="/#contact"
+                        data-testid="support-contact-cta"
+                        className="inline-block rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25"
+                    >
+                        Contact Xunison
+                    </Link>
+                </div>
+            </section>
+            <Footer />
+        </div>
+    );
+}
