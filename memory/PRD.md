@@ -24,6 +24,11 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-08-29, update 3)
+- Dedicated series detail pages at /series/d, /series/m, /series/q, /series/o — each with its own live 3D device variant (parameterized body/panel/LED/logo colors, vent count, SIM tray on Q), full spec sheet (10 rows), feature trio, "Built to your market" CTA, and a cross-series lineup nav
+- D71 device component now parameterized (bodyColor, panelColor, logoColor, vents, ports, simTray) — variants: D flagship white, M value grey, Q cellular green-LED + SIM tray, O ruggedized slate + amber LED
+- SeriesGrid cards on Products page now link to their detail pages with EXPLORE affordance
+
 ## Implemented (2026-08-29, update 2)
 - Product lineup expansion: D / M / Q / O series grid (D71 flagged as LATEST flagship), "Built to order" B2B customization section (e-SIM, physical SIM failover, FXS telephone port, regional band plans, operator firmware, casing/branding), TrustedBy client strip (Earthlink, Orangeburg IQ, Hitron, STC) on Product page + homepage after the experience
 - Nav/Footer relabeled "Products"

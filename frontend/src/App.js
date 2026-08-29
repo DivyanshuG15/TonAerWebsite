@@ -7,6 +7,7 @@ import HomePage from '@/pages/HomePage';
 import ProductPage from '@/pages/ProductPage';
 import TechnologyPage from '@/pages/TechnologyPage';
 import SupportPage from '@/pages/SupportPage';
+import SeriesPage from '@/pages/SeriesPage';
 import { initQuality } from '@/experience/store';
 
 initQuality();
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/product" element={<ProductPage />} />
                     <Route path="/technology" element={<TechnologyPage />} />
                     <Route path="/support" element={<SupportPage />} />
+                    <Route path="/series/:seriesId" element={<SeriesPage />} />
                 </Routes>
             </BrowserRouter>
             <Toaster position="bottom-right" richColors />

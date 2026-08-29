@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const SERIES = [
     {
@@ -32,21 +33,21 @@ export function SeriesGrid({ dark = true }) {
     return (
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="series-grid">
             {SERIES.map((s, i) => (
-                <motion.div
-                    key={s.letter}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className={`relative rounded-2xl border p-8 overflow-hidden group transition-all duration-500 hover:-translate-y-1 ${
-                        s.latest
-                            ? 'border-[#0066FF]/60 bg-[#0066FF]/10 shadow-xl shadow-[#0066FF]/10'
-                            : dark
-                              ? 'border-white/10 bg-white/5 hover:border-white/25'
-                              : 'border-slate-200 bg-white hover:border-[#0066FF]/40'
-                    }`}
-                    data-testid={`series-card-${s.letter.toLowerCase()}`}
-                >
+                <Link key={s.letter} to={`/series/${s.letter.toLowerCase()}`} data-testid={`series-link-${s.letter.toLowerCase()}`}>
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                        className={`relative rounded-2xl border p-8 overflow-hidden group transition-all duration-500 hover:-translate-y-1 h-full ${
+                            s.latest
+                                ? 'border-[#0066FF]/60 bg-[#0066FF]/10 shadow-xl shadow-[#0066FF]/10'
+                                : dark
+                                  ? 'border-white/10 bg-white/5 hover:border-white/25'
+                                  : 'border-slate-200 bg-white hover:border-[#0066FF]/40'
+                        }`}
+                        data-testid={`series-card-${s.letter.toLowerCase()}`}
+                    >
                     <div className={`absolute -top-6 -right-2 font-display font-bold text-[7rem] leading-none select-none ${
                         s.latest ? 'text-[#0066FF]/15' : dark ? 'text-white/5' : 'text-slate-900/5'
                     }`}>
@@ -79,7 +80,13 @@ export function SeriesGrid({ dark = true }) {
                             </span>
                         ))}
                     </div>
-                </motion.div>
+                    <div className={`mt-6 font-mono-xu text-[10px] tracking-[0.3em] transition-colors duration-300 ${
+                        s.latest ? 'text-sky-400' : dark ? 'text-slate-500 group-hover:text-white' : 'text-slate-400 group-hover:text-[#0066FF]'
+                    }`}>
+                        EXPLORE {s.letter} SERIES →
+                    </div>
+                    </motion.div>
+                </Link>
             ))}
         </div>
     );
