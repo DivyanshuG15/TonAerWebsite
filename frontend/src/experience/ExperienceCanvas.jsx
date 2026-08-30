@@ -15,7 +15,7 @@ import { EcosystemScene } from './EcosystemScene';
 
 function SceneRoot() {
     const { gl, scene, setDpr } = useThree();
-    const bg = useMemo(() => new THREE.Color('#F8FAFC'), []);
+    const bg = useMemo(() => new THREE.Color('#020617'), []);
     const fpsAcc = useRef({ frames: 0, time: 0, level: 0 });
 
     useEffect(() => {

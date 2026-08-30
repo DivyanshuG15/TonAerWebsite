@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ExperienceCanvas } from '../experience/ExperienceCanvas';
 import { ScrollRig } from '../experience/ScrollRig';
+import { scrollStore } from '../experience/store';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { Chapter, MaskedLine } from '../components/Chapter';
 import { Marquee } from '../components/Marquee';
@@ -25,54 +27,78 @@ function HeroLine({ ready, delay, className = '', children }) {
 }
 
 function HeroOverlay({ ready }) {
+    const explore = () => {
+        if (scrollStore.lenis) scrollStore.lenis.scrollTo(window.innerHeight * 1.6, { duration: 1.8 });
+        else window.scrollTo({ top: window.innerHeight * 1.6, behavior: 'smooth' });
+    };
     return (
-        <section className="relative text-slate-900" style={{ height: '140vh' }} data-testid="hero-section">
-            <div className="sticky top-0 h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 pointer-events-none overflow-hidden">
+        <section className="relative text-white" style={{ height: '140vh' }} data-testid="hero-section">
+            <div className="sticky top-0 h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
                 <motion.div
                     initial={{ opacity: 0 }}
-                    animate={ready ? { opacity: 0.65 } : {}}
-                    transition={{ delay: 0.8, duration: 0.8 }}
-                    className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mb-8 flex items-center gap-3"
+                    animate={ready ? { opacity: 1 } : {}}
+                    transition={{ delay: 0.7, duration: 0.8 }}
+                    className="font-mono-xu text-[11px] tracking-[0.4em] text-sky-400 flex items-center gap-4"
                 >
-                    <span className="w-8 h-px bg-current" />
-                    01 // XUNISON D71 — WI-FI 7 TRI-BAND GATEWAY
+                    <span className="w-8 h-px bg-current opacity-60" />
+                    CONNECTED INTELLIGENCE
+                    <span className="w-8 h-px bg-current opacity-60" />
                 </motion.div>
                 <h1
-                    className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.04]"
+                    className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.14] mt-9"
                     data-testid="hero-headline"
                 >
                     <HeroLine ready={ready} delay={0.15}>
-                        CONNECTIVITY,
+                        Every Device.
                     </HeroLine>
-                    <HeroLine ready={ready} delay={0.32} className="text-[#0066FF]">
-                        REIMAGINED.
+                    <HeroLine ready={ready} delay={0.3}>
+                        One <span className="text-sky-400">Intelligent</span> Platform.
                     </HeroLine>
                 </h1>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={ready ? { opacity: 0.75, y: 0 } : {}}
-                    transition={{ delay: 0.7, duration: 0.8 }}
-                    className="mt-8 max-w-xl text-base md:text-lg leading-relaxed text-slate-600"
+                    animate={ready ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.65, duration: 0.8 }}
+                    className="mt-9 max-w-xl text-base md:text-lg leading-relaxed text-slate-400"
                 >
-                    One gateway. Three bands. An entire connected world — rendered live as you scroll,
-                    from silicon to cloud to the spaces we live in.
+                    Connect your devices, centralize your data, and unlock meaningful insights
+                    through one intelligent ecosystem.
                 </motion.p>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={ready ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.9, duration: 0.8 }}
+                    className="mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 pointer-events-auto"
+                >
+                    <button
+                        onClick={explore}
+                        data-testid="hero-cta-primary"
+                        className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#0066FF]/40"
+                    >
+                        Explore the Platform
+                    </button>
+                    <Link
+                        to="/technology"
+                        data-testid="hero-cta-secondary"
+                        className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300"
+                    >
+                        Learn More
+                    </Link>
+                </motion.div>
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={ready ? { opacity: 1 } : {}}
-                    transition={{ delay: 1.3, duration: 0.8 }}
-                    className="absolute bottom-10 left-6 sm:left-12 md:left-24 flex items-center gap-4"
+                    transition={{ delay: 1.5, duration: 0.8 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
                     data-testid="scroll-cue"
                 >
-                    <span className="w-px h-14 bg-slate-400/60 overflow-hidden relative">
+                    <span className="font-mono-xu text-[9px] tracking-[0.4em] text-slate-500">SCROLL</span>
+                    <span className="w-px h-10 bg-white/15 overflow-hidden relative">
                         <motion.span
-                            className="absolute inset-x-0 top-0 h-5 bg-[#0066FF]"
-                            animate={{ y: [-20, 56] }}
+                            className="absolute inset-x-0 top-0 h-4 bg-sky-400"
+                            animate={{ y: [-16, 40] }}
                             transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
                         />
-                    </span>
-                    <span className="font-mono-xu text-[10px] tracking-[0.35em] text-slate-500">
-                        SCROLL TO BEGIN THE JOURNEY
                     </span>
                 </motion.div>
             </div>

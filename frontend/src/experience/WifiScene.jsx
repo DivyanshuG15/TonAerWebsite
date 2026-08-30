@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import { useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { ContactShadows } from '@react-three/drei';
 import { scrollStore, local, quality } from './store';
 import { useSceneFader } from './sceneUtils';
 import { Particles } from './Particles';
+import { D71 } from './D71';
 
 const BANDS = [
     { r: 2.4, color: '#D97706', speed: 0.07 },
@@ -86,6 +88,11 @@ export function WifiScene() {
 
     return (
         <group ref={group}>
+            <ambientLight intensity={0.85} />
+            <directionalLight position={[5, 8, 6]} intensity={1.5} />
+            <directionalLight position={[-6, 4, -5]} intensity={0.5} color="#7dd3fc" />
+            <D71 scale={0.55} position={[0, 0.5, 0]} onMaterial={register} />
+            <ContactShadows position={[0, 0.04, 0]} opacity={0.4} scale={8} blur={2.4} far={2.5} resolution={256} color="#1e3a5f" />
             {BANDS.map((b, i) => (
                 <group key={b.color} ref={(el) => (bandRefs.current[i] = el)}>
                     <Particles

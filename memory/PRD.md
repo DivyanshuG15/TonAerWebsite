@@ -24,6 +24,11 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-08-30, update 4)
+- Hero redesigned as centered immersive composition on dark navy: eyebrow "CONNECTED INTELLIGENCE", headline "Every Device. / One Intelligent Platform." (cyan accent on "Intelligent"), centered supporting copy, primary CTA "Explore the Platform" (smooth-scrolls into chapter 02), secondary CTA "Learn More" (→ /technology), minimal centered scroll cue
+- Hero 3D scene replaced: abstract intelligence hub (glowing core, two slow orbit rings, 9 quiet nodes, faint links, ~300 dust particles, slow pulse) positioned lower-center behind/below content
+- D71 product reveal moved into the Smart Wi-Fi chapter (field now emanates from the device on a light studio bg); hero camera changed to slow centered push-in; background timeline starts dark navy and dawns into light at the Wi-Fi chapter
+
 ## Implemented (2026-08-29, update 3)
 - Dedicated series detail pages at /series/d, /series/m, /series/q, /series/o — each with its own live 3D device variant (parameterized body/panel/LED/logo colors, vent count, SIM tray on Q), full spec sheet (10 rows), feature trio, "Built to your market" CTA, and a cross-series lineup nav
 - D71 device component now parameterized (bodyColor, panelColor, logoColor, vents, ports, simTray) — variants: D flagship white, M value grey, Q cellular green-LED + SIM tray, O ruggedized slate + amber LED
