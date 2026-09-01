@@ -9,6 +9,7 @@ import { SeriesVisual } from './SeriesVisual';
 import { TrustedBy } from './TrustedBy';
 import { LeadForm } from './LeadForm';
 import { BrandPreview } from './BrandPreview';
+import { IntelligenceShowcase } from './IntelligenceShowcase';
 
 const fadeUp = {
     initial: { opacity: 0, y: 24 },
@@ -61,13 +62,6 @@ const CLOUD_FEATURES = [
     { icon: Wrench, t: 'Remote Troubleshooting', d: 'Diagnose and resolve issues from the operations console.' },
     { icon: Layers, t: 'Fleet Management', d: 'Group, segment and operate millions of devices at once.' },
     { icon: TrendingUp, t: 'Scalable Operations', d: 'Infrastructure that grows with your subscriber base.' },
-];
-
-const AI_FEATURES = [
-    { t: 'AI-Powered Troubleshooting', d: 'Likely root causes surfaced before the support call ends.' },
-    { t: 'Intelligent Gateway Placement', d: 'Signal analysis guides installers to the optimal location.' },
-    { t: 'Network Behavior Insights', d: 'Understand how households actually use the network.' },
-    { t: 'Proactive Issue Detection', d: 'Anomalies flagged and often resolved before customers notice.' },
 ];
 
 const INDUSTRIES = [
@@ -136,35 +130,6 @@ function CloudVisual() {
                 <circle cx="270" cy="120" r="11" fill="none" stroke="#F59E0B" strokeOpacity="0.5" strokeDasharray="3 3" />
                 <text x="270" y="148" fill="#F59E0B" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLAGGED</text>
                 <text x="200" y="14" fill="#7DD3FC" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLEET HUB</text>
-            </svg>
-        </div>
-    );
-}
-
-function IntelVisual() {
-    return (
-        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6" data-testid="intel-visual">
-            <div className="font-mono-xu text-[9px] tracking-[0.25em] text-slate-500 mb-4 flex justify-between">
-                <span>NETWORK OBSERVATION</span>
-                <span className="text-emerald-400">OPTIMIZED</span>
-            </div>
-            <svg viewBox="0 0 400 170" className="w-full" aria-hidden="true">
-                <g stroke="#38BDF8" strokeOpacity="0.2" strokeWidth="1">
-                    <line x1="70" y1="85" x2="150" y2="40" /><line x1="70" y1="85" x2="150" y2="130" />
-                    <line x1="150" y1="40" x2="240" y2="60" /><line x1="150" y1="130" x2="240" y2="110" />
-                    <line x1="240" y1="60" x2="330" y2="85" /><line x1="240" y1="110" x2="330" y2="85" />
-                    <line x1="150" y1="40" x2="240" y2="110" /><line x1="150" y1="130" x2="240" y2="60" />
-                </g>
-                <path d="M 70 85 L 150 40 L 240 60 L 330 85" fill="none" stroke="#22C55E" strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="4 4" />
-                <circle cx="70" cy="85" r="6" fill="#7DD3FC" />
-                <circle cx="150" cy="40" r="6" fill="#7DD3FC" />
-                <circle cx="150" cy="130" r="6" fill="#F43F5E" />
-                <circle cx="150" cy="130" r="12" fill="none" stroke="#F43F5E" strokeOpacity="0.6" />
-                <circle cx="240" cy="60" r="6" fill="#7DD3FC" />
-                <circle cx="240" cy="110" r="6" fill="#7DD3FC" />
-                <circle cx="330" cy="85" r="8" fill="#0066FF" />
-                <text x="150" y="160" fill="#F43F5E" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">ANOMALY ISOLATED</text>
-                <text x="250" y="18" fill="#22C55E" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">OPTIMIZATION PATH</text>
             </svg>
         </div>
     );
@@ -289,23 +254,7 @@ export function HomeSections() {
                 title="Turn Network Data Into Action."
                 desc="Transform device and network data into meaningful insights that help teams detect issues, optimize performance, and improve customer experience."
             >
-                <div className="mt-12 grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="grid gap-4 order-2 lg:order-1">
-                        {AI_FEATURES.map((c, i) => (
-                            <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-                                className="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-5">
-                                <BrainCircuit size={18} className="text-sky-400 shrink-0 mt-0.5" />
-                                <div>
-                                    <div className="font-display font-semibold text-sm">{c.t}</div>
-                                    <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">{c.d}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                    <div className="order-1 lg:order-2">
-                        <IntelVisual />
-                    </div>
-                </div>
+                <IntelligenceShowcase />
             </Section>
 
             <Section

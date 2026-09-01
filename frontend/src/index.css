@@ -86,6 +86,77 @@ body {
     animation: led-blink 1.6s ease-in-out infinite;
 }
 
+@keyframes xu-dash {
+    to { stroke-dashoffset: -24; }
+}
+
+.xu-dash {
+    animation: xu-dash 1.2s linear infinite;
+}
+
+@keyframes xu-pulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.5); }
+}
+
+.xu-pulse {
+    animation: xu-pulse 1.6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+@keyframes xu-scan {
+    from { transform: translateX(0); }
+    to { transform: translateX(337px); }
+}
+
+.xu-scan {
+    animation: xu-scan 1.5s linear infinite;
+}
+
+@keyframes xu-scan-wide {
+    from { transform: translateX(0); }
+    to { transform: translateX(368px); }
+}
+
+.xu-scan-wide {
+    animation: xu-scan-wide 5s ease-in-out infinite alternate;
+}
+
+@keyframes xu-draw {
+    from { stroke-dashoffset: 340; }
+    to { stroke-dashoffset: 0; }
+}
+
+.xu-draw {
+    stroke-dasharray: 340;
+    animation: xu-draw 7s linear infinite;
+}
+
+@keyframes xu-alert {
+    0%, 30% { opacity: 0; }
+    40%, 62% { opacity: 1; }
+    72%, 100% { opacity: 0; }
+}
+
+.xu-alert {
+    animation: xu-alert 7s linear infinite;
+}
+
+@keyframes xu-settle {
+    0%, 64% { opacity: 0; }
+    76%, 92% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.xu-settle {
+    animation: xu-settle 7s linear infinite;
+}
+
+.xu-color {
+    transition: fill 0.8s ease;
+}
+
 .grain::after {
     content: '';
     position: absolute;

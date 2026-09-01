@@ -24,6 +24,11 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-09-01, update 8 — interactive intelligence showcase)
+- "Turn Network Data Into Action." section: static SVG replaced with IntelligenceShowcase.jsx — four clickable capability cards (AI-Powered Troubleshooting, Intelligent Gateway Placement, Network Behavior Insights, Proactive Issue Detection) driving a "LIVE CAPABILITY DEMO" panel with 0X/04 counter and smooth AnimatePresence transitions
+- Four looping animated SVG demos (CSS keyframes + phase timers, no video): root-cause analysis flow (issue → analyze → cause → action → restored), floor-plan gateway placement (poor corner → scan sweep → recommended move → coverage improved), 24h activity timeline bars with peak callout, latency anomaly chart with threshold/alert/auto-optimize cycle
+- Default state selects AI-Powered Troubleshooting; "SELECT A CAPABILITY TO EXPLORE" cue; click/tap primary interaction
+
 ## Implemented (2026-09-01, update 7 — white-label interactive preview)
 - White-Label Advantage section: static "Your Logo" placeholder replaced with a 4-step interactive Brand Preview (BrandPreview.jsx): 01 select model (D/M/Q/O cards with positioning copy) → live 3D preview → 02 upload logo (PNG/SVG/JPG, ≤3MB, thumbnail + remove) → 03 device finish (Standard/White/Black casing) → B2B CTA (Discuss Your White-Label Solution → #contact, Explore This Product → /series/:id)
 - Per-series logo placement config (position + size per model) — real GLB/PNG mockups can replace procedural configs later
