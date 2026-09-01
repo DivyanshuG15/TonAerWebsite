@@ -5,34 +5,46 @@ import { Marquee } from '../components/Marquee';
 
 const CHAPTERS = [
     {
+        id: 'wifi',
         n: '01',
-        t: 'Multi-Link Operation',
-        d: 'Devices connect across multiple bands simultaneously — aggregating throughput and slashing latency by avoiding congested links in real time.',
-        tags: ['MLO', 'STR / NSTR', 'LOW LATENCY'],
+        t: 'Wi-Fi Technology',
+        d: 'Wi-Fi 7 across the flagship line: Multi-Link Operation aggregates bands in real time, 320 MHz channels open multi-gigabit lanes in 6 GHz, and 4096-QAM squeezes twenty percent more from every transmission.',
+        tags: ['WI-FI 7', 'MLO', '320 MHZ', '4096-QAM'],
     },
     {
+        id: 'mesh',
         n: '02',
-        t: '320 MHz Channels',
-        d: 'Wi-Fi 7 doubles channel width in the 6 GHz spectrum, opening clean multi-gigabit lanes even in crowded apartment buildings.',
-        tags: ['6 GHZ', 'MULTI-GIG', 'CLEAN SPECTRUM'],
+        t: 'Mesh Networking',
+        d: 'EasyMesh-certified nodes self-organize into one seamless network with band and client steering — whole-home coverage that operators can deploy and expand without site surveys.',
+        tags: ['EASYMESH', 'CLIENT STEERING', 'SELF-ORGANIZING'],
     },
     {
+        id: 'cloud',
         n: '03',
-        t: '4096-QAM Modulation',
-        d: 'Twenty percent more data in every transmission. Dense modulation squeezes more from every hertz of licensed-free spectrum.',
-        tags: ['4096-QAM', '+20% THROUGHPUT'],
+        t: 'Cloud Architecture',
+        d: 'Every device streams rich, privacy-safe telemetry over TR-369 / USP into the Xunison Cloud — provisioning, configuration, monitoring and analytics at fleet scale, from one console.',
+        tags: ['TR-369 / USP', 'ZERO-TOUCH', 'FLEET SCALE'],
     },
     {
+        id: 'ai',
         n: '04',
-        t: 'Telemetry Pipeline',
-        d: 'Every D71 streams rich, privacy-safe telemetry into the Xunison Cloud — signal, health, events and performance at fleet scale.',
-        tags: ['TR-369 / USP', 'REAL-TIME', 'FLEET SCALE'],
+        t: 'AI Network Intelligence',
+        d: 'Pattern recognition across millions of networks learns what normal looks like — then isolates anomalies, predicts failures and applies optimizations before subscribers notice.',
+        tags: ['OBSERVE', 'UNDERSTAND', 'ACT'],
     },
     {
+        id: 'iot',
         n: '05',
-        t: 'AI Anomaly Engine',
-        d: 'Pattern recognition across millions of networks learns what normal looks like — then isolates anomalies and applies optimizations automatically.',
-        tags: ['OBSERVE', 'UNDERSTAND', 'ACT'],
+        t: 'IoT Connectivity',
+        d: 'Matter and Thread ready options bring every device class — sensors, locks, lighting, appliances — onto one managed network with unified visibility.',
+        tags: ['MATTER', 'THREAD', 'UNIFIED MANAGEMENT'],
+    },
+    {
+        id: 'security',
+        n: '06',
+        t: 'Network Security',
+        d: 'WPA3, hardened firmware, network-level threat protection and granular parental controls — enterprise-grade security that ships switched on.',
+        tags: ['WPA3', 'THREAT PROTECTION', 'PARENTAL CONTROLS'],
     },
 ];
 
@@ -53,12 +65,14 @@ export default function TechnologyPage() {
             <section className="px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-20 space-y-20">
                 {CHAPTERS.map((c, i) => (
                     <motion.div
-                        key={c.n}
+                        key={c.id}
+                        id={c.id}
+                        data-testid={`tech-${c.id}`}
                         initial={{ opacity: 0, y: 32 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.4 }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className={`grid md:grid-cols-12 gap-8 items-start ${i % 2 ? 'md:text-right' : ''}`}
+                        className={`scroll-mt-28 grid md:grid-cols-12 gap-8 items-start ${i % 2 ? 'md:text-right' : ''}`}
                     >
                         <div className={`md:col-span-3 font-display font-bold text-6xl text-white/10 ${i % 2 ? 'md:order-2' : ''}`}>
                             {c.n}

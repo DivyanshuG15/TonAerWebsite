@@ -7,9 +7,8 @@ import { scrollStore } from '../experience/store';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { Chapter, MaskedLine } from '../components/Chapter';
 import { Marquee } from '../components/Marquee';
-import { LeadForm } from '../components/LeadForm';
+import { HomeSections } from '../components/HomeSections';
 import { Footer } from '../components/Footer';
-import { TrustedBy } from '../components/TrustedBy';
 
 function HeroLine({ ready, delay, className = '', children }) {
     return (
@@ -28,8 +27,8 @@ function HeroLine({ ready, delay, className = '', children }) {
 
 function HeroOverlay({ ready }) {
     const explore = () => {
-        if (scrollStore.lenis) scrollStore.lenis.scrollTo(window.innerHeight * 1.6, { duration: 1.8 });
-        else window.scrollTo({ top: window.innerHeight * 1.6, behavior: 'smooth' });
+        if (scrollStore.lenis) scrollStore.lenis.scrollTo('#ecosystem', { duration: 1.8 });
+        else document.querySelector('#ecosystem')?.scrollIntoView({ behavior: 'smooth' });
     };
     return (
         <section className="relative text-white" style={{ height: '140vh' }} data-testid="hero-section">
@@ -41,7 +40,7 @@ function HeroOverlay({ ready }) {
                     className="font-mono-xu text-[11px] tracking-[0.4em] text-sky-400 flex items-center gap-4"
                 >
                     <span className="w-8 h-px bg-current opacity-60" />
-                    CONNECTED INTELLIGENCE
+                    WHITE-LABEL CONNECTIVITY PLATFORM
                     <span className="w-8 h-px bg-current opacity-60" />
                 </motion.div>
                 <h1
@@ -49,10 +48,10 @@ function HeroOverlay({ ready }) {
                     data-testid="hero-headline"
                 >
                     <HeroLine ready={ready} delay={0.15}>
-                        Every Device.
+                        Build Your Network.
                     </HeroLine>
                     <HeroLine ready={ready} delay={0.3}>
-                        One <span className="text-sky-400">Intelligent</span> Platform.
+                        Own Your <span className="text-sky-400">Brand.</span>
                     </HeroLine>
                 </h1>
                 <motion.p
@@ -61,8 +60,8 @@ function HeroOverlay({ ready }) {
                     transition={{ delay: 0.65, duration: 0.8 }}
                     className="mt-9 max-w-xl text-base md:text-lg leading-relaxed text-slate-400"
                 >
-                    Connect your devices, centralize your data, and unlock meaningful insights
-                    through one intelligent ecosystem.
+                    Advanced white-label Wi-Fi devices, intelligent gateways, cloud management, and
+                    mobile applications — built for ISPs, telecom operators, and connectivity businesses.
                 </motion.p>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -75,14 +74,14 @@ function HeroOverlay({ ready }) {
                         data-testid="hero-cta-primary"
                         className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#0066FF]/40"
                     >
-                        Explore the Platform
+                        Explore Solutions
                     </button>
                     <Link
-                        to="/technology"
+                        to="/product"
                         data-testid="hero-cta-secondary"
                         className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300"
                     >
-                        Learn More
+                        View Products
                     </Link>
                 </motion.div>
                 <motion.div
@@ -208,7 +207,7 @@ export default function HomePage() {
                     ]}
                 />
 
-                <section id="contact" className="relative text-slate-900" style={{ height: '150vh' }} data-testid="chapter-08">
+                <section id="story" className="relative text-slate-900" style={{ height: '130vh' }} data-testid="chapter-08">
                     <div className="sticky top-0 min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24">
                         <div className="max-w-3xl">
                             <div className="font-mono-xu text-[11px] tracking-[0.35em] mb-7 flex items-center gap-3 text-[#0066FF] opacity-80">
@@ -230,14 +229,27 @@ export default function HomePage() {
                                     <span className="text-[#0066FF]">NEXT</span> — NETWORKS THAT UNDERSTAND THEIR SURROUNDINGS.
                                 </motion.p>
                             </div>
-                            <div className="mt-12 max-w-xl pointer-events-auto">
-                                <LeadForm />
+                            <div className="mt-12 flex flex-col sm:flex-row gap-4 pointer-events-auto">
+                                <button
+                                    onClick={() => scrollStore.lenis?.scrollTo('#contact', { duration: 1.6 })}
+                                    data-testid="finale-cta-demo"
+                                    className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#0066FF]/30"
+                                >
+                                    Request a Demo
+                                </button>
+                                <button
+                                    onClick={() => scrollStore.lenis?.scrollTo('#ecosystem', { duration: 1.6 })}
+                                    data-testid="finale-cta-explore"
+                                    className="rounded-full border border-slate-300 hover:border-[#0066FF] text-slate-600 hover:text-[#0066FF] text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300"
+                                >
+                                    Explore the Ecosystem
+                                </button>
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-            <TrustedBy />
+            <HomeSections />
             <Footer />
         </div>
     );

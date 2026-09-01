@@ -24,6 +24,15 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-09-01, update 5 — IA overhaul)
+- Two-level navigation: Solutions / Products / Technology / Company / Resources dropdowns (hover + click, outside-click close, chevrons, active-group highlight) + Products mega menu (All Products, D/M/Q/O cards, Compare Products & Product Selector as SOON) + Request Demo primary CTA; mobile hamburger with full-screen accordion menu
+- Homepage business story: new hero copy ("Build Your Network. Own Your Brand." / WHITE-LABEL CONNECTIVITY PLATFORM), cinematic 3D journey preserved, then business sections after the experience: ecosystem (5 components + flow), white-label advantage (brand-customization visual), product portfolio (D71 live render + series links), cloud platform (schematic topology visual, no fake data), intelligent operations (anomaly/optimization SVG), industries (ISP / Telecom / Network Solutions), TrustedBy, capabilities grid (11), why-partner (5), final CTA with lead form (id="contact")
+- New /company page with anchored sections (about, rnd, engineering, careers, news, reports)
+- Technology page rewritten as 6 anchored chapters (wifi, mesh, cloud, ai, iot, security); Support page gained Documentation / Downloads / Insights resource cards + #faqs anchor
+- Hash-based cross-page navigation via ScrollManager (Lenis-aware)
+- LeadForm restyled for dark backgrounds
+- Fix: scrollStore import in App.js; ecosystem gradient transition
+
 ## Implemented (2026-08-30, update 4)
 - Hero redesigned as centered immersive composition on dark navy: eyebrow "CONNECTED INTELLIGENCE", headline "Every Device. / One Intelligent Platform." (cyan accent on "Intelligent"), centered supporting copy, primary CTA "Explore the Platform" (smooth-scrolls into chapter 02), secondary CTA "Learn More" (→ /technology), minimal centered scroll cue
 - Hero 3D scene replaced: abstract intelligence hub (glowing core, two slow orbit rings, 9 quiet nodes, faint links, ~300 dust particles, slow pulse) positioned lower-center behind/below content

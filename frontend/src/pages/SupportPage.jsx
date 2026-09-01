@@ -39,7 +39,43 @@ export default function SupportPage() {
                     <MaskedLine delay={0.12}>INSTANTLY.</MaskedLine>
                 </h1>
             </section>
-            <section className="px-6 sm:px-12 md:px-24 max-w-5xl mx-auto pb-24 space-y-4">
+            <section className="px-6 sm:px-12 md:px-24 max-w-5xl mx-auto pb-6 grid sm:grid-cols-3 gap-4">
+                {[
+                    {
+                        id: 'documentation',
+                        t: 'Documentation',
+                        d: 'Integration guides, TR-369 data models and API references live in the Xunison operator portal.',
+                    },
+                    {
+                        id: 'downloads',
+                        t: 'Downloads',
+                        d: 'Firmware release notes and product datasheets for the D, M, Q and O series — via the portal.',
+                    },
+                    {
+                        id: 'insights',
+                        t: 'Insights / Blog',
+                        d: 'Field notes on Wi-Fi 7 deployments, fleet telemetry and operator playbooks — published quarterly.',
+                    },
+                ].map((c, i) => (
+                    <motion.div
+                        key={c.id}
+                        id={c.id}
+                        data-testid={`resource-${c.id}`}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: i * 0.06 }}
+                        className="scroll-mt-28 rounded-2xl border border-slate-200 bg-white/80 backdrop-blur-xl p-6"
+                    >
+                        <div className="font-mono-xu text-[10px] tracking-[0.3em] text-[#0066FF]">{c.t.toUpperCase()}</div>
+                        <p className="text-sm text-slate-600 leading-relaxed mt-3">{c.d}</p>
+                        <Link to="/#contact" className="inline-block mt-4 text-xs font-semibold text-[#0066FF] hover:text-sky-500 transition-colors">
+                            Request portal access →
+                        </Link>
+                    </motion.div>
+                ))}
+            </section>
+            <section id="faqs" className="scroll-mt-28 px-6 sm:px-12 md:px-24 max-w-5xl mx-auto py-16 space-y-4">
                 {FAQS.map((f, i) => (
                     <motion.details
                         key={i}

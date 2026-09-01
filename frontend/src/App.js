@@ -8,15 +8,25 @@ import ProductPage from '@/pages/ProductPage';
 import TechnologyPage from '@/pages/TechnologyPage';
 import SupportPage from '@/pages/SupportPage';
 import SeriesPage from '@/pages/SeriesPage';
-import { initQuality } from '@/experience/store';
+import CompanyPage from '@/pages/CompanyPage';
+import { initQuality, scrollStore } from '@/experience/store';
 
 initQuality();
 
-function ScrollToTop() {
-    const { pathname } = useLocation();
+function ScrollManager() {
+    const { pathname, hash } = useLocation();
     useEffect(() => {
+        if (hash) {
+            const t = setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (!el) return;
+                if (scrollStore.lenis) scrollStore.lenis.scrollTo(el, { duration: 1.4 });
+                else el.scrollIntoView({ behavior: 'smooth' });
+            }, 600);
+            return () => clearTimeout(t);
+        }
         window.scrollTo(0, 0);
-    }, [pathname]);
+    }, [pathname, hash]);
     return null;
 }
 
@@ -24,7 +34,7 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <ScrollToTop />
+                <ScrollManager />
                 <Nav />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -32,6 +42,7 @@ function App() {
                     <Route path="/technology" element={<TechnologyPage />} />
                     <Route path="/support" element={<SupportPage />} />
                     <Route path="/series/:seriesId" element={<SeriesPage />} />
+                    <Route path="/company" element={<CompanyPage />} />
                 </Routes>
             </BrowserRouter>
             <Toaster position="bottom-right" richColors />
