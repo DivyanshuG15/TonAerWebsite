@@ -24,6 +24,12 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-09-01, update 9 — product catalog)
+- /product rebuilt as a B2B catalog: series tabs (D/M/Q/O) → model selector cards (D Series: mD60, D71, D72; M: M20, M40; Q: Q20, Q10; O: O10, O20 — non-D71 names are PLACEHOLDERS pending real model data) → product overview (media viewer with FRONT/SIDE/REAR/DETAIL live-render camera angles + PRODUCT VIDEO and TECHNOLOGY DEMO tabs as honest portal placeholders, capability badges, CTAs) → per-model key capabilities → expandable 7-group spec table (✓ supported / — not available) → compare section (technology filters, 2–4 model slots, cross-series, categorized scrollable table, requirement-based recommender) → related products → B2B CTA
+- Scalable catalog data model in /src/data/catalog.js (series, products, spec groups, filters, capability map)
+- /series/:id now redirects to /product?series=:id (single catalog experience); URL params make product views shareable
+- Unverified specs intentionally show '—' rather than invented values
+
 ## Implemented (2026-09-01, update 8 — interactive intelligence showcase)
 - "Turn Network Data Into Action." section: static SVG replaced with IntelligenceShowcase.jsx — four clickable capability cards (AI-Powered Troubleshooting, Intelligent Gateway Placement, Network Behavior Insights, Proactive Issue Detection) driving a "LIVE CAPABILITY DEMO" panel with 0X/04 counter and smooth AnimatePresence transitions
 - Four looping animated SVG demos (CSS keyframes + phase timers, no video): root-cause analysis flow (issue → analyze → cause → action → restored), floor-plan gateway placement (poor corner → scan sweep → recommended move → coverage improved), 24h activity timeline bars with peak callout, latency anomaly chart with threshold/alert/auto-optimize cycle

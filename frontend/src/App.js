@@ -1,14 +1,19 @@
 import { useEffect } from 'react';
 import '@/App.css';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { Nav } from '@/components/Nav';
 import HomePage from '@/pages/HomePage';
 import ProductPage from '@/pages/ProductPage';
 import TechnologyPage from '@/pages/TechnologyPage';
 import SupportPage from '@/pages/SupportPage';
-import SeriesPage from '@/pages/SeriesPage';
 import CompanyPage from '@/pages/CompanyPage';
+
+function SeriesRedirect() {
+    const { seriesId } = useParams();
+    const valid = ['d', 'm', 'q', 'o'].includes(seriesId);
+    return <Navigate to={valid ? `/product?series=${seriesId}` : '/product'} replace />;
+}
 import { initQuality, scrollStore } from '@/experience/store';
 
 initQuality();
@@ -41,7 +46,7 @@ function App() {
                     <Route path="/product" element={<ProductPage />} />
                     <Route path="/technology" element={<TechnologyPage />} />
                     <Route path="/support" element={<SupportPage />} />
-                    <Route path="/series/:seriesId" element={<SeriesPage />} />
+                    <Route path="/series/:seriesId" element={<SeriesRedirect />} />
                     <Route path="/company" element={<CompanyPage />} />
                 </Routes>
             </BrowserRouter>

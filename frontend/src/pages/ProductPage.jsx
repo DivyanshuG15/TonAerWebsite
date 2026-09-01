@@ -1,150 +1,237 @@
-import { motion } from 'framer-motion';
+import { Link, useSearchParams } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { Footer } from '../components/Footer';
-import { MaskedLine } from '../components/Chapter';
-import { ProductVisual } from '../components/ProductVisual';
-import { SeriesGrid } from '../components/SeriesGrid';
-import { TrustedBy } from '../components/TrustedBy';
+import { MediaViewer } from '../components/catalog/MediaViewer';
+import { SpecTable } from '../components/catalog/SpecTable';
+import { CompareSection } from '../components/catalog/CompareSection';
+import { SERIES, PRODUCTS, CAP_INFO, seriesById } from '../data/catalog';
 
-const SPECS = [
-    { k: 'STANDARD', v: 'Wi-Fi 7 (802.11be)' },
-    { k: 'BANDS', v: '2.4 / 5 / 6 GHz Tri-Band' },
-    { k: 'CHANNELS', v: 'Up to 320 MHz' },
-    { k: 'MODULATION', v: '4096-QAM' },
-    { k: 'LINK OPERATION', v: 'Multi-Link Operation (MLO)' },
-    { k: 'WAN', v: '10G SFP+ / 2.5G Ethernet' },
-    { k: 'MESH', v: 'EasyMesh certified' },
-    { k: 'CELLULAR', v: 'e-SIM + physical SIM options' },
-    { k: 'VOICE', v: 'FXS telephone port' },
-    { k: 'MANAGEMENT', v: 'TR-369 / USP + Xunison Cloud' },
-];
+const fadeUp = {
+    initial: { opacity: 0, y: 24 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+};
+
+function SectionHead({ kicker, title, desc }) {
+    return (
+        <>
+            <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-5 flex items-center gap-3">
+                <span className="w-8 h-px bg-current" />
+                {kicker}
+            </motion.div>
+            <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-3xl sm:text-4xl leading-tight text-white">
+                {title}
+            </motion.h2>
+            {desc && <motion.p {...fadeUp} className="mt-4 max-w-2xl text-slate-400 leading-relaxed">{desc}</motion.p>}
+        </>
+    );
+}
 
 export default function ProductPage() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const series = SERIES.find((s) => s.id === searchParams.get('series')) || SERIES[0];
+    const seriesProducts = PRODUCTS.filter((p) => p.series === series.id);
+    const product = seriesProducts.find((p) => p.id === searchParams.get('model')) || seriesProducts[0];
+
+    const selectSeries = (id) => {
+        setSearchParams({ series: id });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    const selectProduct = (p) => {
+        const target = typeof p === 'string' ? p : p.id;
+        setSearchParams({ series: (typeof p === 'string' ? seriesById(PRODUCTS.find((x) => x.id === target)?.series) : seriesById(p.series)).id, model: target });
+        document.querySelector('#overview')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const related = [
+        ...seriesProducts.filter((p) => p.id !== product.id),
+        ...PRODUCTS.filter((p) => p.series !== series.id && p.tags.some((t) => product.tags.includes(t))),
+    ].slice(0, 3);
+
     return (
-        <div className="bg-[#F8FAFC] text-slate-900" data-testid="product-page">
-            <section className="pt-36 pb-24 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto">
-                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mb-6 flex items-center gap-3">
+        <div className="bg-[#020617] text-white" data-testid="product-page">
+            <section className="pt-32 pb-10 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto">
+                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-8 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
-                    FLAGSHIP // D71 — D SERIES · LATEST
+                    PRODUCT CATALOG
                 </div>
-                <h1 className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.04]">
-                    <MaskedLine>THE GATEWAY,</MaskedLine>
-                    <MaskedLine delay={0.12}>ELEVATED.</MaskedLine>
-                </h1>
-                <div className="mt-16 grid md:grid-cols-2 gap-12 items-center">
+                <div className="flex flex-wrap gap-3 mb-10" data-testid="series-tabs">
+                    {SERIES.map((s) => (
+                        <button
+                            key={s.id}
+                            onClick={() => selectSeries(s.id)}
+                            data-testid={`series-tab-${s.id}`}
+                            className={`rounded-2xl border px-6 py-4 text-left transition-all duration-300 ${
+                                series.id === s.id
+                                    ? 'border-sky-400 bg-sky-400/10 shadow-lg shadow-sky-400/5'
+                                    : 'border-white/10 bg-white/5 hover:border-white/25'
+                            }`}
+                        >
+                            <div className={`font-display font-bold text-xl ${series.id === s.id ? 'text-sky-400' : 'text-slate-300'}`}>
+                                {s.id.toUpperCase()}
+                            </div>
+                            <div className="text-xs text-slate-400 mt-0.5">{s.name}</div>
+                        </button>
+                    ))}
+                </div>
+                <motion.h1 key={series.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+                    className="font-display font-bold tracking-tight text-4xl sm:text-5xl leading-tight">
+                    {series.name}
+                </motion.h1>
+                <p className="mt-4 max-w-2xl text-slate-400 leading-relaxed">{series.desc}</p>
+            </section>
+
+            <section className="px-6 sm:px-12 md:px-24 max-w-7xl mx-auto pb-8">
+                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-500 mb-4">EXPLORE {series.name.toUpperCase()}</div>
+                <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1" data-testid="model-selector">
+                    {seriesProducts.map((p) => (
+                        <button
+                            key={p.id}
+                            onClick={() => selectProduct(p)}
+                            data-testid={`model-card-${p.id}`}
+                            className={`min-w-[200px] text-left rounded-2xl border p-5 transition-all duration-300 shrink-0 ${
+                                product.id === p.id
+                                    ? 'border-sky-400 bg-sky-400/10'
+                                    : 'border-white/10 bg-white/5 hover:border-white/25'
+                            }`}
+                        >
+                            <div className={`font-display font-bold text-lg ${product.id === p.id ? 'text-sky-400' : 'text-white'}`}>{p.name}</div>
+                            <div className="text-xs text-slate-400 mt-1">{p.tag}</div>
+                            <div className="mt-3 flex flex-wrap gap-1.5">
+                                {p.badges.slice(0, 2).map((b) => (
+                                    <span key={b} className="font-mono-xu text-[8px] tracking-[0.15em] border border-white/15 text-slate-400 rounded-full px-2 py-0.5">
+                                        {b.toUpperCase()}
+                                    </span>
+                                ))}
+                            </div>
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            <section id="overview" className="scroll-mt-24 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-14">
+                <AnimatePresence mode="wait">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        key={product.id}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        className="grid lg:grid-cols-2 gap-12 items-start"
                     >
-                        <ProductVisual />
-                    </motion.div>
-                    <div>
-                        <p className="text-base md:text-lg leading-relaxed text-slate-600 max-w-lg">
-                            A premium unibody Wi-Fi 7 gateway engineered for service providers — designed to disappear
-                            into the home while quietly running one of the most advanced radios ever deployed at the edge.
-                        </p>
-                        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
-                            {SPECS.map((s, i) => (
-                                <motion.div
-                                    key={s.k}
-                                    initial={{ opacity: 0, y: 16 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.6, delay: i * 0.05 }}
-                                    className="border-l-2 border-[#0066FF]/30 pl-4"
+                        <MediaViewer variant={{ ...series.variant, ...(product.variant || {}) }} productName={product.name} />
+                        <div>
+                            <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">{series.name.toUpperCase()} // {product.id.toUpperCase()}</div>
+                            <h2 className="font-display font-bold tracking-tight text-4xl sm:text-5xl mt-3">{product.name}</h2>
+                            <p className="mt-4 text-base md:text-lg text-slate-400 leading-relaxed max-w-lg">{product.desc}</p>
+                            <div className="mt-6 flex flex-wrap gap-2">
+                                {product.badges.map((b) => (
+                                    <span key={b} className="font-mono-xu text-[10px] tracking-[0.2em] border border-sky-400/30 text-sky-300 rounded-full px-3 py-1">
+                                        {b.toUpperCase()}
+                                    </span>
+                                ))}
+                            </div>
+                            <div className="mt-9 flex flex-col sm:flex-row gap-3">
+                                <Link
+                                    to="/#contact"
+                                    data-testid="product-cta-info"
+                                    className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25"
                                 >
-                                    <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-400">{s.k}</div>
-                                    <div className="font-display font-medium mt-1 text-sm sm:text-base">{s.v}</div>
-                                </motion.div>
-                            ))}
+                                    Request Product Information
+                                </Link>
+                                <button
+                                    onClick={() => document.querySelector('#compare')?.scrollIntoView({ behavior: 'smooth' })}
+                                    data-testid="product-cta-compare"
+                                    className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300"
+                                >
+                                    Compare Gateway
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </AnimatePresence>
             </section>
 
-            <section className="bg-[#020617] text-white py-24 px-6 sm:px-12 md:px-24">
-                <div className="max-w-7xl mx-auto">
-                    <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6">ARCHITECTURE // BUILT FOR OPERATORS</div>
-                    <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl max-w-2xl leading-tight">
-                        Consumer-simple. Carrier-grade.
-                    </h2>
-                    <div className="mt-12 grid md:grid-cols-3 gap-8">
-                        {[
-                            { n: '01', t: 'Tri-Band Radio', d: 'Three coordinated radios with dynamic band steering keep dense homes fast and predictable.' },
-                            { n: '02', t: 'Xunison Cloud', d: 'Fleet-wide telemetry, remote management and zero-touch provisioning through TR-369 / USP.' },
-                            { n: '03', t: 'AI Optimization', d: 'Anomaly detection and self-healing optimization run continuously — before subscribers notice.' },
-                        ].map((c, i) => (
+            <section className="px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-14">
+                <SectionHead kicker="KEY CAPABILITIES" title="Built for Modern Connectivity." />
+                <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <AnimatePresence mode="popLayout">
+                        {product.caps.map((cap, i) => (
                             <motion.div
-                                key={c.n}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.7, delay: i * 0.1 }}
-                                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
-                            >
-                                <div className="font-mono-xu text-xs text-sky-400 tracking-[0.3em]">{c.n}</div>
-                                <div className="font-display font-semibold text-xl mt-3">{c.t}</div>
-                                <p className="text-sm text-slate-400 mt-3 leading-relaxed">{c.d}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            <section className="bg-[#0B1120] text-white py-24 px-6 sm:px-12 md:px-24 border-t border-white/5">
-                <div className="max-w-7xl mx-auto">
-                    <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6 flex items-center gap-3">
-                        <span className="w-8 h-px bg-current" />
-                        THE LINEUP // D · M · Q · O
-                    </div>
-                    <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl max-w-2xl leading-tight mb-12">
-                        Four series. One platform.
-                    </h2>
-                    <SeriesGrid dark />
-                </div>
-            </section>
-
-            <section className="py-24 px-6 sm:px-12 md:px-24 bg-[#F8FAFC]">
-                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-                    <div>
-                        <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mb-6 flex items-center gap-3">
-                            <span className="w-8 h-px bg-current" />
-                            BUILT TO ORDER // PER OPERATOR
-                        </div>
-                        <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl leading-tight">
-                            Shaped by your market, not the other way around.
-                        </h2>
-                        <p className="mt-6 text-base md:text-lg leading-relaxed text-slate-600 max-w-lg">
-                            Every deployment is configured around the operator's demand, demography and market size —
-                            from radio bands and firmware to casing and branding. You define the business case; we build the hardware to match.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
-                        {[
-                            { k: 'E-SIM', v: 'Programmable carrier profiles, remotely provisioned' },
-                            { k: 'PHYSICAL SIM', v: 'Dual-SIM failover for cellular-backed series' },
-                            { k: 'FXS TELEPHONE', v: 'RJ11 voice port for landline replacement' },
-                            { k: 'BAND PLANS', v: 'Regional spectrum matched to market' },
-                            { k: 'FIRMWARE', v: 'Operator-branded UI, TR-369 fleet control' },
-                            { k: 'BRANDING', v: 'Casing, colorway and packaging per operator' },
-                        ].map((s, i) => (
-                            <motion.div
-                                key={s.k}
+                                key={product.id + cap}
                                 initial={{ opacity: 0, y: 16 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: i * 0.05 }}
-                                className="border-l-2 border-[#0066FF]/30 pl-4"
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.4, delay: i * 0.05 }}
+                                className="rounded-2xl border border-white/10 bg-white/5 p-6"
                             >
-                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-400">{s.k}</div>
-                                <div className="font-display font-medium mt-1 text-sm sm:text-base">{s.v}</div>
+                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">{CAP_INFO[cap][0]}</div>
+                                <p className="text-sm text-slate-400 mt-3 leading-relaxed">{CAP_INFO[cap][1]}</p>
                             </motion.div>
                         ))}
-                    </div>
+                    </AnimatePresence>
                 </div>
             </section>
 
-            <TrustedBy />
+            <section className="px-6 sm:px-12 md:px-24 max-w-5xl mx-auto py-14">
+                <SectionHead kicker="TECHNICAL SPECIFICATIONS" title={`${product.name} — Full Specification.`} desc="Expand a category to review detailed specifications. Capabilities marked — are not available on this model." />
+                <div className="mt-10">
+                    <SpecTable key={product.id} specs={product.specs} />
+                </div>
+            </section>
+
+            <section id="compare" className="scroll-mt-24 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-14">
+                <SectionHead
+                    kicker="COMPARE GATEWAYS"
+                    title="Find the Right Gateway for Your Deployment."
+                    desc="Compare models across performance, connectivity, management and advanced technology capabilities — within a series or across the portfolio."
+                />
+                <div className="mt-10">
+                    <CompareSection currentId={product.id} onSelect={selectProduct} />
+                </div>
+            </section>
+
+            <section className="px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-14">
+                <SectionHead kicker="EXPLORE OTHER GATEWAYS" title="Related Products." />
+                <div className="mt-10 grid sm:grid-cols-3 gap-4">
+                    {related.map((p) => (
+                        <button
+                            key={p.id}
+                            onClick={() => selectProduct(p)}
+                            data-testid={`related-${p.id}`}
+                            className="text-left rounded-2xl border border-white/10 bg-white/5 hover:border-sky-400/40 p-6 transition-all duration-300 hover:-translate-y-1 group"
+                        >
+                            <div className="font-mono-xu text-[9px] tracking-[0.25em] text-slate-500">{seriesById(p.series).name.toUpperCase()}</div>
+                            <div className="font-display font-bold text-xl mt-2 group-hover:text-sky-400 transition-colors">{p.name}</div>
+                            <div className="text-xs text-slate-400 mt-1">{p.tag}</div>
+                            <div className="mt-4 flex items-center gap-2 text-xs text-sky-400">
+                                View product <ArrowRight size={12} />
+                            </div>
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            <section className="px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-20">
+                <div className="rounded-3xl border border-sky-400/20 bg-sky-400/5 p-10 sm:p-14 text-center">
+                    <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl">Build the Right Connectivity Solution.</h2>
+                    <p className="mt-4 text-slate-400 max-w-xl mx-auto leading-relaxed">
+                        Talk with our team about product selection, white-label customization and deployment requirements.
+                    </p>
+                    <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                        <Link to="/support" data-testid="catalog-cta-experts"
+                            className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-200 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300">
+                            Talk to Our Experts
+                        </Link>
+                        <Link to="/#contact" data-testid="catalog-cta-info"
+                            className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25">
+                            Request Product Information
+                        </Link>
+                    </div>
+                </div>
+            </section>
             <Footer />
         </div>
     );
