@@ -1,11 +1,6 @@
 import { motion } from 'framer-motion';
 
-const CLIENTS = [
-    { name: 'EARTHLINK', note: 'US NATIONAL ISP' },
-    { name: 'ORANGEBURG IQ', note: 'REGIONAL FIBER' },
-    { name: 'HITRON', note: 'CPE / OEM PARTNER' },
-    { name: 'STC', note: 'MENA CARRIER' },
-];
+const CLIENTS = ['EARTHLINK', 'ORANGEBURG IQ', 'HITRON', 'STC'];
 
 export function TrustedBy({ dark = false }) {
     return (
@@ -16,26 +11,23 @@ export function TrustedBy({ dark = false }) {
             <div className="max-w-6xl mx-auto">
                 <div className={`font-mono-xu text-[11px] tracking-[0.35em] mb-10 flex items-center gap-3 ${dark ? 'text-sky-400' : 'text-[#0066FF]'}`}>
                     <span className="w-8 h-px bg-current" />
-                    TRUSTED BY OPERATORS WORLDWIDE
+                    TRUSTED BY CONNECTIVITY BUSINESSES
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
-                    {CLIENTS.map((c, i) => (
+                    {CLIENTS.map((name, i) => (
                         <motion.div
-                            key={c.name}
+                            key={name}
                             initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: i * 0.08 }}
                             className="group"
-                            data-testid={`client-${c.name.toLowerCase().replace(/\s+/g, '-')}`}
+                            data-testid={`client-${name.toLowerCase().replace(/\s+/g, '-')}`}
                         >
                             <div className={`font-display font-bold text-xl sm:text-2xl tracking-wide transition-colors duration-300 ${
                                 dark ? 'text-white/50 group-hover:text-white' : 'text-slate-400 group-hover:text-slate-900'
                             }`}>
-                                {c.name}
-                            </div>
-                            <div className={`font-mono-xu text-[9px] tracking-[0.3em] mt-2 ${dark ? 'text-slate-600' : 'text-slate-400'}`}>
-                                {c.note}
+                                {name}
                             </div>
                         </motion.div>
                     ))}

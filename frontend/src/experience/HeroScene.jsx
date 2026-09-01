@@ -7,7 +7,7 @@ import { Particles, getDotTexture } from './Particles';
 
 // Scene 01: a calm intelligence hub — one glowing core, a few quiet connections.
 export function HeroScene() {
-    const { group, register } = useSceneFader(0.0, 0.135, 0.02);
+    const { group, register } = useSceneFader(0.0, 1.0, 0.08);
     const core = useRef();
     const ringA = useRef();
     const ringB = useRef();

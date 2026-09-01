@@ -130,7 +130,10 @@ export function Nav() {
     useEffect(() => {
         let raf;
         const loop = () => {
-            if (barRef.current) barRef.current.style.transform = `scaleX(${scrollStore.progress})`;
+            if (barRef.current) {
+                const p = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+                barRef.current.style.transform = `scaleX(${Math.min(1, p)})`;
+            }
             raf = requestAnimationFrame(loop);
         };
         raf = requestAnimationFrame(loop);

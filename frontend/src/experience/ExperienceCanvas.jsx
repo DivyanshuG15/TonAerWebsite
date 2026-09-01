@@ -2,16 +2,9 @@ import * as THREE from 'three';
 import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { scrollStore, bgColorAt, quality } from './store';
+import { quality } from './store';
 import { CameraRig } from './CameraRig';
 import { HeroScene } from './HeroScene';
-import { WifiScene } from './WifiScene';
-import { NetworkScene } from './NetworkScene';
-import { TelemetryScene } from './TelemetryScene';
-import { CloudScene } from './CloudScene';
-import { AIScene } from './AIScene';
-import { EnvironmentScene } from './EnvironmentScene';
-import { EcosystemScene } from './EcosystemScene';
 
 function SceneRoot() {
     const { gl, scene, setDpr } = useThree();
@@ -32,9 +25,6 @@ function SceneRoot() {
     }, [gl, scene, bg]);
 
     useFrame((_, dt) => {
-        bgColorAt(scrollStore.progress, bg);
-        document.body.style.backgroundColor = `#${bg.getHexString()}`;
-
         if (quality.mobile) return;
         const f = fpsAcc.current;
         f.frames++;
@@ -54,13 +44,6 @@ function SceneRoot() {
         <>
             <CameraRig />
             <HeroScene />
-            <WifiScene />
-            <NetworkScene />
-            <TelemetryScene />
-            <CloudScene />
-            <AIScene />
-            <EnvironmentScene />
-            <EcosystemScene />
         </>
     );
 }

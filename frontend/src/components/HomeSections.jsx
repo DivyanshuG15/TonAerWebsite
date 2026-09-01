@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
     Cpu, Cloud, Smartphone, Activity, BrainCircuit, Tag, Code2, CloudCog, Layers,
     MonitorCheck, Settings, BarChart3, Wrench, TrendingUp, ShieldCheck, Wifi,
-    Share2, Radio, Lock, Users, ArrowLeftRight, HardDrive, Network, Check, ArrowRight,
+    Share2, Radio, Lock, ArrowLeftRight, HardDrive, ArrowRight,
 } from 'lucide-react';
 import { SeriesVisual } from './SeriesVisual';
 import { TrustedBy } from './TrustedBy';
@@ -72,37 +72,36 @@ const AI_FEATURES = [
 const INDUSTRIES = [
     {
         t: 'Internet Service Providers',
-        points: ['Large-scale device deployment', 'Remote management at fleet level', 'Reduced support costs', 'Better customer experience'],
+        d: 'Deploy and manage branded customer devices at scale with centralized operations and remote management.',
     },
     {
         t: 'Telecom Operators',
-        points: ['Fully branded connectivity ecosystem', 'Advanced gateways for every tier', 'Scalable infrastructure', 'Centralized operations'],
+        d: 'Build scalable connectivity ecosystems with advanced gateways, cloud management, and intelligent network operations.',
     },
     {
         t: 'Network Solution Providers',
-        points: ['Hardware customization', 'Flexible software stack', 'Advanced networking capabilities', 'Solutions that scale with clients'],
+        d: 'Deliver flexible and customized networking solutions using advanced hardware and scalable software.',
     },
 ];
 
 const CAPABILITIES = [
-    { icon: Wifi, t: 'Advanced Wi-Fi', d: 'Wi-Fi 7, MLO, 320 MHz channels' },
+    { icon: Wifi, t: 'Advanced Wi-Fi', d: 'Wi-Fi 7, MLO, 320 MHz' },
     { icon: Share2, t: 'Mesh Networking', d: 'EasyMesh self-organizing coverage' },
-    { icon: Radio, t: 'IoT Connectivity', d: 'Matter and Thread ready options' },
-    { icon: ShieldCheck, t: 'Enterprise Security', d: 'WPA3 and hardened firmware' },
+    { icon: Radio, t: 'IoT Connectivity', d: 'Matter and Thread ready' },
+    { icon: Cloud, t: 'Cloud Management', d: 'TR-369 / USP fleet control' },
+    { icon: BrainCircuit, t: 'AI Intelligence', d: 'Detect, predict, optimize' },
+    { icon: ShieldCheck, t: 'Enterprise Security', d: 'WPA3, hardened firmware' },
     { icon: Lock, t: 'Cybersecurity', d: 'Network-level threat protection' },
-    { icon: Users, t: 'Parental Controls', d: 'Profiles, schedules and filters' },
-    { icon: ArrowLeftRight, t: 'Ethernet SIM Backup', d: 'Cellular failover over e-SIM / SIM' },
-    { icon: Cloud, t: 'Cloud Device Management', d: 'TR-369 / USP fleet control' },
-    { icon: Smartphone, t: 'Mobile App Control', d: 'Branded subscriber applications' },
-    { icon: HardDrive, t: 'Local Device Management', d: 'On-device administration options' },
-    { icon: Network, t: 'Scalable Architecture', d: 'From one home to millions' },
+    { icon: ArrowLeftRight, t: 'SIM Backup', d: 'e-SIM / SIM failover' },
+    { icon: Smartphone, t: 'Mobile App Control', d: 'Branded subscriber apps' },
+    { icon: HardDrive, t: 'Local Management', d: 'On-device administration' },
 ];
 
 const WHY = [
-    { k: '10+', v: 'Years Experience', d: 'A decade building carrier-grade connectivity.' },
+    { k: '10+', v: 'Years of Experience', d: 'A decade building carrier-grade connectivity.' },
     { k: 'ENG', v: 'Engineering Teams', d: 'Hardware, firmware, cloud and apps in-house.' },
-    { k: 'R&D', v: 'Research Capabilities', d: 'Active programs in Wi-Fi sensing and intelligence.' },
-    { k: 'OEM', v: 'Custom Development', d: 'Products shaped to each operator and market.' },
+    { k: 'R&D', v: 'Research & Development', d: 'Active programs in next-generation wireless.' },
+    { k: 'OEM', v: 'Custom Development', d: 'Hardware and software shaped to each market.' },
     { k: 'E2E', v: 'Complete Ecosystem', d: 'Hardware, cloud, apps and intelligence — one partner.' },
 ];
 
@@ -172,13 +171,13 @@ function IntelVisual() {
 
 export function HomeSections() {
     return (
-        <div className="relative z-10 text-white" style={{ background: 'linear-gradient(#F8FAFC 0%, #020617 220px)' }}>
+        <div className="relative z-10 text-white bg-[#020617]">
             <Section
                 id="ecosystem"
                 kicker="WHAT WE PROVIDE"
                 title="One Complete Connectivity Ecosystem."
                 desc="From advanced hardware to cloud intelligence, we provide the technology infrastructure needed to build, manage, and scale modern connectivity services."
-                className="pt-44"
+                className="border-t border-white/5"
             >
                 <div className="mt-10 flex flex-wrap items-center gap-2 font-mono-xu text-[10px] tracking-[0.25em] text-slate-500">
                     {['DEVICES', 'GATEWAY', 'CLOUD', 'MOBILE', 'INTELLIGENCE'].map((s, i) => (
@@ -330,14 +329,7 @@ export function HomeSections() {
                             className="rounded-2xl border border-white/10 bg-white/5 p-8">
                             <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">0{i + 1}</div>
                             <div className="font-display font-semibold text-lg mt-3">{g.t}</div>
-                            <ul className="mt-5 space-y-2.5">
-                                {g.points.map((p) => (
-                                    <li key={p} className="flex items-start gap-2.5 text-sm text-slate-400">
-                                        <Check size={14} className="text-sky-400 shrink-0 mt-0.5" />
-                                        {p}
-                                    </li>
-                                ))}
-                            </ul>
+                            <p className="mt-4 text-sm text-slate-400 leading-relaxed">{g.d}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -350,7 +342,7 @@ export function HomeSections() {
                 kicker="TECHNOLOGY CAPABILITIES"
                 title="Technology That Keeps Moving Forward."
             >
-                <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                     {CAPABILITIES.map((c, i) => (
                         <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: (i % 4) * 0.05 }}
                             className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-sky-400/40 transition-colors duration-300">

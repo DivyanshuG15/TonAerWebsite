@@ -24,6 +24,12 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-09-01, update 6 — homepage cleanup)
+- Removed the cinematic scroll chapters from the homepage (Tri-Band explainer, Telemetry "Every Connection Creates Data", Environmental Sensing, network/cloud chapters, marquee, and the ecosystem finale overlay) per final IA: HERO → ECOSYSTEM → WHITE-LABEL → PORTFOLIO → CLOUD → INTELLIGENCE → INDUSTRIES → TRUSTED BY → CAPABILITIES → WHY US → REQUEST DEMO → FOOTER
+- Homepage canvas now renders only the hero intelligence hub (slow push-in camera); Wi-Fi / Network / Telemetry / Cloud / AI / Environment / Ecosystem 3D scenes remain in /src/experience for a future R&D / Emerging Technology page
+- Industries cards rewritten with approved B2B copy; capabilities compacted to a 10-item 5-col grid; why-partner items aligned to approved claims; trust section heading "TRUSTED BY CONNECTIVITY BUSINESSES" with only the four real customer names (invented descriptor notes removed)
+- Nav progress bar now driven by document scroll; sections sit on solid dark navy
+
 ## Implemented (2026-09-01, update 5 — IA overhaul)
 - Two-level navigation: Solutions / Products / Technology / Company / Resources dropdowns (hover + click, outside-click close, chevrons, active-group highlight) + Products mega menu (All Products, D/M/Q/O cards, Compare Products & Product Selector as SOON) + Request Demo primary CTA; mobile hamburger with full-screen accordion menu
 - Homepage business story: new hero copy ("Build Your Network. Own Your Brand." / WHITE-LABEL CONNECTIVITY PLATFORM), cinematic 3D journey preserved, then business sections after the experience: ecosystem (5 components + flow), white-label advantage (brand-customization visual), product portfolio (D71 live render + series links), cloud platform (schematic topology visual, no fake data), intelligent operations (anomaly/optimization SVG), industries (ISP / Telecom / Network Solutions), TrustedBy, capabilities grid (11), why-partner (5), final CTA with lead form (id="contact")
