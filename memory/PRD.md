@@ -24,6 +24,13 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-09-01, update 7 — white-label interactive preview)
+- White-Label Advantage section: static "Your Logo" placeholder replaced with a 4-step interactive Brand Preview (BrandPreview.jsx): 01 select model (D/M/Q/O cards with positioning copy) → live 3D preview → 02 upload logo (PNG/SVG/JPG, ≤3MB, thumbnail + remove) → 03 device finish (Standard/White/Black casing) → B2B CTA (Discuss Your White-Label Solution → #contact, Explore This Product → /series/:id)
+- Per-series logo placement config (position + size per model) — real GLB/PNG mockups can replace procedural configs later
+- Logo decal renders via opaque-pass alphaTest (transparent:true caused invisible decal — resolved after debug iterations)
+- Mobile: horizontally scrollable model selector, stacked steps, large preview
+- Left benefits column (White-Label Hardware / Branded Applications / Centralized Cloud Platform / Custom Development) preserved
+
 ## Implemented (2026-09-01, update 6 — homepage cleanup)
 - Removed the cinematic scroll chapters from the homepage (Tri-Band explainer, Telemetry "Every Connection Creates Data", Environmental Sensing, network/cloud chapters, marquee, and the ecosystem finale overlay) per final IA: HERO → ECOSYSTEM → WHITE-LABEL → PORTFOLIO → CLOUD → INTELLIGENCE → INDUSTRIES → TRUSTED BY → CAPABILITIES → WHY US → REQUEST DEMO → FOOTER
 - Homepage canvas now renders only the hero intelligence hub (slow push-in camera); Wi-Fi / Network / Telemetry / Cloud / AI / Environment / Ecosystem 3D scenes remain in /src/experience for a future R&D / Emerging Technology page

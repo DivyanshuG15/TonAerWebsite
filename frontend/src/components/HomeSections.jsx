@@ -8,6 +8,7 @@ import {
 import { SeriesVisual } from './SeriesVisual';
 import { TrustedBy } from './TrustedBy';
 import { LeadForm } from './LeadForm';
+import { BrandPreview } from './BrandPreview';
 
 const fadeUp = {
     initial: { opacity: 0, y: 24 },
@@ -216,19 +217,8 @@ export function HomeSections() {
                             </motion.div>
                         ))}
                     </div>
-                    <motion.div {...fadeUp} className="rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 p-10 text-center" data-testid="whitelabel-visual">
-                        <div className="rounded-2xl border-2 border-dashed border-sky-400/40 py-14 px-8">
-                            <div className="font-mono-xu text-[10px] tracking-[0.4em] text-sky-400">YOUR BRAND HERE</div>
-                            <div className="font-display font-bold text-3xl mt-4 text-white/80">Your Logo</div>
-                            <div className="flex justify-center gap-2 mt-6">
-                                {['#0066FF', '#22C55E', '#F59E0B', '#F43F5E'].map((c) => (
-                                    <span key={c} className="w-5 h-5 rounded-full border border-white/20" style={{ background: c }} />
-                                ))}
-                            </div>
-                        </div>
-                        <p className="font-mono-xu text-[10px] tracking-[0.25em] text-slate-500 mt-6">
-                            CASING · FIRMWARE · APP · CLOUD — ALL YOURS
-                        </p>
+                    <motion.div {...fadeUp}>
+                        <BrandPreview />
                     </motion.div>
                 </div>
             </Section>
