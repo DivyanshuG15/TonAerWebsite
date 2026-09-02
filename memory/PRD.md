@@ -24,6 +24,10 @@ Build the Xunison homepage as an interactive technology experience (NOT a normal
 - frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
 - frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
 
+## Implemented (2026-09-02, update 10 — comparison UX rebuild)
+- Gateway comparison rebuilt as a 4-step flow: technology filters (AND logic) + gateway search → matching gateways grouped by series (cards with device thumb, badges, Add to Compare) → explicit selection (max 4, ✓ Added toggle, no auto-prepopulation) → sticky comparison tray ("N gateways selected" + Compare Now) → categorized comparison table revealed only on Compare Now
+- No-match state: "NO EXACT MATCH FOUND" + Remove a Filter + closest matches by requirement score; Clear All Filters preserves the current selection; old requirement recommender removed (superseded by this flow)
+
 ## Implemented (2026-09-01, update 9 — product catalog)
 - /product rebuilt as a B2B catalog: series tabs (D/M/Q/O) → model selector cards (D Series: mD60, D71, D72; M: M20, M40; Q: Q20, Q10; O: O10, O20 — non-D71 names are PLACEHOLDERS pending real model data) → product overview (media viewer with FRONT/SIDE/REAR/DETAIL live-render camera angles + PRODUCT VIDEO and TECHNOLOGY DEMO tabs as honest portal placeholders, capability badges, CTAs) → per-model key capabilities → expandable 7-group spec table (✓ supported / — not available) → compare section (technology filters, 2–4 model slots, cross-series, categorized scrollable table, requirement-based recommender) → related products → B2B CTA
 - Scalable catalog data model in /src/data/catalog.js (series, products, spec groups, filters, capability map)

@@ -185,11 +185,11 @@ export default function ProductPage() {
             <section id="compare" className="scroll-mt-24 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-14">
                 <SectionHead
                     kicker="COMPARE GATEWAYS"
-                    title="Find the Right Gateway for Your Deployment."
-                    desc="Compare models across performance, connectivity, management and advanced technology capabilities — within a series or across the portfolio."
+                    title="Find the Right Gateway for Your Needs."
+                    desc="Select the technologies and capabilities you need. We'll show the gateways that match your requirements."
                 />
                 <div className="mt-10">
-                    <CompareSection currentId={product.id} onSelect={selectProduct} />
+                    <CompareSection onSelect={selectProduct} />
                 </div>
             </section>
 
