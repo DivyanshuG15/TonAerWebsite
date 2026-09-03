@@ -92,6 +92,11 @@ export default function CompanyPage() {
                                 {s.body.map((p, j) => (
                                     <p key={j} className="text-slate-400 leading-relaxed text-sm sm:text-base max-w-2xl">{p}</p>
                                 ))}
+                                {s.id === 'about' && (
+                                    <Link to="/about" data-testid="company-about-link" className="inline-block text-sm font-semibold text-brand hover:text-brand-soft transition-colors">
+                                        Read our full story
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </motion.section>

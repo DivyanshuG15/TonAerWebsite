@@ -41,9 +41,9 @@ const MENUS = [
     {
         id: 'company',
         label: 'Company',
-        roots: ['/company'],
+        roots: ['/company', '/about'],
         items: [
-            { t: 'About Us', d: 'The team behind the platform', to: '/company#about' },
+            { t: 'About Us', d: 'The team behind the platform', to: '/about' },
             { t: 'Research & Development', d: 'What wireless can reveal next', to: '/company#rnd' },
             { t: 'Engineering & Innovation', d: 'Hardware, cloud and apps in-house', to: '/company#engineering' },
             { t: 'Careers', d: 'Build the future of connectivity', to: '/careers' },

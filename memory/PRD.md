@@ -39,8 +39,11 @@ Build the TonAer (formerly "Xunison") B2B technology website as an interactive t
 - 4-step interactive preview: 01 select model (D/M/Q/O) → live 3D turntable → 02 upload logo (PNG/SVG/JPG ≤3MB, decal via alphaTest opaque pass) → 03 device finish → B2B CTAs
 - **Per-model casing colors** (July 2026): finishes configurable per series in `BrandPreview.jsx` — D & M: White/Black; Q: Black only; O: none (fixed industrial finish, shows "not available" note). Model switch resets finish to Standard.
 
-### Careers Portal (`/careers`)
-- Hero, culture/areas sections, searchable + filterable job list (department, category), job detail pages (`/careers/:slug`)
+### About Page (`/about`, July 2026)
+- 12-section editorial company page: hero (masked-line headline + abstract signal-ring evolution visual), Our Story, Our Evolution (5-stage timeline, no invented dates), 6 Values cards, Engineering Mindset (discipline chips), "See the Whole System" (DEVICE→…→EXPERIENCE stack with animated flow connectors), Customer Partnership, TonAer Difference (6), Culture, Vision (large statement), Road Ahead loop, final brand statement with Talk to TonAer / Explore Our Story CTAs
+- Nav Company > About Us now routes to /about; CompanyPage about section links to it ("Read our full story"); new CSS utilities `flow-y`, `spin-slow` in index.css
+
+### Careers Portal (`/careers`)- Hero, culture/areas sections, searchable + filterable job list (department, category), job detail pages (`/careers/:slug`)
 - Application form with resume upload → Emergent Object Storage; reference number returned
 - 8 SAMPLE/DEMO jobs seeded with `isDemo: True` → "DEMO POSITION" badge, demo applications flagged and excluded from real recruitment routing
 - Intelligent Operations showcase: 4 clickable capability cards with looping animated SVG demos
