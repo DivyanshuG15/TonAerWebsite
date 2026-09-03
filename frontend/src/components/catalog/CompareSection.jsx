@@ -26,10 +26,12 @@ function DeviceThumb({ p }) {
 
 const normValue = (v) => (!v || v === '—' ? '' : v);
 
-export function CompareSection({ onSelect }) {
+export function CompareSection({ onSelect, initialSelected = [] }) {
     const [filters, setFilters] = useState([]);
     const [query, setQuery] = useState('');
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState(() =>
+        initialSelected.filter((id) => productById(id)).slice(0, 4)
+    );
     const [comparing, setComparing] = useState(false);
     const [highlightDiffs, setHighlightDiffs] = useState(false);
 
@@ -213,7 +215,7 @@ export function CompareSection({ onSelect }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 24 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="mt-10"
+                        className="mt-10 scroll-mt-28"
                         id="comparison-result"
                         data-testid="comparison-result"
                     >
@@ -270,6 +272,9 @@ export function CompareSection({ onSelect }) {
                                                     <span className="block font-mono-xu text-[9px] tracking-[0.2em] text-slate-500 mt-1">
                                                         {seriesById(p.series).name.toUpperCase()}
                                                     </span>
+                                                    <span className="block font-mono-xu text-[8px] tracking-[0.2em] text-brand/70 group-hover:text-brand mt-1.5 transition-colors">
+                                                        VIEW PRODUCT
+                                                    </span>
                                                 </button>
                                             </th>
                                         ))}
@@ -294,11 +299,11 @@ export function CompareSection({ onSelect }) {
             <AnimatePresence>
                 {selected.length > 0 && !comparing && (
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 30, x: '-50%' }}
+                        animate={{ opacity: 1, y: 0, x: '-50%' }}
+                        exit={{ opacity: 0, y: 30, x: '-50%' }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 rounded-full bg-slate-950/90 backdrop-blur-xl border border-white/15 shadow-2xl shadow-slate-950/60 pl-5 pr-2 py-2"
+                        className="fixed bottom-6 left-1/2 z-40 flex items-center gap-3 rounded-full bg-slate-950/90 backdrop-blur-xl border border-white/15 shadow-2xl shadow-slate-950/60 pl-5 pr-2 py-2"
                         data-testid="compare-tray"
                     >
                         <span className="font-mono-xu text-[9px] tracking-[0.25em] text-slate-400 whitespace-nowrap">

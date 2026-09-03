@@ -21,7 +21,7 @@ const MENUS = [
     {
         id: 'products',
         label: 'Products',
-        roots: ['/product', '/series'],
+        roots: ['/product', '/products', '/series'],
         mega: true,
         items: [],
     },
@@ -91,14 +91,16 @@ function ProductsMega() {
                         The complete TonAer hardware portfolio — one platform, four series.
                     </p>
                 </Link>
-                <div className="mt-3 space-y-2 opacity-50">
-                    {['Compare Products', 'Product Selector'].map((t) => (
-                        <div key={t} className="flex items-center justify-between rounded-xl border border-white/5 px-5 py-3">
-                            <span className="text-sm text-slate-400">{t}</span>
-                            <span className="font-mono-xu text-[9px] tracking-[0.25em] text-brand border border-brand/30 rounded-full px-2 py-0.5">SOON</span>
-                        </div>
-                    ))}
-                </div>
+                <Link
+                    to="/products/compare"
+                    data-testid="mega-compare-gateways"
+                    className="mt-3 block rounded-xl border border-white/10 bg-white/5 hover:border-brand/40 p-5 transition-colors duration-300"
+                >
+                    <div className="font-display font-semibold text-white">Compare Gateways</div>
+                    <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                        Side-by-side specifications across all series — filter by the technologies you need.
+                    </p>
+                </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
                 {SERIES_MENU.map((s) => (
@@ -291,6 +293,7 @@ export function Nav() {
                                                                     {s.name}
                                                                 </Link>
                                                             ))}
+                                                            <Link to="/products/compare" className="block py-2.5 text-sm text-brand">Compare Gateways</Link>
                                                         </>
                                                     ) : (
                                                         menu.items.map((item) => (

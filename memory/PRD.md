@@ -31,7 +31,8 @@ Build the TonAer (formerly "Xunison") B2B technology website as an interactive t
 ### Product Catalog & Comparison (`/product`)
 - Series tabs (D/M/Q/O) → model cards (mD60, D71, D72, M20, M40, Q20, Q10, O10, O20 — non-D71 names are PLACEHOLDERS) → overview with live-render media viewer (FRONT/SIDE/REAR/DETAIL) → per-model capabilities → expandable 7-group spec table (✓ / — honest values) → compare → related products → CTA
 - Comparison 4-step flow: technology filters (AND) + search → matches grouped by series → explicit selection (max 4) → sticky tray → Compare Now reveals categorized table; no-match state with closest matches
-- **Highlight Differences toggle** (July 2026): dims identical spec rows (opacity 35%), differing rows get subtle Signal Green row highlight; only shown when 2+ gateways compared
+- **Highlight Differences toggle** (July 2026): dims identical spec rows, differing rows get subtle Signal Green row highlight; only shown when 2+ gateways compared
+- **Dedicated Compare Gateways page `/products/compare`** (July 2026): same `CompareSection` component (single source of truth) shared with /product; deep links `?product=D71` / `?products=D71,M40` preselect valid ids (max 4); View Product links navigate to `/product?series&model`; Products nav dropdown has real Compare Gateways link (Product Selector removed); product page CTA "Compare This Gateway" deep-links to the dedicated page
 - `/series/:id` redirects to `/product?series=:id`; URL params make views shareable
 
 ### White-Label Brand Preview (homepage)

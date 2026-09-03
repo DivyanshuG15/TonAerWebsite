@@ -141,13 +141,13 @@ export default function ProductPage() {
                                 >
                                     Request Product Information
                                 </Link>
-                                <button
-                                    onClick={() => document.querySelector('#compare')?.scrollIntoView({ behavior: 'smooth' })}
+                                <Link
+                                    to={`/products/compare?product=${product.id}`}
                                     data-testid="product-cta-compare"
-                                    className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300"
+                                    className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 text-center transition-all duration-300"
                                 >
-                                    Compare Gateway
-                                </button>
+                                    Compare This Gateway
+                                </Link>
                             </div>
                         </div>
                     </motion.div>
