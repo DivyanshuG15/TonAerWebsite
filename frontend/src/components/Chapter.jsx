@@ -33,7 +33,7 @@ export function HudLabel({ text, style }) {
     );
 }
 
-export function Chapter({ num, kicker, lines, copy, dark = true, height = '150vh', align = 'left', labels = [], accent = '#38BDF8', children }) {
+export function Chapter({ num, kicker, lines, copy, dark = true, height = '150vh', align = 'left', labels = [], accent = '#00D084', children }) {
     return (
         <section
             className={`relative ${dark ? 'text-white' : 'text-slate-900'}`}

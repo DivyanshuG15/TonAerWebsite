@@ -12,7 +12,7 @@ const rand = () => {
     return (s - 1) / 2147483646;
 };
 
-// Xunison R&D: a 3D room where the D71's wireless field visibly reacts to presence.
+// TonAer R&D: a 3D room where the D71's wireless field visibly reacts to presence.
 export function EnvironmentScene() {
     const { group, register } = useSceneFader(0.75, 0.87, 0.028);
     const silhouette = useRef();
@@ -67,7 +67,7 @@ export function EnvironmentScene() {
         <group ref={group}>
             <ambientLight intensity={0.22} />
             <directionalLight position={[4, 6, 3]} intensity={1.4} color="#dbeafe" />
-            <pointLight position={[2, 3, 2]} intensity={10} distance={16} color="#93c5fd" />
+            <pointLight position={[2, 3, 2]} intensity={10} distance={16} color="#7AEBC2" />
             <pointLight position={[-3, 2, -2]} intensity={5} distance={12} color="#22c55e" />
 
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
@@ -102,7 +102,7 @@ export function EnvironmentScene() {
 
             <mesh position={[0.2, 1.9, -4.42]}>
                 <boxGeometry args={[2.4, 1.3, 0.08]} />
-                <meshStandardMaterial ref={register} color="#0b1220" emissive="#0ea5e9" emissiveIntensity={0.4} roughness={0.4} />
+                <meshStandardMaterial ref={register} color="#0b1220" emissive="#00D084" emissiveIntensity={0.4} roughness={0.4} />
             </mesh>
 
             <mesh ref={silhouette} position={[0, 0.98, -0.6]}>

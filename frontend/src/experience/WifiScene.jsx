@@ -90,9 +90,9 @@ export function WifiScene() {
         <group ref={group}>
             <ambientLight intensity={0.85} />
             <directionalLight position={[5, 8, 6]} intensity={1.5} />
-            <directionalLight position={[-6, 4, -5]} intensity={0.5} color="#7dd3fc" />
+            <directionalLight position={[-6, 4, -5]} intensity={0.5} color="#5CE8B4" />
             <D71 scale={0.55} position={[0, 0.5, 0]} onMaterial={register} />
-            <ContactShadows position={[0, 0.04, 0]} opacity={0.4} scale={8} blur={2.4} far={2.5} resolution={256} color="#1e3a5f" />
+            <ContactShadows position={[0, 0.04, 0]} opacity={0.4} scale={8} blur={2.4} far={2.5} resolution={256} color="#0B3D2E" />
             {BANDS.map((b, i) => (
                 <group key={b.color} ref={(el) => (bandRefs.current[i] = el)}>
                     <Particles
@@ -112,7 +112,7 @@ export function WifiScene() {
             ))}
             <instancedMesh ref={devicesRef} args={[undefined, undefined, 50]} frustumCulled={false}>
                 <icosahedronGeometry args={[0.055, 1]} />
-                <meshBasicMaterial ref={register} color="#1e3a5f" transparent opacity={0.95} />
+                <meshBasicMaterial ref={register} color="#0B3D2E" transparent opacity={0.95} />
             </instancedMesh>
             <lineSegments ref={linksRef} geometry={linkGeo} frustumCulled={false}>
                 <lineBasicMaterial ref={register} color="#0284C7" transparent opacity={0.3} />

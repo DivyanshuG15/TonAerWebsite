@@ -9,7 +9,7 @@ export const SERIES = [
         id: 'm',
         name: 'M Series',
         desc: 'Reliable, volume-ready gateways engineered for mass-market fiber rollouts.',
-        variant: { bodyColor: '#e6ebf1', panelColor: '#d6dee7', ledColor: '#0066FF', logoColor: '#0066FF', vents: 6 },
+        variant: { bodyColor: '#e6ebf1', panelColor: '#d6dee7', ledColor: '#00D084', logoColor: '#00D084', vents: 6 },
     },
     {
         id: 'q',
@@ -36,7 +36,7 @@ export const SPEC_GROUPS = [
 ];
 
 const MGMT_YES = {
-    'Cloud Management': '✓ Xunison Cloud',
+    'Cloud Management': '✓ TonAer Cloud',
     'Remote Monitoring': '✓',
     'Remote Configuration': '✓ TR-369 / USP',
     'OTA Updates': '✓',
@@ -61,7 +61,7 @@ export const PRODUCTS = [
         desc: 'Proven mesh-capable gateway for large-scale broadband deployments.',
         tags: ['wifi6', 'dualband', 'mesh', 'cloud', 'sim'],
         caps: ['performance', 'connectivity', 'intelligence', 'reliability', 'security', 'customization'],
-        variant: { ledColor: '#0066FF', logoColor: '#0066FF', vents: 6 },
+        variant: { ledColor: '#00D084', logoColor: '#00D084', vents: 6 },
         specs: {
             wireless: { 'Wi-Fi Standard': 'Wi-Fi 6 (802.11ax)', 'Bands': 'Dual-Band 2.4 / 5 GHz', 'Maximum Speed': '—', 'Channels': 'Up to 160 MHz', 'MIMO': '✓ MU-MIMO', 'Mesh Support': '✓ EasyMesh' },
             processing: { 'Processor': '—', 'Memory': '—', 'Flash Storage': '—' },
@@ -121,7 +121,7 @@ export const PRODUCTS = [
         desc: 'Cost-efficient gateway for high-volume fiber broadband deployments.',
         tags: ['wifi6', 'dualband', 'cloud'],
         caps: ['connectivity', 'intelligence', 'security', 'customization'],
-        variant: { ledColor: '#0066FF', logoColor: '#0066FF', vents: 4 },
+        variant: { ledColor: '#00D084', logoColor: '#00D084', vents: 4 },
         specs: {
             wireless: { 'Wi-Fi Standard': 'Wi-Fi 6 (802.11ax)', 'Bands': 'Dual-Band 2.4 / 5 GHz', 'Maximum Speed': '—', 'Channels': 'Up to 80 MHz', 'MIMO': '✓ MU-MIMO', 'Mesh Support': '—' },
             processing: { 'Processor': '—', 'Memory': '—', 'Flash Storage': '—' },
@@ -141,7 +141,7 @@ export const PRODUCTS = [
         desc: 'Wi-Fi 6E performance tier for operators scaling premium mass-market service.',
         tags: ['wifi6', 'triband', 'mesh', 'cloud'],
         caps: ['performance', 'connectivity', 'intelligence', 'security', 'customization'],
-        variant: { ledColor: '#0066FF', logoColor: '#0066FF', vents: 6 },
+        variant: { ledColor: '#00D084', logoColor: '#00D084', vents: 6 },
         specs: {
             wireless: { 'Wi-Fi Standard': 'Wi-Fi 6E (802.11ax)', 'Bands': 'Tri-Band 2.4 / 5 / 6 GHz', 'Maximum Speed': '—', 'Channels': 'Up to 160 MHz', 'MIMO': '✓ MU-MIMO', 'Mesh Support': '✓ EasyMesh' },
             processing: { 'Processor': '—', 'Memory': '—', 'Flash Storage': '—' },

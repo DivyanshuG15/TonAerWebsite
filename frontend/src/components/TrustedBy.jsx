@@ -9,7 +9,7 @@ export function TrustedBy({ dark = false }) {
             data-testid="trusted-by"
         >
             <div className="max-w-6xl mx-auto">
-                <div className={`font-mono-xu text-[11px] tracking-[0.35em] mb-10 flex items-center gap-3 ${dark ? 'text-sky-400' : 'text-[#0066FF]'}`}>
+                <div className={`font-mono-xu text-[11px] tracking-[0.35em] mb-10 flex items-center gap-3 ${dark ? 'text-brand' : 'text-[#00D084]'}`}>
                     <span className="w-8 h-px bg-current" />
                     TRUSTED BY CONNECTIVITY BUSINESSES
                 </div>
@@ -33,7 +33,7 @@ export function TrustedBy({ dark = false }) {
                     ))}
                 </div>
                 <p className={`mt-12 text-sm leading-relaxed max-w-2xl ${dark ? 'text-slate-400' : 'text-slate-500'}`}>
-                    Every Xunison gateway is built to the operator's demand — shaped by deployment size,
+                    Every TonAer gateway is built to the operator's demand — shaped by deployment size,
                     regional demography and market requirements, and delivered with their firmware, bands and branding.
                 </p>
             </div>

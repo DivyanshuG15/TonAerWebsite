@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend-only testing (no backend testing per request) of the two new features: per-model casing finish customization in the homepage White-Label Brand Preview and the 'Highlight Differences' toggle in the /product comparison table. All 9 requested scenarios passed. Brand preview: D Series shows Standard/White/Black, M Series shows Standard/White/Black, Q Series shows only Standard/Black (no White), O Series shows NO finish buttons and instead renders data-testid='finish-not-supported' with the exact copy 'The O Series ships in a fixed industrial finish - casing color customization is not available for this model.'; switching model resets finish to Standard (verified O->D and D->Q). 3D canvas re-renders on finish change (visually confirmed white vs dark casing in screenshots) with no WebGL crash and zero console errors. Comparison: with 2 gateways (D71+D72) the highlight-differences-toggle is visible (aria-pressed toggles false/true/false); ON -> 30/40 identical rows computed opacity 0.35 (Wi-Fi Standard, Bands, Channels dimmed) and 3 differing rows (WAN, SIM Support, Failover) get bg rgba(0,208,132,0.05) at full opacity with data-testid diff-row-*; OFF restores all rows to opacity 1 with no tint. With ONE gateway selected the toggle is correctly absent (count 0). 3-gateway case also correct (10 highlighted / 23 dimmed). Regression: search (D72 -> 1 card, 'zzzz' -> no-match), filter chips, clear-filters, tray, Compare Now, Modify Selection and brand-preview step 02 logo upload button all work.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CompareSection", "issue": "After clicking Compare Now the code does document.querySelector('#comparison-result').scrollIntoView(), but the comparison container only has data-testid='comparison-result' and no id, so the element count for #comparison-result is 0 and the auto-scroll to the results table never happens (user may not notice the table appeared below the fold).", "selector": "[data-testid=\"comparison-result\"]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/product comparison table (Highlight Differences ON)", "issues": ["Dimmed identical rows use opacity-35 on slate-400/slate-500 text over #0B1120 - effective contrast falls well below 3:1, making identical specs almost unreadable. Consider opacity-50/60 to keep them de-emphasised but legible.", "The green tint on differing rows (rgba(0,208,132,0.05)) is extremely subtle - only the removal of dimming really communicates the difference; a slightly stronger tint or a left accent border would read better."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Add id=\"comparison-result\" to the comparison container (or scroll via a ref) so the post-Compare-Now smooth scroll actually works",
+    "Consider raising dimmed row opacity from 35% to ~50-60% for readability/accessibility"
+  ],
+  "critical_code_review_comments": [
+    "BrandPreview: FINISHES swatch for 'Standard' uses selected.variant.bodyColor with a hardcoded '#f2f5f8' fallback (D Series has empty variant) - fine functionally, but the fallback duplicates the D71 default body color; consider sourcing it from the D71 default props.",
+    "CompareSection: normValue only normalizes '' and '—'; case/whitespace variants of the same spec value would be treated as different. Acceptable for the current curated catalog data."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not tested", "frontend": "100% (9/9 requested scenarios passed)"},
+  "seed_data_creation": "None - static catalog data, no auth",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Both new features verified end-to-end on the public preview URL. Reliable approach: on homepage wait ~4s then scroll_into_view on [data-testid='brand-preview'] (WebGL is slow); assert finish selection via the 'border-brand' class on finish-* buttons. On /product, row dim/highlight state is best asserted via page.evaluate over '[data-testid=\"compare-table\"] tbody tr' reading getComputedStyle opacity (0.35) and className containing 'bg-brand/[0.05]'. Only open issue: missing id='comparison-result' breaks the auto-scroll; nothing else outstanding.",
+  "rca_of_the_issue": "Auto-scroll no-op RCA: CompareSection line 319 queries '#comparison-result' but the motion.div at line 217 exposes only data-testid, so querySelector returns null and scrollIntoView is skipped silently."
+}

@@ -11,7 +11,7 @@ const rand = () => {
     return (s - 1) / 2147483646;
 };
 
-// Xunison Cloud: scattered telemetry converges into a swirling abstract compute sphere.
+// TonAer Cloud: scattered telemetry converges into a swirling abstract compute sphere.
 export function CloudScene() {
     const { group, register } = useSceneFader(0.575, 0.70, 0.03);
     const core = useRef();
@@ -77,7 +77,7 @@ export function CloudScene() {
             </points>
             <mesh ref={core}>
                 <sphereGeometry args={[1, 32, 32]} />
-                <meshBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.16} blending={THREE.AdditiveBlending} depthWrite={false} />
+                <meshBasicMaterial ref={register} color="#00D084" transparent opacity={0.16} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
         </group>
     );

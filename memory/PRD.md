@@ -1,112 +1,66 @@
-# XUNISON — 3D Technology Story Homepage
+# TONAER — B2B White-Label Connectivity Platform Website
 
 ## Original Problem Statement
-Build the Xunison homepage as an interactive technology experience (NOT a normal website): a continuous WebGL/3D scroll-driven narrative — D71 gateway → Wi-Fi → Connected Devices → Network → Telemetry → Cloud → AI → Environmental Intelligence → Ecosystem/CTA. Cinematic camera, purposeful particles, tri-band visualization, AI anomaly story (observe → understand → act), R&D environmental sensing (privacy-safe, no surveillance), dramatic zoom-out finale, loading experience, reduced-motion + mobile fallbacks, premium Apple-launch-meets-NVIDIA feel.
+Build the TonAer (formerly "Xunison") B2B technology website as an interactive technology experience: a cinematic WebGL/3D scroll-driven homepage, a full product catalog with gateway comparison, an interactive white-label brand preview, and a complete Careers portal. Premium Apple-launch-meets-NVIDIA feel on a dark enterprise palette.
 
-## User Choices (2026-08-29)
-- No official D71 3D model — procedural premium stand-in built in code, swappable for GLB via `modelUrl` prop (no scene rebuild)
-- Visual tone: follow brief exactly (white → soft blue → midnight navy → light)
-- Performance: balanced, adaptive quality + strong mobile fallback
-- Full nav with Product / Technology / Support pages
-- Awwwards-level craft: masked line-by-line reveals, numbered chapters, editorial marquee, framer-motion + lenis
+## Brand Rules (STRICT)
+- Company name: **TonAer** — never "Xunison" anywhere (UI, metadata, code labels).
+- Primary accent: **Signal Green `#00D084`** (Tailwind token `brand`). Backgrounds stay dark navy / near-black — green is an accent only, never a background wash.
+- 3D hardware assets are procedural stand-ins, swappable for real GLB/GLTF via config (no scene rebuild).
 
 ## Architecture
-- Frontend: React 19 + @react-three/fiber v9 + drei + three; GSAP ScrollTrigger central progress (0..1) + Lenis momentum scroll; framer-motion UI reveals
-- Single fixed WebGL canvas; all 8 scenes coexist at origin and crossfade via `useSceneFader(start, end)` driven by `scrollStore.progress`
-- Camera: keyframed cinematic path (CameraRig) with smoothstep interpolation + damped lerp + subtle pointer parallax
-- Background color interpolated from BG_STOPS per progress (canvas scene.background + body)
-- Adaptive quality: device detection (mobile/reduced-motion) scales particle counts, DPR, shadows; runtime FPS monitor steps DPR down
-- Backend: FastAPI + MongoDB — POST/GET /api/leads (demo requests), /api/health, /api/status
-- Pages: / (experience), /product (live D71 render + specs), /technology, /support
+- Frontend: React 19 + Tailwind + Framer Motion + GSAP ScrollTrigger + Lenis; Three.js via @react-three/fiber v9 + drei. Single fixed WebGL canvas on homepage; hero intelligence hub only.
+- Backend: FastAPI + MongoDB (leads) + Emergent Object Storage for resume uploads (NEVER local /uploads — blocked).
+- Key data: `/frontend/src/data/catalog.js` (series/products/specs/filters), `/frontend/src/data/careersConfig.js`, `/backend/careers_data.py` (job + application models, demo seeder).
 
-## Key Files
-- frontend/src/experience/: store.js, ScrollRig.jsx, ExperienceCanvas.jsx, CameraRig.jsx, D71.jsx, Particles.jsx, sceneUtils.js, HeroScene, WifiScene, NetworkScene, TelemetryScene, CloudScene, AIScene, EnvironmentScene, EcosystemScene
-- frontend/src/components/: Nav, LoadingScreen, Chapter (MaskedLine/HudLabel), Marquee, LeadForm, Footer, ProductVisual
-- frontend/src/pages/: HomePage, ProductPage, TechnologyPage, SupportPage
+## Key API Endpoints
+- `POST /api/leads`, `GET /api/leads` — demo request capture (no auth, demo only)
+- `GET /api/jobs`, `GET /api/jobs/{slug}` — careers listings
+- `POST /api/applications` — multipart form + resume file → Emergent Object Storage
+- `GET /api/health`, `GET /api/status`
 
-## Implemented (2026-09-02, update 10 — comparison UX rebuild)
-- Gateway comparison rebuilt as a 4-step flow: technology filters (AND logic) + gateway search → matching gateways grouped by series (cards with device thumb, badges, Add to Compare) → explicit selection (max 4, ✓ Added toggle, no auto-prepopulation) → sticky comparison tray ("N gateways selected" + Compare Now) → categorized comparison table revealed only on Compare Now
-- No-match state: "NO EXACT MATCH FOUND" + Remove a Filter + closest matches by requirement score; Clear All Filters preserves the current selection; old requirement recommender removed (superseded by this flow)
+## Implemented Features (current state, July 2026)
 
-## Implemented (2026-09-01, update 9 — product catalog)
-- /product rebuilt as a B2B catalog: series tabs (D/M/Q/O) → model selector cards (D Series: mD60, D71, D72; M: M20, M40; Q: Q20, Q10; O: O10, O20 — non-D71 names are PLACEHOLDERS pending real model data) → product overview (media viewer with FRONT/SIDE/REAR/DETAIL live-render camera angles + PRODUCT VIDEO and TECHNOLOGY DEMO tabs as honest portal placeholders, capability badges, CTAs) → per-model key capabilities → expandable 7-group spec table (✓ supported / — not available) → compare section (technology filters, 2–4 model slots, cross-series, categorized scrollable table, requirement-based recommender) → related products → B2B CTA
-- Scalable catalog data model in /src/data/catalog.js (series, products, spec groups, filters, capability map)
-- /series/:id now redirects to /product?series=:id (single catalog experience); URL params make product views shareable
-- Unverified specs intentionally show '—' rather than invented values
+### Cinematic 3D Homepage
+- Hero: abstract intelligence hub (glowing core, orbit rings, nodes, particles) on dark navy; copy "Build Your Network. Own Your Brand." / WHITE-LABEL CONNECTIVITY PLATFORM
+- Section flow: HERO → ECOSYSTEM → WHITE-LABEL → PORTFOLIO → CLOUD → INTELLIGENCE → INDUSTRIES → TRUSTED BY → CAPABILITIES → WHY US → REQUEST DEMO → FOOTER
+- Full cinematic scroll chapters (Wi-Fi / Network / Telemetry / Cloud / AI / Environment / Ecosystem scenes) remain in `/src/experience/` for a future R&D page — removed from homepage per client IA
+- Two-level navigation (Solutions / Products / Technology / Company / Resources dropdowns + Products mega menu + Request Demo CTA), mobile accordion menu
+- Loading screen, glass pill nav with scroll progress, lead form → MongoDB (verified e2e)
 
-## Implemented (2026-09-01, update 8 — interactive intelligence showcase)
-- "Turn Network Data Into Action." section: static SVG replaced with IntelligenceShowcase.jsx — four clickable capability cards (AI-Powered Troubleshooting, Intelligent Gateway Placement, Network Behavior Insights, Proactive Issue Detection) driving a "LIVE CAPABILITY DEMO" panel with 0X/04 counter and smooth AnimatePresence transitions
-- Four looping animated SVG demos (CSS keyframes + phase timers, no video): root-cause analysis flow (issue → analyze → cause → action → restored), floor-plan gateway placement (poor corner → scan sweep → recommended move → coverage improved), 24h activity timeline bars with peak callout, latency anomaly chart with threshold/alert/auto-optimize cycle
-- Default state selects AI-Powered Troubleshooting; "SELECT A CAPABILITY TO EXPLORE" cue; click/tap primary interaction
+### Product Catalog & Comparison (`/product`)
+- Series tabs (D/M/Q/O) → model cards (mD60, D71, D72, M20, M40, Q20, Q10, O10, O20 — non-D71 names are PLACEHOLDERS) → overview with live-render media viewer (FRONT/SIDE/REAR/DETAIL) → per-model capabilities → expandable 7-group spec table (✓ / — honest values) → compare → related products → CTA
+- Comparison 4-step flow: technology filters (AND) + search → matches grouped by series → explicit selection (max 4) → sticky tray → Compare Now reveals categorized table; no-match state with closest matches
+- **Highlight Differences toggle** (July 2026): dims identical spec rows (opacity 35%), differing rows get subtle Signal Green row highlight; only shown when 2+ gateways compared
+- `/series/:id` redirects to `/product?series=:id`; URL params make views shareable
 
-## Implemented (2026-09-01, update 7 — white-label interactive preview)
-- White-Label Advantage section: static "Your Logo" placeholder replaced with a 4-step interactive Brand Preview (BrandPreview.jsx): 01 select model (D/M/Q/O cards with positioning copy) → live 3D preview → 02 upload logo (PNG/SVG/JPG, ≤3MB, thumbnail + remove) → 03 device finish (Standard/White/Black casing) → B2B CTA (Discuss Your White-Label Solution → #contact, Explore This Product → /series/:id)
-- Per-series logo placement config (position + size per model) — real GLB/PNG mockups can replace procedural configs later
-- Logo decal renders via opaque-pass alphaTest (transparent:true caused invisible decal — resolved after debug iterations)
-- Mobile: horizontally scrollable model selector, stacked steps, large preview
-- Left benefits column (White-Label Hardware / Branded Applications / Centralized Cloud Platform / Custom Development) preserved
+### White-Label Brand Preview (homepage)
+- 4-step interactive preview: 01 select model (D/M/Q/O) → live 3D turntable → 02 upload logo (PNG/SVG/JPG ≤3MB, decal via alphaTest opaque pass) → 03 device finish → B2B CTAs
+- **Per-model casing colors** (July 2026): finishes configurable per series in `BrandPreview.jsx` — D & M: White/Black; Q: Black only; O: none (fixed industrial finish, shows "not available" note). Model switch resets finish to Standard.
 
-## Implemented (2026-09-01, update 6 — homepage cleanup)
-- Removed the cinematic scroll chapters from the homepage (Tri-Band explainer, Telemetry "Every Connection Creates Data", Environmental Sensing, network/cloud chapters, marquee, and the ecosystem finale overlay) per final IA: HERO → ECOSYSTEM → WHITE-LABEL → PORTFOLIO → CLOUD → INTELLIGENCE → INDUSTRIES → TRUSTED BY → CAPABILITIES → WHY US → REQUEST DEMO → FOOTER
-- Homepage canvas now renders only the hero intelligence hub (slow push-in camera); Wi-Fi / Network / Telemetry / Cloud / AI / Environment / Ecosystem 3D scenes remain in /src/experience for a future R&D / Emerging Technology page
-- Industries cards rewritten with approved B2B copy; capabilities compacted to a 10-item 5-col grid; why-partner items aligned to approved claims; trust section heading "TRUSTED BY CONNECTIVITY BUSINESSES" with only the four real customer names (invented descriptor notes removed)
-- Nav progress bar now driven by document scroll; sections sit on solid dark navy
-
-## Implemented (2026-09-01, update 5 — IA overhaul)
-- Two-level navigation: Solutions / Products / Technology / Company / Resources dropdowns (hover + click, outside-click close, chevrons, active-group highlight) + Products mega menu (All Products, D/M/Q/O cards, Compare Products & Product Selector as SOON) + Request Demo primary CTA; mobile hamburger with full-screen accordion menu
-- Homepage business story: new hero copy ("Build Your Network. Own Your Brand." / WHITE-LABEL CONNECTIVITY PLATFORM), cinematic 3D journey preserved, then business sections after the experience: ecosystem (5 components + flow), white-label advantage (brand-customization visual), product portfolio (D71 live render + series links), cloud platform (schematic topology visual, no fake data), intelligent operations (anomaly/optimization SVG), industries (ISP / Telecom / Network Solutions), TrustedBy, capabilities grid (11), why-partner (5), final CTA with lead form (id="contact")
-- New /company page with anchored sections (about, rnd, engineering, careers, news, reports)
-- Technology page rewritten as 6 anchored chapters (wifi, mesh, cloud, ai, iot, security); Support page gained Documentation / Downloads / Insights resource cards + #faqs anchor
-- Hash-based cross-page navigation via ScrollManager (Lenis-aware)
-- LeadForm restyled for dark backgrounds
-- Fix: scrollStore import in App.js; ecosystem gradient transition
-
-## Implemented (2026-08-30, update 4)
-- Hero redesigned as centered immersive composition on dark navy: eyebrow "CONNECTED INTELLIGENCE", headline "Every Device. / One Intelligent Platform." (cyan accent on "Intelligent"), centered supporting copy, primary CTA "Explore the Platform" (smooth-scrolls into chapter 02), secondary CTA "Learn More" (→ /technology), minimal centered scroll cue
-- Hero 3D scene replaced: abstract intelligence hub (glowing core, two slow orbit rings, 9 quiet nodes, faint links, ~300 dust particles, slow pulse) positioned lower-center behind/below content
-- D71 product reveal moved into the Smart Wi-Fi chapter (field now emanates from the device on a light studio bg); hero camera changed to slow centered push-in; background timeline starts dark navy and dawns into light at the Wi-Fi chapter
-
-## Implemented (2026-08-29, update 3)
-- Dedicated series detail pages at /series/d, /series/m, /series/q, /series/o — each with its own live 3D device variant (parameterized body/panel/LED/logo colors, vent count, SIM tray on Q), full spec sheet (10 rows), feature trio, "Built to your market" CTA, and a cross-series lineup nav
-- D71 device component now parameterized (bodyColor, panelColor, logoColor, vents, ports, simTray) — variants: D flagship white, M value grey, Q cellular green-LED + SIM tray, O ruggedized slate + amber LED
-- SeriesGrid cards on Products page now link to their detail pages with EXPLORE affordance
-
-## Implemented (2026-08-29, update 2)
-- Product lineup expansion: D / M / Q / O series grid (D71 flagged as LATEST flagship), "Built to order" B2B customization section (e-SIM, physical SIM failover, FXS telephone port, regional band plans, operator firmware, casing/branding), TrustedBy client strip (Earthlink, Orangeburg IQ, Hitron, STC) on Product page + homepage after the experience
-- Nav/Footer relabeled "Products"
-- D71 spec grid extended with CELLULAR (e-SIM + SIM) and VOICE (FXS) rows
-
-## Implemented (2026-08-29)
-- Full 8-scene scroll experience with branded loading screen (XUNISON + signal pulse + counter)
-- Procedural D71 (unibody, vents, ports, pulsing cyan LED, logo dot) with GLB swap architecture
-- Tri-band Wi-Fi particle shells (amber/cyan/violet) + 5→20→50 device density growth + links
-- Network topology with data pulses traveling device → D71 → cloud
-- Telemetry point field morphing from noise into organized waveforms
-- Cloud convergence vortex + core
-- AI anomaly story: normal → rose anomaly pulse → analysis ring → neighbor analysis → emerald optimization path → heal
-- Environmental R&D room: furniture, TV, mini D71 (green LED), moving silhouette, ripple-reactive sensing field, expanding rings
-- Ecosystem zoom-out finale (49 home nodes → cloud) resolving to CTA + TODAY/NOW/NEXT manifesto
-- Lead capture form → MongoDB (verified e2e with toast)
-- Editorial marquee, glass pill nav with scroll progress bar, footer
-- Product page live-render D71 studio visual; Technology numbered chapters; Support FAQ
+### Careers Portal (`/careers`)
+- Hero, culture/areas sections, searchable + filterable job list (department, category), job detail pages (`/careers/:slug`)
+- Application form with resume upload → Emergent Object Storage; reference number returned
+- 8 SAMPLE/DEMO jobs seeded with `isDemo: True` → "DEMO POSITION" badge, demo applications flagged and excluded from real recruitment routing
+- Intelligent Operations showcase: 4 clickable capability cards with looping animated SVG demos
 
 ## Verified
+- Rebrand to TonAer + Signal Green confirmed by user (July 2026)
+- Careers demo flow verified (8 demo jobs, badges, application POST)
 - curl: /api/health, POST+GET /api/leads OK
-- Screenshots: hero, wifi, network, telemetry, cloud, AI, environment, ecosystem, finale, lead-form e2e, product page, mobile 390px hero+wifi
-- Fixed: band() edge math (hero/ecosystem invisible), square→round particle sprites, additive wash-out on light bg, finale headline reveal (useInView), env room contrast/composition
+- Screenshot-tested: homepage, product catalog, comparison flow, brand preview, careers, mobile 390px
 
 ## Backlog
-- P0: Official D71 GLB drop-in when asset exists (architecture ready)
-- P1: Interactive D71 hotspots (hover Wi-Fi 7 / Tri-Band / Smart Network callouts)
-- P1: Deeper mobile choreography (shorter camera sequences), touch-specific tweaks
-- P1: prefers-reduced-motion section-skip nav tabs
-- P2: Depth of field / bloom post-processing pass on high-tier GPUs
-- P2: Admin view for /api/leads with auth
-- P2: i18n, SEO meta/OG tags, sitemap
-- P2: WebGPU renderer probe when stable in three
+- P0: Official D71 GLB drop-in (architecture ready)
+- P1: Admin recruitment panel — HR create/edit/close jobs, review applications (backend mock exists; user deferred)
+- P1: Deeper mobile choreography, touch tweaks; prefers-reduced-motion section-skip
+- P2: Saved shortlist (persist comparison selection via localStorage) — approved, after P1 work
+- P2: Branded PDF datasheet download per model (verified specs + TonAer branding) — approved, after core catalog/admin work
+- P2: Compare share links (user deferred)
+- P2: Bloom/DOF post-processing behind quality gate; leads admin with auth; i18n/SEO/OG/sitemap
 
 ## Next Tasks
-1. Drop in official D71 GLB + hotspot callouts
-2. Post-processing polish (bloom/DOF) behind quality gate
-3. SEO + OG share card
-4. Leads admin with auth
+1. Test casing colors + highlight-differences (this round)
+2. Saved shortlist persistence
+3. PDF datasheet generation
+4. Admin recruitment panel (when user re-prioritizes)

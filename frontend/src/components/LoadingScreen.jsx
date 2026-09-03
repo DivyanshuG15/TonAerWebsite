@@ -27,9 +27,9 @@ export function LoadingScreen({ onDone }) {
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
             <div className="relative flex items-center justify-center mb-10">
-                <span className="absolute w-16 h-16 rounded-full border border-sky-400/50 signal-ring" />
-                <span className="absolute w-16 h-16 rounded-full border border-sky-400/30 signal-ring" style={{ animationDelay: '0.6s' }} />
-                <span className="w-2.5 h-2.5 rounded-full bg-sky-400 led-blink" />
+                <span className="absolute w-16 h-16 rounded-full border border-brand/50 signal-ring" />
+                <span className="absolute w-16 h-16 rounded-full border border-brand/30 signal-ring" style={{ animationDelay: '0.6s' }} />
+                <span className="w-2.5 h-2.5 rounded-full bg-brand led-blink" />
             </div>
             <div className="overflow-hidden">
                 <motion.div
@@ -38,10 +38,10 @@ export function LoadingScreen({ onDone }) {
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     className="font-display font-bold tracking-[0.3em] text-white text-2xl"
                 >
-                    XUNISON
+                    TONAER
                 </motion.div>
             </div>
-            <div className="font-mono-xu text-[10px] tracking-[0.4em] text-sky-400/70 mt-4">
+            <div className="font-mono-xu text-[10px] tracking-[0.4em] text-brand/70 mt-4">
                 CONNECTING EXPERIENCE...
             </div>
             <div className="font-mono-xu text-xs text-slate-500 mt-8 tabular-nums" data-testid="loading-counter">

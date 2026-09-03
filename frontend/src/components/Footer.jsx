@@ -6,8 +6,8 @@ export function Footer() {
             <div className="max-w-6xl mx-auto px-6 sm:px-12 py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
                 <div className="col-span-2 md:col-span-1">
                     <div className="font-display font-bold tracking-[0.22em] text-white flex items-center gap-2 mb-4">
-                        XUNISON
-                        <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                        TONAER
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand" />
                     </div>
                     <p className="text-xs leading-relaxed">
                         Connectivity, reimagined — from the D71 gateway to cloud intelligence and the connected environments of tomorrow.
@@ -26,7 +26,7 @@ export function Footer() {
                     <ul className="space-y-2 text-sm">
                         <li><span className="hover:text-white transition-colors cursor-pointer">About</span></li>
                         <li><span className="hover:text-white transition-colors cursor-pointer">R&D Intelligence</span></li>
-                        <li><span className="hover:text-white transition-colors cursor-pointer">Careers</span></li>
+                        <li><Link to="/careers" className="hover:text-white transition-colors" data-testid="footer-careers-link">Careers</Link></li>
                     </ul>
                 </div>
                 <div>
@@ -39,7 +39,7 @@ export function Footer() {
                 </div>
             </div>
             <div className="border-t border-white/5 py-6 text-center font-mono-xu text-[10px] tracking-[0.3em] text-slate-600">
-                XUNISON © 2026 — CONNECTIVITY, REIMAGINED.
+                TONAER © 2026 — CONNECTIVITY, REIMAGINED.
             </div>
         </footer>
     );

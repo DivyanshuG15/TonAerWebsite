@@ -35,7 +35,7 @@ function HeroOverlay({ ready }) {
                     initial={{ opacity: 0 }}
                     animate={ready ? { opacity: 1 } : {}}
                     transition={{ delay: 0.7, duration: 0.8 }}
-                    className="font-mono-xu text-[11px] tracking-[0.4em] text-sky-400 flex items-center gap-4"
+                    className="font-mono-xu text-[11px] tracking-[0.4em] text-brand flex items-center gap-4"
                 >
                     <span className="w-8 h-px bg-current opacity-60" />
                     WHITE-LABEL CONNECTIVITY PLATFORM
@@ -49,7 +49,7 @@ function HeroOverlay({ ready }) {
                         Build Your Network.
                     </HeroLine>
                     <HeroLine ready={ready} delay={0.3}>
-                        Own Your <span className="text-sky-400">Brand.</span>
+                        Own Your <span className="text-brand">Brand.</span>
                     </HeroLine>
                 </h1>
                 <motion.p
@@ -70,14 +70,14 @@ function HeroOverlay({ ready }) {
                     <button
                         onClick={explore}
                         data-testid="hero-cta-primary"
-                        className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#0066FF]/40"
+                        className="rounded-full bg-[#00D084] hover:bg-brand-strong text-[#04150E] text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-[#00D084]/40"
                     >
                         Explore Solutions
                     </button>
                     <Link
                         to="/product"
                         data-testid="hero-cta-secondary"
-                        className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300"
+                        className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-9 py-4 transition-all duration-300"
                     >
                         View Products
                     </Link>
@@ -92,7 +92,7 @@ function HeroOverlay({ ready }) {
                     <span className="font-mono-xu text-[9px] tracking-[0.4em] text-slate-500">SCROLL</span>
                     <span className="w-px h-10 bg-white/15 overflow-hidden relative">
                         <motion.span
-                            className="absolute inset-x-0 top-0 h-4 bg-sky-400"
+                            className="absolute inset-x-0 top-0 h-4 bg-brand"
                             animate={{ y: [-16, 40] }}
                             transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
                         />

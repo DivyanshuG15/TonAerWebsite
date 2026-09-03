@@ -58,7 +58,7 @@ export function TelemetryScene() {
             <points ref={ptsRef} geometry={geo} frustumCulled={false}>
                 <pointsMaterial
                     ref={register}
-                    color="#38bdf8"
+                    color="#00D084"
                     size={0.06}
                     sizeAttenuation
                     transparent

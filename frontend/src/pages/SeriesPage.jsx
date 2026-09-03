@@ -12,7 +12,7 @@ const SERIES = {
         code: 'D71',
         kicker: 'D SERIES // FLAGSHIP — LATEST GENERATION',
         lines: ['THE FLAGSHIP.', 'WI-FI 7, PERFECTED.'],
-        copy: 'The D71 leads the D Series — a premium unibody tri-band Wi-Fi 7 gateway engineered for service providers who want the most advanced radio at the edge, managed entirely from the Xunison Cloud.',
+        copy: 'The D71 leads the D Series — a premium unibody tri-band Wi-Fi 7 gateway engineered for service providers who want the most advanced radio at the edge, managed entirely from the TonAer Cloud.',
         specs: [
             { k: 'STANDARD', v: 'Wi-Fi 7 (802.11be)' },
             { k: 'BANDS', v: '2.4 / 5 / 6 GHz Tri-Band' },
@@ -23,11 +23,11 @@ const SERIES = {
             { k: 'MESH', v: 'EasyMesh certified' },
             { k: 'CELLULAR', v: 'e-SIM + physical SIM options' },
             { k: 'VOICE', v: 'FXS telephone port' },
-            { k: 'MANAGEMENT', v: 'TR-369 / USP + Xunison Cloud' },
+            { k: 'MANAGEMENT', v: 'TR-369 / USP + TonAer Cloud' },
         ],
         features: [
             { n: '01', t: 'Tri-Band Wi-Fi 7', d: 'Three coordinated radios with Multi-Link Operation keep dense homes fast and predictable.' },
-            { n: '02', t: 'AI-Optimized', d: 'Anomaly detection and self-healing optimization run continuously via the Xunison Cloud.' },
+            { n: '02', t: 'AI-Optimized', d: 'Anomaly detection and self-healing optimization run continuously via the TonAer Cloud.' },
             { n: '03', t: 'Voice + Cellular Ready', d: 'Optional e-SIM / physical SIM cellular backup and FXS telephone port in the same unibody.' },
         ],
         variant: {},
@@ -48,14 +48,14 @@ const SERIES = {
             { k: 'MESH', v: 'EasyMesh certified' },
             { k: 'VOICE', v: 'FXS telephone port (option)' },
             { k: 'CELLULAR', v: 'e-SIM option' },
-            { k: 'MANAGEMENT', v: 'TR-369 / USP + Xunison Cloud' },
+            { k: 'MANAGEMENT', v: 'TR-369 / USP + TonAer Cloud' },
         ],
         features: [
             { n: '01', t: 'Fleet Economics', d: 'Value-engineered BOM for operators deploying at six-figure scale without sacrificing experience.' },
             { n: '02', t: 'Zero-Touch Rollout', d: 'Pre-provisioned firmware and cloud onboarding — plug in and the network configures itself.' },
             { n: '03', t: 'Mesh at Scale', d: 'EasyMesh-certified nodes self-organize into one seamless network with client steering.' },
         ],
-        variant: { bodyColor: '#e6ebf1', panelColor: '#d6dee7', ledColor: '#0066FF', logoColor: '#0066FF', vents: 6 },
+        variant: { bodyColor: '#e6ebf1', panelColor: '#d6dee7', ledColor: '#00D084', logoColor: '#00D084', vents: 6 },
     },
     q: {
         letter: 'Q',
@@ -73,7 +73,7 @@ const SERIES = {
             { k: 'VOICE', v: 'FXS telephone port (RJ11)' },
             { k: 'FAILOVER', v: 'Automatic SIM + WAN switchover' },
             { k: 'PROVISIONING', v: 'Remote e-SIM profile management' },
-            { k: 'MANAGEMENT', v: 'TR-369 / USP + Xunison Cloud' },
+            { k: 'MANAGEMENT', v: 'TR-369 / USP + TonAer Cloud' },
         ],
         features: [
             { n: '01', t: 'Dual-SIM Failover', d: 'e-SIM plus two physical SIM slots keep subscribers online when a carrier drops.' },
@@ -87,7 +87,7 @@ const SERIES = {
         code: 'O SERIES',
         kicker: 'O SERIES // OUTDOOR + RUGGEDIZED',
         lines: ['OUTDOOR.', 'UNSTOPPABLE.'],
-        copy: 'The O Series extends Xunison networks beyond the walls — hardened outdoor units for campuses, hospitality, rural broadband and hard-to-reach markets, monitored from the same cloud.',
+        copy: 'The O Series extends TonAer networks beyond the walls — hardened outdoor units for campuses, hospitality, rural broadband and hard-to-reach markets, monitored from the same cloud.',
         specs: [
             { k: 'ENCLOSURE', v: 'IP67 weather-sealed' },
             { k: 'TEMPERATURE', v: '-40°C to +65°C operating' },
@@ -98,7 +98,7 @@ const SERIES = {
             { k: 'PROTECTION', v: 'Integrated surge protection' },
             { k: 'BACKHAUL', v: 'PoE / fiber media option' },
             { k: 'LOCATION', v: 'GNSS option for asset tracking' },
-            { k: 'MANAGEMENT', v: 'TR-369 / USP + Xunison Cloud' },
+            { k: 'MANAGEMENT', v: 'TR-369 / USP + TonAer Cloud' },
         ],
         features: [
             { n: '01', t: 'Hardened by Design', d: 'IP67 sealing, surge protection and an extended temperature envelope for any climate.' },
@@ -126,12 +126,12 @@ export default function SeriesPage() {
             <section className="pt-36 pb-20 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto">
                 <Link
                     to="/product"
-                    className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-400 hover:text-[#0066FF] transition-colors"
+                    className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-400 hover:text-[#00D084] transition-colors"
                     data-testid="series-back-link"
                 >
                     ← ALL SERIES
                 </Link>
-                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#0066FF] mt-8 mb-6 flex items-center gap-3">
+                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-[#00D084] mt-8 mb-6 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
                     {data.kicker}
                 </div>
@@ -158,7 +158,7 @@ export default function SeriesPage() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: i * 0.04 }}
-                                    className="border-l-2 border-[#0066FF]/30 pl-4"
+                                    className="border-l-2 border-[#00D084]/30 pl-4"
                                 >
                                     <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-400">{s.k}</div>
                                     <div className="font-display font-medium mt-1 text-sm sm:text-base">{s.v}</div>
@@ -171,7 +171,7 @@ export default function SeriesPage() {
 
             <section className="bg-[#020617] text-white py-24 px-6 sm:px-12 md:px-24">
                 <div className="max-w-7xl mx-auto">
-                    <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-12">
+                    <div className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-12">
                         WHY OPERATORS CHOOSE {data.letter} SERIES
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
@@ -184,7 +184,7 @@ export default function SeriesPage() {
                                 transition={{ duration: 0.7, delay: i * 0.1 }}
                                 className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-8"
                             >
-                                <div className="font-mono-xu text-xs text-sky-400 tracking-[0.3em]">{c.n}</div>
+                                <div className="font-mono-xu text-xs text-brand tracking-[0.3em]">{c.n}</div>
                                 <div className="font-display font-semibold text-xl mt-3">{c.t}</div>
                                 <p className="text-sm text-slate-400 mt-3 leading-relaxed">{c.d}</p>
                             </motion.div>
@@ -200,7 +200,7 @@ export default function SeriesPage() {
                         <button
                             onClick={goDemo}
                             data-testid="series-demo-cta"
-                            className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25"
+                            className="rounded-full bg-[#00D084] hover:bg-brand-strong text-[#04150E] text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25"
                         >
                             Request a Demo
                         </button>
@@ -218,8 +218,8 @@ export default function SeriesPage() {
                             data-testid={`series-nav-${id}`}
                             className={`rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
                                 id === seriesId
-                                    ? 'border-[#0066FF] bg-[#0066FF]/5'
-                                    : 'border-slate-200 bg-white hover:border-[#0066FF]/40'
+                                    ? 'border-[#00D084] bg-[#00D084]/5'
+                                    : 'border-slate-200 bg-white hover:border-[#00D084]/40'
                             }`}
                         >
                             <div className="font-display font-bold text-3xl">{s.letter}</div>

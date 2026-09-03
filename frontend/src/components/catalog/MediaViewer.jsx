@@ -34,12 +34,12 @@ const TABS = [
 function MediaPlaceholder({ title, desc, testId }) {
     return (
         <div className="rounded-2xl border border-white/10 bg-white/5 aspect-[4/3] flex flex-col items-center justify-center text-center px-8" data-testid={testId}>
-            <span className="w-14 h-14 rounded-full border border-sky-400/40 bg-sky-400/10 flex items-center justify-center">
-                <Play size={18} className="text-sky-400 ml-0.5" />
+            <span className="w-14 h-14 rounded-full border border-brand/40 bg-brand/10 flex items-center justify-center">
+                <Play size={18} className="text-brand ml-0.5" />
             </span>
             <div className="font-display font-semibold text-white mt-5">{title}</div>
             <p className="text-xs text-slate-500 mt-2 max-w-xs leading-relaxed">{desc}</p>
-            <Link to="/#contact" className="mt-5 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors">
+            <Link to="/#contact" className="mt-5 text-xs font-semibold text-brand hover:text-brand-soft transition-colors">
                 Request access →
             </Link>
         </div>
@@ -59,7 +59,7 @@ export function MediaViewer({ variant, productName }) {
                         onClick={() => setTab(t.id)}
                         data-testid={`media-tab-${t.id}`}
                         className={`rounded-full px-4 py-2 font-mono-xu text-[10px] tracking-[0.2em] transition-all duration-300 ${
-                            tab === t.id ? 'bg-[#0066FF] text-white' : 'text-slate-400 hover:text-white'
+                            tab === t.id ? 'bg-[#00D084] text-[#04150E]' : 'text-slate-400 hover:text-[#04150E]'
                         }`}
                     >
                         {t.label}
@@ -73,7 +73,7 @@ export function MediaViewer({ variant, productName }) {
                             <Canvas dpr={[1, 1.75]} camera={{ fov: 35, position: ANGLES[0].pos }} gl={{ antialias: true }}>
                                 <ambientLight intensity={0.75} />
                                 <directionalLight position={[6, 9, 7]} intensity={1.6} />
-                                <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#7dd3fc" />
+                                <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#5CE8B4" />
                                 <CamRig angle={angle} />
                                 <group position={[0, -0.3, 0]}>
                                     <D71 {...variant} />
@@ -92,7 +92,7 @@ export function MediaViewer({ variant, productName }) {
                                     data-testid={`angle-${a.id}`}
                                     className={`flex-1 rounded-xl border px-3 py-2.5 font-mono-xu text-[10px] tracking-[0.2em] transition-all duration-300 ${
                                         angle === a.id
-                                            ? 'border-sky-400 bg-sky-400/10 text-white'
+                                            ? 'border-brand bg-brand/10 text-white'
                                             : 'border-white/10 text-slate-500 hover:border-white/25 hover:text-slate-300'
                                     }`}
                                 >
@@ -106,7 +106,7 @@ export function MediaViewer({ variant, productName }) {
                     <motion.div key="video" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
                         <MediaPlaceholder
                             title="Product videos"
-                            desc="Introductions, installation walkthroughs and feature films are shared through the Xunison operator portal."
+                            desc="Introductions, installation walkthroughs and feature films are shared through the TonAer operator portal."
                             testId="media-video-placeholder"
                         />
                     </motion.div>

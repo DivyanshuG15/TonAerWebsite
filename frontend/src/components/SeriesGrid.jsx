@@ -41,20 +41,20 @@ export function SeriesGrid({ dark = true }) {
                         transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                         className={`relative rounded-2xl border p-8 overflow-hidden group transition-all duration-500 hover:-translate-y-1 h-full ${
                             s.latest
-                                ? 'border-[#0066FF]/60 bg-[#0066FF]/10 shadow-xl shadow-[#0066FF]/10'
+                                ? 'border-[#00D084]/60 bg-[#00D084]/10 shadow-xl shadow-[#00D084]/10'
                                 : dark
                                   ? 'border-white/10 bg-white/5 hover:border-white/25'
-                                  : 'border-slate-200 bg-white hover:border-[#0066FF]/40'
+                                  : 'border-slate-200 bg-white hover:border-[#00D084]/40'
                         }`}
                         data-testid={`series-card-${s.letter.toLowerCase()}`}
                     >
                     <div className={`absolute -top-6 -right-2 font-display font-bold text-[7rem] leading-none select-none ${
-                        s.latest ? 'text-[#0066FF]/15' : dark ? 'text-white/5' : 'text-slate-900/5'
+                        s.latest ? 'text-[#00D084]/15' : dark ? 'text-white/5' : 'text-slate-900/5'
                     }`}>
                         {s.letter}
                     </div>
                     {s.latest && (
-                        <div className="inline-block font-mono-xu text-[9px] tracking-[0.3em] text-white bg-[#0066FF] rounded-full px-3 py-1 mb-4">
+                        <div className="inline-block font-mono-xu text-[9px] tracking-[0.3em] text-[#04150E] bg-[#00D084] rounded-full px-3 py-1 mb-4">
                             LATEST // NOW SHIPPING
                         </div>
                     )}
@@ -70,7 +70,7 @@ export function SeriesGrid({ dark = true }) {
                                 key={t}
                                 className={`font-mono-xu text-[9px] tracking-[0.2em] rounded-full px-2.5 py-1 border ${
                                     s.latest
-                                        ? 'border-sky-400/40 text-sky-300'
+                                        ? 'border-brand/40 text-brand-soft'
                                         : dark
                                           ? 'border-white/15 text-slate-400'
                                           : 'border-slate-300 text-slate-500'
@@ -81,7 +81,7 @@ export function SeriesGrid({ dark = true }) {
                         ))}
                     </div>
                     <div className={`mt-6 font-mono-xu text-[10px] tracking-[0.3em] transition-colors duration-300 ${
-                        s.latest ? 'text-sky-400' : dark ? 'text-slate-500 group-hover:text-white' : 'text-slate-400 group-hover:text-[#0066FF]'
+                        s.latest ? 'text-brand' : dark ? 'text-slate-500 group-hover:text-white' : 'text-slate-400 group-hover:text-[#00D084]'
                     }`}>
                         EXPLORE {s.letter} SERIES →
                     </div>

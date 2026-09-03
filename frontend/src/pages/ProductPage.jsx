@@ -17,7 +17,7 @@ const fadeUp = {
 function SectionHead({ kicker, title, desc }) {
     return (
         <>
-            <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-5 flex items-center gap-3">
+            <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-5 flex items-center gap-3">
                 <span className="w-8 h-px bg-current" />
                 {kicker}
             </motion.div>
@@ -53,7 +53,7 @@ export default function ProductPage() {
     return (
         <div className="bg-[#020617] text-white" data-testid="product-page">
             <section className="pt-32 pb-10 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto">
-                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-8 flex items-center gap-3">
+                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-8 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
                     PRODUCT CATALOG
                 </div>
@@ -65,11 +65,11 @@ export default function ProductPage() {
                             data-testid={`series-tab-${s.id}`}
                             className={`rounded-2xl border px-6 py-4 text-left transition-all duration-300 ${
                                 series.id === s.id
-                                    ? 'border-sky-400 bg-sky-400/10 shadow-lg shadow-sky-400/5'
+                                    ? 'border-brand bg-brand/10 shadow-lg shadow-brand/5'
                                     : 'border-white/10 bg-white/5 hover:border-white/25'
                             }`}
                         >
-                            <div className={`font-display font-bold text-xl ${series.id === s.id ? 'text-sky-400' : 'text-slate-300'}`}>
+                            <div className={`font-display font-bold text-xl ${series.id === s.id ? 'text-brand' : 'text-slate-300'}`}>
                                 {s.id.toUpperCase()}
                             </div>
                             <div className="text-xs text-slate-400 mt-0.5">{s.name}</div>
@@ -93,11 +93,11 @@ export default function ProductPage() {
                             data-testid={`model-card-${p.id}`}
                             className={`min-w-[200px] text-left rounded-2xl border p-5 transition-all duration-300 shrink-0 ${
                                 product.id === p.id
-                                    ? 'border-sky-400 bg-sky-400/10'
+                                    ? 'border-brand bg-brand/10'
                                     : 'border-white/10 bg-white/5 hover:border-white/25'
                             }`}
                         >
-                            <div className={`font-display font-bold text-lg ${product.id === p.id ? 'text-sky-400' : 'text-white'}`}>{p.name}</div>
+                            <div className={`font-display font-bold text-lg ${product.id === p.id ? 'text-brand' : 'text-white'}`}>{p.name}</div>
                             <div className="text-xs text-slate-400 mt-1">{p.tag}</div>
                             <div className="mt-3 flex flex-wrap gap-1.5">
                                 {p.badges.slice(0, 2).map((b) => (
@@ -123,12 +123,12 @@ export default function ProductPage() {
                     >
                         <MediaViewer variant={{ ...series.variant, ...(product.variant || {}) }} productName={product.name} />
                         <div>
-                            <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">{series.name.toUpperCase()} // {product.id.toUpperCase()}</div>
+                            <div className="font-mono-xu text-[10px] tracking-[0.3em] text-brand">{series.name.toUpperCase()} // {product.id.toUpperCase()}</div>
                             <h2 className="font-display font-bold tracking-tight text-4xl sm:text-5xl mt-3">{product.name}</h2>
                             <p className="mt-4 text-base md:text-lg text-slate-400 leading-relaxed max-w-lg">{product.desc}</p>
                             <div className="mt-6 flex flex-wrap gap-2">
                                 {product.badges.map((b) => (
-                                    <span key={b} className="font-mono-xu text-[10px] tracking-[0.2em] border border-sky-400/30 text-sky-300 rounded-full px-3 py-1">
+                                    <span key={b} className="font-mono-xu text-[10px] tracking-[0.2em] border border-brand/30 text-brand-soft rounded-full px-3 py-1">
                                         {b.toUpperCase()}
                                     </span>
                                 ))}
@@ -137,14 +137,14 @@ export default function ProductPage() {
                                 <Link
                                     to="/#contact"
                                     data-testid="product-cta-info"
-                                    className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25"
+                                    className="rounded-full bg-[#00D084] hover:bg-brand-strong text-[#04150E] text-sm font-semibold tracking-wide px-8 py-4 text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25"
                                 >
                                     Request Product Information
                                 </Link>
                                 <button
                                     onClick={() => document.querySelector('#compare')?.scrollIntoView({ behavior: 'smooth' })}
                                     data-testid="product-cta-compare"
-                                    className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300"
+                                    className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300"
                                 >
                                     Compare Gateway
                                 </button>
@@ -167,7 +167,7 @@ export default function ProductPage() {
                                 transition={{ duration: 0.4, delay: i * 0.05 }}
                                 className="rounded-2xl border border-white/10 bg-white/5 p-6"
                             >
-                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">{CAP_INFO[cap][0]}</div>
+                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-brand">{CAP_INFO[cap][0]}</div>
                                 <p className="text-sm text-slate-400 mt-3 leading-relaxed">{CAP_INFO[cap][1]}</p>
                             </motion.div>
                         ))}
@@ -201,12 +201,12 @@ export default function ProductPage() {
                             key={p.id}
                             onClick={() => selectProduct(p)}
                             data-testid={`related-${p.id}`}
-                            className="text-left rounded-2xl border border-white/10 bg-white/5 hover:border-sky-400/40 p-6 transition-all duration-300 hover:-translate-y-1 group"
+                            className="text-left rounded-2xl border border-white/10 bg-white/5 hover:border-brand/40 p-6 transition-all duration-300 hover:-translate-y-1 group"
                         >
                             <div className="font-mono-xu text-[9px] tracking-[0.25em] text-slate-500">{seriesById(p.series).name.toUpperCase()}</div>
-                            <div className="font-display font-bold text-xl mt-2 group-hover:text-sky-400 transition-colors">{p.name}</div>
+                            <div className="font-display font-bold text-xl mt-2 group-hover:text-brand transition-colors">{p.name}</div>
                             <div className="text-xs text-slate-400 mt-1">{p.tag}</div>
-                            <div className="mt-4 flex items-center gap-2 text-xs text-sky-400">
+                            <div className="mt-4 flex items-center gap-2 text-xs text-brand">
                                 View product <ArrowRight size={12} />
                             </div>
                         </button>
@@ -215,18 +215,18 @@ export default function ProductPage() {
             </section>
 
             <section className="px-6 sm:px-12 md:px-24 max-w-7xl mx-auto py-20">
-                <div className="rounded-3xl border border-sky-400/20 bg-sky-400/5 p-10 sm:p-14 text-center">
+                <div className="rounded-3xl border border-brand/20 bg-brand/5 p-10 sm:p-14 text-center">
                     <h2 className="font-display font-bold tracking-tight text-3xl sm:text-4xl">Build the Right Connectivity Solution.</h2>
                     <p className="mt-4 text-slate-400 max-w-xl mx-auto leading-relaxed">
                         Talk with our team about product selection, white-label customization and deployment requirements.
                     </p>
                     <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
                         <Link to="/support" data-testid="catalog-cta-experts"
-                            className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-200 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300">
+                            className="rounded-full border border-white/20 hover:border-brand/60 text-slate-200 hover:text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300">
                             Talk to Our Experts
                         </Link>
                         <Link to="/#contact" data-testid="catalog-cta-info"
-                            className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25">
+                            className="rounded-full bg-[#00D084] hover:bg-brand-strong text-[#04150E] text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25">
                             Request Product Information
                         </Link>
                     </div>

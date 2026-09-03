@@ -16,7 +16,7 @@ const SECTIONS = [
         kicker: 'ABOUT US',
         title: 'The company behind the platform.',
         body: [
-            'Xunison is a B2B connectivity technology company. We design and manufacture white-label Wi-Fi routers, gateways and CPE — and pair them with the cloud platform, device management and mobile applications operators need to run modern connectivity services.',
+            'TonAer is a B2B connectivity technology company. We design and manufacture white-label Wi-Fi routers, gateways and CPE — and pair them with the cloud platform, device management and mobile applications operators need to run modern connectivity services.',
             'Our customers are internet service providers, telecom operators and network solution companies — including Earthlink, Orangeburg IQ, Hitron and STC — who ship our technology under their own brand.',
         ],
     },
@@ -34,7 +34,7 @@ const SECTIONS = [
         kicker: 'ENGINEERING & INNOVATION',
         title: 'Hardware, cloud and apps — under one roof.',
         body: [
-            'Radio engineering, industrial design, firmware, cloud services and mobile applications are all built by Xunison teams. Owning the full stack means faster customization, tighter integration and one accountable partner.',
+            'Radio engineering, industrial design, firmware, cloud services and mobile applications are all built by TonAer teams. Owning the full stack means faster customization, tighter integration and one accountable partner.',
             'Every product is shaped around a business case: operator demand, regional demography and market size.',
         ],
     },
@@ -44,7 +44,7 @@ const SECTIONS = [
         title: 'Build the future of connectivity.',
         body: [
             'We are always interested in engineers and designers who want to work on real hardware, real networks and real scale — across RF, embedded systems, cloud platforms and applied AI.',
-            'Introduce yourself at careers@xunison.example and tell us what you want to build.',
+            'Introduce yourself at careers@tonaer.example and tell us what you want to build.',
         ],
     },
     {
@@ -52,7 +52,7 @@ const SECTIONS = [
         kicker: 'NEWS & UPDATES',
         title: 'What is shipping next.',
         body: [
-            'Product announcements, firmware release notes and platform updates are published through the Xunison operator portal first.',
+            'Product announcements, firmware release notes and platform updates are published through the TonAer operator portal first.',
             'Request access via the demo form and our team will provision your account.',
         ],
     },
@@ -71,9 +71,9 @@ export default function CompanyPage() {
     return (
         <div className="bg-[#020617] text-white" data-testid="company-page">
             <section className="pt-36 pb-16 px-6 sm:px-12 md:px-24 max-w-5xl mx-auto">
-                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6 flex items-center gap-3">
+                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-6 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
-                    COMPANY // XUNISON
+                    COMPANY // TONAER
                 </div>
                 <h1 className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.04]">
                     <MaskedLine>YOUR BRAND.</MaskedLine>
@@ -85,7 +85,7 @@ export default function CompanyPage() {
                     <motion.section key={s.id} id={s.id} {...fadeUp} className="scroll-mt-28 border-t border-white/10 pt-12" data-testid={`company-${s.id}`}>
                         <div className="grid md:grid-cols-12 gap-6">
                             <div className="md:col-span-4">
-                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">{s.kicker}</div>
+                                <div className="font-mono-xu text-[10px] tracking-[0.3em] text-brand">{s.kicker}</div>
                                 <h2 className="font-display font-semibold text-2xl mt-3 tracking-tight">{s.title}</h2>
                             </div>
                             <div className="md:col-span-8 space-y-4">
@@ -96,15 +96,15 @@ export default function CompanyPage() {
                         </div>
                     </motion.section>
                 ))}
-                <motion.div {...fadeUp} className="rounded-3xl border border-sky-400/20 bg-sky-400/5 p-10 text-center">
-                    <div className="font-display font-bold text-2xl">Partner with Xunison</div>
+                <motion.div {...fadeUp} className="rounded-3xl border border-brand/20 bg-brand/5 p-10 text-center">
+                    <div className="font-display font-bold text-2xl">Partner with TonAer</div>
                     <p className="text-slate-400 text-sm mt-3 max-w-md mx-auto">
                         Hardware, cloud, device management, mobile apps and network intelligence — one complete ecosystem under your brand.
                     </p>
                     <Link
                         to="/#contact"
                         data-testid="company-cta"
-                        className="inline-block mt-6 rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5"
+                        className="inline-block mt-6 rounded-full bg-[#00D084] hover:bg-brand-strong text-[#04150E] text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5"
                     >
                         Request a Demo
                     </Link>

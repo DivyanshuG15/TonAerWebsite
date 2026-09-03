@@ -11,6 +11,8 @@ import { scrollStore } from '../experience/store';
 
 // Per-series device variants + logo placement areas.
 // Real product mockups (GLB / transparent PNG) can replace these configs later.
+// `finishes` lists the optional casing colors (beyond Standard) actually
+// offered per model. Series with no entry ship in a fixed industrial finish.
 const SERIES = [
     {
         id: 'd',
@@ -18,13 +20,15 @@ const SERIES = [
         pos: 'Advanced high-performance connectivity',
         variant: {},
         logo: { position: [0, 0.262, 0.45], size: 0.6 },
+        finishes: ['white', 'black'],
     },
     {
         id: 'm',
         name: 'M Series',
         pos: 'Reliable connectivity for scalable deployments',
-        variant: { bodyColor: '#e6ebf1', panelColor: '#d6dee7', ledColor: '#0066FF', logoColor: '#0066FF', vents: 6 },
+        variant: { bodyColor: '#e6ebf1', panelColor: '#d6dee7', ledColor: '#00D084', logoColor: '#00D084', vents: 6 },
         logo: { position: [0, 0.262, -0.35], size: 0.55 },
+        finishes: ['white', 'black'],
     },
     {
         id: 'q',
@@ -32,6 +36,7 @@ const SERIES = [
         pos: 'Advanced gateway solutions',
         variant: { bodyColor: '#dde5ee', panelColor: '#ccd6e2', ledColor: '#22C55E', logoColor: '#16a34a', vents: 6, simTray: true },
         logo: { position: [-0.7, 0.262, 0.45], size: 0.45 },
+        finishes: ['black'],
     },
     {
         id: 'o',
@@ -39,6 +44,7 @@ const SERIES = [
         pos: 'Specialized connectivity solutions',
         variant: { bodyColor: '#93a6bb', panelColor: '#7e93aa', ledColor: '#F59E0B', logoColor: '#F59E0B', vents: 4, ports: 2 },
         logo: { position: [0.7, 0.262, 0.45], size: 0.45 },
+        finishes: [],
     },
 ];
 
@@ -91,7 +97,7 @@ function Turntable({ variant, logoUrl, placement }) {
     );
 }
 
-const stepKicker = 'font-mono-xu text-[10px] tracking-[0.3em] text-sky-400';
+const stepKicker = 'font-mono-xu text-[10px] tracking-[0.3em] text-brand';
 
 export function BrandPreview() {
     const [model, setModel] = useState(null);
@@ -102,8 +108,17 @@ export function BrandPreview() {
     const navigate = useNavigate();
 
     const selected = SERIES.find((s) => s.id === model);
+    const availableFinishes = selected
+        ? FINISHES.filter((f) => f.id === 'standard' || (selected.finishes || []).includes(f.id))
+        : FINISHES;
+    const casingSupported = availableFinishes.length > 1;
     const finishOverride = FINISHES.find((f) => f.id === finish)?.override || {};
     const variant = selected ? { ...selected.variant, ...finishOverride } : {};
+
+    const pickModel = (id) => {
+        setModel(id);
+        setFinish('standard');
+    };
 
     const onFile = (e) => {
         const file = e.target.files?.[0];
@@ -144,15 +159,15 @@ export function BrandPreview() {
                 {SERIES.map((s) => (
                     <button
                         key={s.id}
-                        onClick={() => setModel(s.id)}
+                        onClick={() => pickModel(s.id)}
                         data-testid={`model-select-${s.id}`}
                         className={`min-w-[130px] text-left rounded-xl border p-4 transition-all duration-300 ${
                             model === s.id
-                                ? 'border-sky-400 bg-sky-400/10 shadow-lg shadow-sky-400/10'
+                                ? 'border-brand bg-brand/10 shadow-lg shadow-brand/10'
                                 : 'border-white/10 bg-white/5 hover:border-white/25'
                         }`}
                     >
-                        <div className={`font-display font-bold text-xl ${model === s.id ? 'text-sky-400' : 'text-slate-300'}`}>
+                        <div className={`font-display font-bold text-xl ${model === s.id ? 'text-brand' : 'text-slate-300'}`}>
                             {s.id.toUpperCase()}
                         </div>
                         <div className="text-xs font-medium text-white mt-1">{s.name}</div>
@@ -164,7 +179,7 @@ export function BrandPreview() {
             <div className="mt-7">
                 <div className="flex items-center justify-between mb-3">
                     <span className="font-mono-xu text-[9px] tracking-[0.3em] text-slate-500">LIVE BRAND PREVIEW</span>
-                    {selected && <span className="font-mono-xu text-[9px] tracking-[0.3em] text-sky-400">{selected.name.toUpperCase()}</span>}
+                    {selected && <span className="font-mono-xu text-[9px] tracking-[0.3em] text-brand">{selected.name.toUpperCase()}</span>}
                 </div>
                 {selected ? (
                     <motion.div
@@ -178,7 +193,7 @@ export function BrandPreview() {
                         <Canvas dpr={[1, 1.75]} camera={{ fov: 35, position: [3.8, 1.7, 5.4] }} gl={{ antialias: true }}>
                             <ambientLight intensity={0.75} />
                             <directionalLight position={[6, 9, 7]} intensity={1.6} />
-                            <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#7dd3fc" />
+                            <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#5CE8B4" />
                             <Turntable variant={variant} logoUrl={logoUrl} placement={selected.logo} />
                             <ContactShadows position={[0, -0.62, 0]} opacity={0.5} scale={9} blur={2.6} far={3} color="#020617" />
                         </Canvas>
@@ -229,34 +244,55 @@ export function BrandPreview() {
                             <button
                                 onClick={() => fileRef.current?.click()}
                                 data-testid="logo-upload-button"
-                                className="w-full flex items-center justify-center gap-3 rounded-xl border border-dashed border-white/20 hover:border-sky-400/60 bg-white/5 py-4 text-sm text-slate-300 hover:text-white transition-all duration-300"
+                                className="w-full flex items-center justify-center gap-3 rounded-xl border border-dashed border-white/20 hover:border-brand/60 bg-white/5 py-4 text-sm text-slate-300 hover:text-white transition-all duration-300"
                             >
-                                <Upload size={15} className="text-sky-400" />
+                                <Upload size={15} className="text-brand" />
                                 Upload Logo
                             </button>
                         )}
 
                         <div className={`${stepKicker} mt-7`}>03 / DEVICE FINISH</div>
-                        <div className="flex gap-2 mt-3">
-                            {FINISHES.map((f) => (
-                                <button
-                                    key={f.id}
-                                    onClick={() => setFinish(f.id)}
-                                    data-testid={`finish-${f.id}`}
-                                    className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs transition-all duration-300 ${
-                                        finish === f.id
-                                            ? 'border-sky-400 bg-sky-400/10 text-white'
-                                            : 'border-white/10 text-slate-400 hover:border-white/25'
-                                    }`}
-                                >
-                                    <span
-                                        className="w-3 h-3 rounded-full border border-white/30"
-                                        style={{ background: f.swatch || selected.variant.bodyColor || '#f2f5f8' }}
-                                    />
-                                    {f.label}
-                                </button>
-                            ))}
-                        </div>
+                        {casingSupported ? (
+                            <>
+                                <p className="text-xs text-slate-500 mt-1.5 mb-1">
+                                    Casing colors available for the {selected.name}.
+                                </p>
+                                <div className="flex gap-2 mt-3" data-testid="finish-options">
+                                    {availableFinishes.map((f) => (
+                                        <button
+                                            key={f.id}
+                                            onClick={() => setFinish(f.id)}
+                                            data-testid={`finish-${f.id}`}
+                                            className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs transition-all duration-300 ${
+                                                finish === f.id
+                                                    ? 'border-brand bg-brand/10 text-white'
+                                                    : 'border-white/10 text-slate-400 hover:border-white/25'
+                                            }`}
+                                        >
+                                            <span
+                                                className="w-3 h-3 rounded-full border border-white/30"
+                                                style={{ background: f.swatch || selected.variant.bodyColor || '#f2f5f8' }}
+                                            />
+                                            {f.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </>
+                        ) : (
+                            <div
+                                className="mt-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 flex items-center gap-3"
+                                data-testid="finish-not-supported"
+                            >
+                                <span
+                                    className="w-3 h-3 rounded-full border border-white/30 shrink-0"
+                                    style={{ background: selected.variant.bodyColor || '#f2f5f8' }}
+                                />
+                                <p className="text-xs text-slate-500 leading-relaxed">
+                                    The {selected.name} ships in a fixed industrial finish — casing color customization is not
+                                    available for this model.
+                                </p>
+                            </div>
+                        )}
 
                         <div className="mt-8 border-t border-white/10 pt-6">
                             <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-500 mb-4">LIKE WHAT YOU SEE?</div>
@@ -264,14 +300,14 @@ export function BrandPreview() {
                                 <button
                                     onClick={goContact}
                                     data-testid="whitelabel-cta-primary"
-                                    className="rounded-full bg-[#0066FF] hover:bg-sky-500 text-white text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0066FF]/25"
+                                    className="rounded-full bg-[#00D084] hover:bg-brand-strong text-[#04150E] text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25"
                                 >
                                     Discuss Your White-Label Solution
                                 </button>
                                 <button
                                     onClick={() => navigate(`/series/${selected.id}`)}
                                     data-testid="whitelabel-cta-secondary"
-                                    className="rounded-full border border-white/20 hover:border-sky-400/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300"
+                                    className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300"
                                 >
                                     Explore This Product
                                 </button>

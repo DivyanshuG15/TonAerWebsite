@@ -4,7 +4,7 @@ import { useFrame } from '@react-three/fiber';
 import { scrollStore, local, smooth } from './store';
 import { useSceneFader } from './sceneUtils';
 
-const CYAN = new THREE.Color('#38bdf8');
+const CYAN = new THREE.Color('#00D084');
 const ROSE = new THREE.Color('#f43f5e');
 const EMERALD = new THREE.Color('#22c55e');
 const tmpC = new THREE.Color();
@@ -96,7 +96,7 @@ export function AIScene() {
     return (
         <group ref={group}>
             <lineSegments geometry={edgeGeo} frustumCulled={false}>
-                <lineBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.22} />
+                <lineBasicMaterial ref={register} color="#00D084" transparent opacity={0.22} />
             </lineSegments>
             <lineSegments geometry={alertGeo} frustumCulled={false}>
                 <lineBasicMaterial ref={register} color="#f43f5e" transparent opacity={0.5} />
@@ -107,7 +107,7 @@ export function AIScene() {
             {nodes.map((p, i) => (
                 <mesh key={i} position={p} ref={(el) => (nodeRefs.current[i] = el)}>
                     <sphereGeometry args={[i === 0 ? 0.16 : 0.1, 16, 16]} />
-                    <meshBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.95} />
+                    <meshBasicMaterial ref={register} color="#00D084" transparent opacity={0.95} />
                 </mesh>
             ))}
             <mesh ref={ringRef} visible={false}>

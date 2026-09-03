@@ -59,13 +59,13 @@ export function EcosystemScene() {
     return (
         <group ref={group}>
             <lineSegments geometry={linkGeo} frustumCulled={false}>
-                <lineBasicMaterial ref={register} color="#0066ff" transparent opacity={0.18} />
+                <lineBasicMaterial ref={register} color="#00D084" transparent opacity={0.18} />
             </lineSegments>
             <points geometry={homeGeo} frustumCulled={false}>
-                <pointsMaterial ref={register} color="#0066ff" size={0.35} sizeAttenuation transparent opacity={0.9} map={getDotTexture()} alphaTest={0.01} depthWrite={false} />
+                <pointsMaterial ref={register} color="#00D084" size={0.35} sizeAttenuation transparent opacity={0.9} map={getDotTexture()} alphaTest={0.01} depthWrite={false} />
             </points>
             <points geometry={homeGeo} frustumCulled={false} position={[0, 0.15, 0]}>
-                <pointsMaterial ref={register} color="#93c5fd" size={0.14} sizeAttenuation transparent opacity={0.9} map={getDotTexture()} alphaTest={0.01} blending={THREE.AdditiveBlending} depthWrite={false} />
+                <pointsMaterial ref={register} color="#7AEBC2" size={0.14} sizeAttenuation transparent opacity={0.9} map={getDotTexture()} alphaTest={0.01} blending={THREE.AdditiveBlending} depthWrite={false} />
             </points>
             <Particles
                 count={cloudCount}
@@ -88,7 +88,7 @@ export function EcosystemScene() {
             />
             <Particles
                 count={pulseCount}
-                color="#38bdf8"
+                color="#00D084"
                 size={0.12}
                 materialRef={register}
                 fill={(i, v) => v.copy(links[pulsesMeta.current[i].link][0])}

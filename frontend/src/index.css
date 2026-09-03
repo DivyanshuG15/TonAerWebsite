@@ -5,9 +5,19 @@
 @tailwind utilities;
 
 :root {
-    --xu-blue: #0066ff;
-    --xu-cyan: #38bdf8;
-    --xu-navy: #020617;
+    --brand-primary: #00d084;
+    --brand-soft: #5ce8b4;
+    --brand-strong: #2be09c;
+    --brand-deep: #00905f;
+    --brand-bg: #020617;
+    --brand-surface: #0b1120;
+    --brand-border: rgba(148, 163, 184, 0.14);
+    --brand-text: #f8fafc;
+    --brand-muted: #94a3b8;
+    --brand-on-primary: #04150e;
+    --brand-success: #00d084;
+    --brand-warning: #f59e0b;
+    --brand-error: #f43f5e;
 }
 
 html {
@@ -41,8 +51,8 @@ body {
 }
 
 ::selection {
-    background: #0066ff;
-    color: #fff;
+    background: #00d084;
+    color: #04150e;
 }
 
 ::-webkit-scrollbar {
@@ -56,7 +66,7 @@ body {
     border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #0066ff;
+    background: #00D084;
 }
 
 @keyframes marquee-x {

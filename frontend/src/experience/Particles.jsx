@@ -19,7 +19,7 @@ export function getDotTexture() {
 }
 
 // Reusable GPU point cloud. fill(i, vec3) seeds positions; tick(attr, time, dt) animates.
-export function Particles({ count, color = '#38BDF8', size = 0.04, fill, tick, materialRef, blending = THREE.AdditiveBlending, ...props }) {
+export function Particles({ count, color = '#00D084', size = 0.04, fill, tick, materialRef, blending = THREE.AdditiveBlending, ...props }) {
     const geometry = useMemo(() => {
         const g = new THREE.BufferGeometry();
         const arr = new Float32Array(count * 3);

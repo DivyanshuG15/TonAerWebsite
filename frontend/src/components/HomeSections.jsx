@@ -22,7 +22,7 @@ function Section({ id, kicker, title, desc, children, className = '' }) {
     return (
         <section id={id} className={`relative z-10 py-24 sm:py-28 px-6 sm:px-12 md:px-24 ${className}`}>
             <div className="max-w-7xl mx-auto">
-                <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6 flex items-center gap-3">
+                <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-6 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
                     {kicker}
                 </motion.div>
@@ -106,30 +106,30 @@ function CloudVisual() {
             <div className="flex items-center gap-1.5 mb-5">
                 <span className="w-2 h-2 rounded-full bg-white/20" />
                 <span className="w-2 h-2 rounded-full bg-white/20" />
-                <span className="w-2 h-2 rounded-full bg-sky-400/60" />
+                <span className="w-2 h-2 rounded-full bg-brand/60" />
                 <div className="ml-4 flex gap-4 font-mono-xu text-[9px] tracking-[0.25em] text-slate-500">
-                    <span className="text-sky-400">FLEET</span>
+                    <span className="text-brand">FLEET</span>
                     <span>CONFIG</span>
                     <span>ANALYTICS</span>
                 </div>
             </div>
             <svg viewBox="0 0 400 160" className="w-full" aria-hidden="true">
-                <g stroke="#38BDF8" strokeOpacity="0.25" strokeWidth="1">
+                <g stroke="#00D084" strokeOpacity="0.25" strokeWidth="1">
                     <line x1="200" y1="30" x2="60" y2="120" />
                     <line x1="200" y1="30" x2="130" y2="120" />
                     <line x1="200" y1="30" x2="200" y2="120" />
                     <line x1="200" y1="30" x2="270" y2="120" />
                     <line x1="200" y1="30" x2="340" y2="120" />
                 </g>
-                <circle cx="200" cy="30" r="10" fill="#0066FF" fillOpacity="0.9" />
-                <circle cx="200" cy="30" r="16" fill="none" stroke="#38BDF8" strokeOpacity="0.4" />
+                <circle cx="200" cy="30" r="10" fill="#00D084" fillOpacity="0.9" />
+                <circle cx="200" cy="30" r="16" fill="none" stroke="#00D084" strokeOpacity="0.4" />
                 {[60, 130, 200, 340].map((x) => (
-                    <circle key={x} cx={x} cy="120" r="6" fill="#7DD3FC" fillOpacity="0.8" />
+                    <circle key={x} cx={x} cy="120" r="6" fill="#5CE8B4" fillOpacity="0.8" />
                 ))}
                 <circle cx="270" cy="120" r="6" fill="#F59E0B" fillOpacity="0.9" />
                 <circle cx="270" cy="120" r="11" fill="none" stroke="#F59E0B" strokeOpacity="0.5" strokeDasharray="3 3" />
                 <text x="270" y="148" fill="#F59E0B" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLAGGED</text>
-                <text x="200" y="14" fill="#7DD3FC" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLEET HUB</text>
+                <text x="200" y="14" fill="#5CE8B4" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLEET HUB</text>
             </svg>
         </div>
     );
@@ -148,7 +148,7 @@ export function HomeSections() {
                 <div className="mt-10 flex flex-wrap items-center gap-2 font-mono-xu text-[10px] tracking-[0.25em] text-slate-500">
                     {['DEVICES', 'GATEWAY', 'CLOUD', 'MOBILE', 'INTELLIGENCE'].map((s, i) => (
                         <span key={s} className="flex items-center gap-2">
-                            <span className="text-sky-400 border border-sky-400/30 rounded-full px-3 py-1.5">{s}</span>
+                            <span className="text-brand border border-brand/30 rounded-full px-3 py-1.5">{s}</span>
                             {i < 4 && <ArrowRight size={12} className="text-slate-600" />}
                         </span>
                     ))}
@@ -156,8 +156,8 @@ export function HomeSections() {
                 <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     {ECOSYSTEM.map((c, i) => (
                         <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                            className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-sky-400/40 transition-colors duration-300">
-                            <c.icon size={20} className="text-sky-400" />
+                            className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-brand/40 transition-colors duration-300">
+                            <c.icon size={20} className="text-brand" />
                             <div className="font-display font-semibold mt-4 text-sm">{c.t}</div>
                             <p className="text-xs text-slate-400 mt-2 leading-relaxed">{c.d}</p>
                         </motion.div>
@@ -176,7 +176,7 @@ export function HomeSections() {
                         {WHITELABEL.map((c, i) => (
                             <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}
                                 className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                                <c.icon size={20} className="text-sky-400" />
+                                <c.icon size={20} className="text-brand" />
                                 <div className="font-display font-semibold mt-4 text-sm">{c.t}</div>
                                 <p className="text-xs text-slate-400 mt-2 leading-relaxed">{c.d}</p>
                             </motion.div>
@@ -207,13 +207,13 @@ export function HomeSections() {
                         ].map((s, i) => (
                             <motion.div key={s.id} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}>
                                 <Link to={`/series/${s.id}`} data-testid={`portfolio-${s.id}`}
-                                    className="flex items-center gap-5 rounded-2xl border border-white/10 bg-white/5 hover:border-sky-400/40 p-5 transition-all duration-300 group">
-                                    <span className="font-display font-bold text-2xl text-sky-400 w-8">{s.id.toUpperCase()}</span>
+                                    className="flex items-center gap-5 rounded-2xl border border-white/10 bg-white/5 hover:border-brand/40 p-5 transition-all duration-300 group">
+                                    <span className="font-display font-bold text-2xl text-brand w-8">{s.id.toUpperCase()}</span>
                                     <span className="flex-1">
                                         <span className="block font-display font-semibold text-sm text-white">{s.n}</span>
                                         <span className="block text-xs text-slate-400 mt-1">{s.d}</span>
                                     </span>
-                                    <ArrowRight size={16} className="text-slate-500 group-hover:text-sky-400 group-hover:translate-x-1 transition-all duration-300" />
+                                    <ArrowRight size={16} className="text-slate-500 group-hover:text-brand group-hover:translate-x-1 transition-all duration-300" />
                                 </Link>
                             </motion.div>
                         ))}
@@ -221,7 +221,7 @@ export function HomeSections() {
                 </div>
                 <motion.div {...fadeUp} className="mt-10">
                     <Link to="/product" data-testid="portfolio-cta"
-                        className="inline-block rounded-full border border-sky-400/40 text-sky-300 hover:bg-sky-400/10 text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300">
+                        className="inline-block rounded-full border border-brand/40 text-brand-soft hover:bg-brand/10 text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300">
                         Explore Product Portfolio
                     </Link>
                 </motion.div>
@@ -239,7 +239,7 @@ export function HomeSections() {
                         {CLOUD_FEATURES.map((c, i) => (
                             <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
                                 className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                                <c.icon size={18} className="text-sky-400" />
+                                <c.icon size={18} className="text-brand" />
                                 <div className="font-display font-semibold mt-3 text-sm">{c.t}</div>
                                 <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">{c.d}</p>
                             </motion.div>
@@ -266,7 +266,7 @@ export function HomeSections() {
                     {INDUSTRIES.map((g, i) => (
                         <motion.div key={g.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.08 }}
                             className="rounded-2xl border border-white/10 bg-white/5 p-8">
-                            <div className="font-mono-xu text-[10px] tracking-[0.3em] text-sky-400">0{i + 1}</div>
+                            <div className="font-mono-xu text-[10px] tracking-[0.3em] text-brand">0{i + 1}</div>
                             <div className="font-display font-semibold text-lg mt-3">{g.t}</div>
                             <p className="mt-4 text-sm text-slate-400 leading-relaxed">{g.d}</p>
                         </motion.div>
@@ -284,8 +284,8 @@ export function HomeSections() {
                 <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                     {CAPABILITIES.map((c, i) => (
                         <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: (i % 4) * 0.05 }}
-                            className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-sky-400/40 transition-colors duration-300">
-                            <c.icon size={18} className="text-sky-400" />
+                            className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-brand/40 transition-colors duration-300">
+                            <c.icon size={18} className="text-brand" />
                             <div className="font-display font-semibold mt-3 text-sm">{c.t}</div>
                             <p className="text-[11px] text-slate-500 mt-1.5">{c.d}</p>
                         </motion.div>
@@ -302,7 +302,7 @@ export function HomeSections() {
                     {WHY.map((w, i) => (
                         <motion.div key={w.v} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}
                             className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-                            <div className="font-display font-bold text-2xl text-sky-400">{w.k}</div>
+                            <div className="font-display font-bold text-2xl text-brand">{w.k}</div>
                             <div className="font-display font-semibold text-sm mt-2">{w.v}</div>
                             <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">{w.d}</p>
                         </motion.div>
@@ -312,7 +312,7 @@ export function HomeSections() {
 
             <section id="contact" className="relative z-10 py-28 px-6 sm:px-12 md:px-24 border-t border-white/5">
                 <div className="max-w-3xl mx-auto text-center">
-                    <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6 flex items-center justify-center gap-3">
+                    <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-6 flex items-center justify-center gap-3">
                         <span className="w-8 h-px bg-current" />
                         GET STARTED
                         <span className="w-8 h-px bg-current" />
@@ -327,7 +327,7 @@ export function HomeSections() {
                         <LeadForm />
                     </motion.div>
                     <motion.div {...fadeUp} className="mt-6">
-                        <Link to="/support" data-testid="cta-talk-to-team" className="text-sm text-slate-400 hover:text-sky-400 transition-colors underline underline-offset-4 decoration-slate-600">
+                        <Link to="/support" data-testid="cta-talk-to-team" className="text-sm text-slate-400 hover:text-brand transition-colors underline underline-offset-4 decoration-slate-600">
                             Talk to Our Team
                         </Link>
                     </motion.div>

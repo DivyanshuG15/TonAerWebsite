@@ -46,7 +46,7 @@ const MENUS = [
             { t: 'About Us', d: 'The team behind the platform', to: '/company#about' },
             { t: 'Research & Development', d: 'What wireless can reveal next', to: '/company#rnd' },
             { t: 'Engineering & Innovation', d: 'Hardware, cloud and apps in-house', to: '/company#engineering' },
-            { t: 'Careers', d: 'Build the future of connectivity', to: '/company#careers' },
+            { t: 'Careers', d: 'Build the future of connectivity', to: '/careers' },
             { t: 'News & Updates', d: 'Product news and release notes', to: '/company#news' },
             { t: 'Annual Reports', d: 'For partners and investors', to: '/company#reports' },
         ],
@@ -84,18 +84,18 @@ function ProductsMega() {
                 <Link
                     to="/product"
                     data-testid="mega-all-products"
-                    className="block rounded-xl border border-white/10 bg-white/5 hover:border-sky-400/40 p-5 transition-colors duration-300"
+                    className="block rounded-xl border border-white/10 bg-white/5 hover:border-brand/40 p-5 transition-colors duration-300"
                 >
                     <div className="font-display font-semibold text-white">All Products</div>
                     <p className="text-xs text-slate-400 mt-2 leading-relaxed">
-                        The complete Xunison hardware portfolio — one platform, four series.
+                        The complete TonAer hardware portfolio — one platform, four series.
                     </p>
                 </Link>
                 <div className="mt-3 space-y-2 opacity-50">
                     {['Compare Products', 'Product Selector'].map((t) => (
                         <div key={t} className="flex items-center justify-between rounded-xl border border-white/5 px-5 py-3">
                             <span className="text-sm text-slate-400">{t}</span>
-                            <span className="font-mono-xu text-[9px] tracking-[0.25em] text-sky-400 border border-sky-400/30 rounded-full px-2 py-0.5">SOON</span>
+                            <span className="font-mono-xu text-[9px] tracking-[0.25em] text-brand border border-brand/30 rounded-full px-2 py-0.5">SOON</span>
                         </div>
                     ))}
                 </div>
@@ -106,9 +106,9 @@ function ProductsMega() {
                         key={s.id}
                         to={`/series/${s.id}`}
                         data-testid={`mega-series-${s.id}`}
-                        className="rounded-xl border border-white/10 hover:border-sky-400/50 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-0.5"
+                        className="rounded-xl border border-white/10 hover:border-brand/50 bg-white/5 p-4 transition-all duration-300 hover:-translate-y-0.5"
                     >
-                        <div className="font-display font-bold text-2xl text-sky-400">{s.id.toUpperCase()}</div>
+                        <div className="font-display font-bold text-2xl text-brand">{s.id.toUpperCase()}</div>
                         <div className="text-sm text-white mt-1">{s.name}</div>
                         <div className="font-mono-xu text-[9px] tracking-[0.15em] text-slate-500 mt-1">{s.d}</div>
                     </Link>
@@ -168,8 +168,8 @@ export function Nav() {
         <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4" data-testid="main-nav" ref={rootRef}>
             <nav className="relative flex items-center gap-1 rounded-full bg-slate-950/70 backdrop-blur-xl border border-white/10 text-white pl-5 pr-2 py-2 shadow-2xl shadow-slate-950/30">
                 <Link to="/" className="font-display font-bold tracking-[0.22em] text-sm mr-3 flex items-center gap-2" data-testid="nav-logo">
-                    XUNISON
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 led-blink" />
+                    TONAER
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand led-blink" />
                 </Link>
 
                 <div className="hidden lg:flex items-center">
@@ -228,7 +228,7 @@ export function Nav() {
                 <button
                     onClick={goDemo}
                     data-testid="nav-cta-demo"
-                    className="ml-2 rounded-full bg-[#0066FF] hover:bg-sky-500 transition-colors duration-300 text-white text-xs font-semibold tracking-wide px-4 py-2"
+                    className="ml-2 rounded-full bg-[#00D084] hover:bg-brand-strong transition-colors duration-300 text-[#04150E] text-xs font-semibold tracking-wide px-4 py-2"
                 >
                     Request Demo
                 </button>
@@ -241,7 +241,7 @@ export function Nav() {
                     <Menu size={18} />
                 </button>
                 <span className="absolute -bottom-px left-6 right-6 h-px bg-white/10 overflow-hidden rounded-full">
-                    <span ref={barRef} className="block h-full w-full bg-sky-400 origin-left" style={{ transform: 'scaleX(0)' }} />
+                    <span ref={barRef} className="block h-full w-full bg-brand origin-left" style={{ transform: 'scaleX(0)' }} />
                 </span>
             </nav>
 
@@ -256,7 +256,7 @@ export function Nav() {
                         data-testid="mobile-menu"
                     >
                         <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-                            <span className="font-display font-bold tracking-[0.22em] text-white">XUNISON</span>
+                            <span className="font-display font-bold tracking-[0.22em] text-white">TONAER</span>
                             <button onClick={() => setMobileOpen(false)} className="p-2 text-slate-300" data-testid="mobile-menu-close" aria-label="Close menu">
                                 <X size={20} />
                             </button>
@@ -270,7 +270,7 @@ export function Nav() {
                                         data-testid={`mobile-accordion-${menu.id}`}
                                     >
                                         <span className="font-display font-medium text-white">{menu.label}</span>
-                                        <ChevronDown size={16} className={`text-sky-400 transition-transform duration-300 ${mobileExpanded === menu.id ? 'rotate-180' : ''}`} />
+                                        <ChevronDown size={16} className={`text-brand transition-transform duration-300 ${mobileExpanded === menu.id ? 'rotate-180' : ''}`} />
                                     </button>
                                     <AnimatePresence>
                                         {mobileExpanded === menu.id && (
@@ -287,7 +287,7 @@ export function Nav() {
                                                             <Link to="/product" className="block py-2.5 text-sm text-slate-300">All Products</Link>
                                                             {SERIES_MENU.map((s) => (
                                                                 <Link key={s.id} to={`/series/${s.id}`} className="flex items-center gap-3 py-2.5 text-sm text-slate-300">
-                                                                    <span className="font-display font-bold text-sky-400">{s.id.toUpperCase()}</span>
+                                                                    <span className="font-display font-bold text-brand">{s.id.toUpperCase()}</span>
                                                                     {s.name}
                                                                 </Link>
                                                             ))}
@@ -309,7 +309,7 @@ export function Nav() {
                             <button
                                 onClick={goDemo}
                                 data-testid="mobile-cta-demo"
-                                className="w-full mt-6 rounded-full bg-[#0066FF] text-white text-sm font-semibold tracking-wide py-4"
+                                className="w-full mt-6 rounded-full bg-[#00D084] text-[#04150E] text-sm font-semibold tracking-wide py-4"
                             >
                                 Request Demo
                             </button>

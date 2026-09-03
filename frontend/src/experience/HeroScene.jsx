@@ -45,33 +45,33 @@ export function HeroScene() {
 
     return (
         <group ref={group} position={[0, -1.05, 0]}>
-            <pointLight color="#38bdf8" intensity={5} distance={10} position={[0, 0.6, 0]} />
+            <pointLight color="#00D084" intensity={5} distance={10} position={[0, 0.6, 0]} />
             <mesh ref={core}>
                 <sphereGeometry args={[0.5, 32, 32]} />
-                <meshBasicMaterial ref={register} color="#0e7490" transparent opacity={0.35} blending={THREE.AdditiveBlending} depthWrite={false} />
+                <meshBasicMaterial ref={register} color="#059669" transparent opacity={0.35} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
             <mesh>
                 <sphereGeometry args={[0.2, 24, 24]} />
-                <meshBasicMaterial ref={register} color="#7dd3fc" transparent opacity={0.75} blending={THREE.AdditiveBlending} depthWrite={false} />
+                <meshBasicMaterial ref={register} color="#5CE8B4" transparent opacity={0.75} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
             <mesh ref={ringA} rotation={[Math.PI / 2.15, 0.2, 0]}>
                 <torusGeometry args={[1.15, 0.008, 8, 96]} />
-                <meshBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.4} />
+                <meshBasicMaterial ref={register} color="#00D084" transparent opacity={0.4} />
             </mesh>
             <mesh ref={ringB} rotation={[Math.PI / 1.9, -0.3, 0]}>
                 <torusGeometry args={[1.8, 0.006, 8, 96]} />
-                <meshBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.2} />
+                <meshBasicMaterial ref={register} color="#00D084" transparent opacity={0.2} />
             </mesh>
             <group ref={orbit}>
                 <points geometry={nodeGeo} frustumCulled={false}>
-                    <pointsMaterial ref={register} color="#bae6fd" size={0.09} sizeAttenuation transparent opacity={0.9} map={getDotTexture()} alphaTest={0.01} blending={THREE.AdditiveBlending} depthWrite={false} />
+                    <pointsMaterial ref={register} color="#B7F5DB" size={0.09} sizeAttenuation transparent opacity={0.9} map={getDotTexture()} alphaTest={0.01} blending={THREE.AdditiveBlending} depthWrite={false} />
                 </points>
                 <lineSegments geometry={linkGeo} frustumCulled={false}>
-                    <lineBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.14} />
+                    <lineBasicMaterial ref={register} color="#00D084" transparent opacity={0.14} />
                 </lineSegments>
                 <Particles
                     count={dustCount}
-                    color="#38bdf8"
+                    color="#00D084"
                     size={0.035}
                     materialRef={register}
                     fill={(i, v) => {

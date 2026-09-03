@@ -22,7 +22,7 @@ const CHAPTERS = [
         id: 'cloud',
         n: '03',
         t: 'Cloud Architecture',
-        d: 'Every device streams rich, privacy-safe telemetry over TR-369 / USP into the Xunison Cloud — provisioning, configuration, monitoring and analytics at fleet scale, from one console.',
+        d: 'Every device streams rich, privacy-safe telemetry over TR-369 / USP into the TonAer Cloud — provisioning, configuration, monitoring and analytics at fleet scale, from one console.',
         tags: ['TR-369 / USP', 'ZERO-TOUCH', 'FLEET SCALE'],
     },
     {
@@ -52,7 +52,7 @@ export default function TechnologyPage() {
     return (
         <div className="bg-[#020617] text-white" data-testid="technology-page">
             <section className="pt-36 pb-16 px-6 sm:px-12 md:px-24 max-w-7xl mx-auto">
-                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-sky-400 mb-6 flex items-center gap-3">
+                <div className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-6 flex items-center gap-3">
                     <span className="w-8 h-px bg-current" />
                     TECHNOLOGY // UNDER THE SURFACE
                 </div>
@@ -82,7 +82,7 @@ export default function TechnologyPage() {
                             <p className="text-slate-400 leading-relaxed mt-4 max-w-xl inline-block">{c.d}</p>
                             <div className={`mt-5 flex flex-wrap gap-2 ${i % 2 ? 'md:justify-end' : ''}`}>
                                 {c.tags.map((tag) => (
-                                    <span key={tag} className="font-mono-xu text-[10px] tracking-[0.25em] border border-sky-400/30 text-sky-300 rounded-full px-3 py-1">
+                                    <span key={tag} className="font-mono-xu text-[10px] tracking-[0.25em] border border-brand/30 text-brand-soft rounded-full px-3 py-1">
                                         {tag}
                                     </span>
                                 ))}

@@ -7,15 +7,15 @@ function GLBModel({ url }) {
     return <primitive object={scene} />;
 }
 
-// Procedural premium stand-in for the Xunison D71.
+// Procedural premium stand-in for the TonAer D71.
 // Drop in an official GLB later by passing modelUrl — no scene rebuild needed.
 // onMaterial lets parent scenes register materials for scroll crossfades.
 export function D71({
     modelUrl,
-    ledColor = '#38BDF8',
+    ledColor = '#00D084',
     bodyColor = '#f2f5f8',
     panelColor = '#e6ecf2',
-    logoColor = '#0066FF',
+    logoColor = '#00D084',
     vents = 9,
     ports = 4,
     simTray = false,
@@ -56,7 +56,7 @@ export function D71({
             ))}
             <mesh ref={led} position={[0, -0.03, 1.115]}>
                 <boxGeometry args={[1.7, 0.035, 0.02]} />
-                <meshStandardMaterial ref={mat} color="#0ea5e9" emissive={ledColor} emissiveIntensity={1.6} toneMapped={false} />
+                <meshStandardMaterial ref={mat} color="#00D084" emissive={ledColor} emissiveIntensity={1.6} toneMapped={false} />
             </mesh>
             {Array.from({ length: ports }).map((_, i) => (
                 <mesh key={`port-${i}`} position={[-0.95 + i * 0.63, -0.03, -1.11]}>

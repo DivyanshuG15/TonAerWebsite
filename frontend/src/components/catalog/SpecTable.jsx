@@ -25,7 +25,7 @@ export function SpecTable({ specs }) {
                             data-testid={`spec-group-${group.id}`}
                             className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-white/5 transition-colors duration-200"
                         >
-                            <span className="font-mono-xu text-[11px] tracking-[0.3em] text-sky-400">{group.label}</span>
+                            <span className="font-mono-xu text-[11px] tracking-[0.3em] text-brand">{group.label}</span>
                             <ChevronDown size={15} className={`text-slate-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                         </button>
                         <AnimatePresence initial={false}>

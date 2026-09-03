@@ -37,7 +37,7 @@ function usePhase(count, ms) {
 function Caption({ text, tone }) {
     const tones = {
         amber: 'border-amber-400/40 text-amber-300',
-        sky: 'border-sky-400/40 text-sky-300',
+        sky: 'border-brand/40 text-brand-soft',
         emerald: 'border-emerald-400/40 text-emerald-300',
         slate: 'border-white/15 text-slate-400',
     };
@@ -61,21 +61,21 @@ function TroubleshootDemo() {
     return (
         <div className="text-center">
             <svg viewBox="0 0 420 190" className="w-full" aria-hidden="true">
-                <g stroke="#38BDF8" strokeOpacity="0.25" strokeWidth="1">
+                <g stroke="#00D084" strokeOpacity="0.25" strokeWidth="1">
                     <line x1="40" y1="60" x2="95" y2="95" />
                     <line x1="40" y1="140" x2="95" y2="105" />
                     <line x1="95" y1="100" x2="190" y2="100" />
                 </g>
-                <line x1="190" y1="100" x2="300" y2="100" stroke={solved ? '#22C55E' : '#38BDF8'} strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="6 6" className="xu-dash" />
-                <circle cx="40" cy="60" r="6" fill="#7DD3FC" />
-                <circle cx="40" cy="140" r="6" fill="#7DD3FC" />
+                <line x1="190" y1="100" x2="300" y2="100" stroke={solved ? '#22C55E' : '#00D084'} strokeOpacity="0.7" strokeWidth="1.5" strokeDasharray="6 6" className="xu-dash" />
+                <circle cx="40" cy="60" r="6" fill="#5CE8B4" />
+                <circle cx="40" cy="140" r="6" fill="#5CE8B4" />
                 <circle cx="95" cy="100" r="8" fill={issueColor} className="xu-color" />
                 {phase < 3 && <circle cx="95" cy="100" r="8" fill="none" stroke={issueColor} className="xu-pulse" />}
-                <rect x="183" y="88" width="26" height="24" rx="5" fill="#0F172A" stroke="#38BDF8" strokeOpacity="0.6" />
-                <circle cx="196" cy="100" r="3" fill={solved ? '#22C55E' : '#38BDF8'} className="led-blink" />
-                <circle cx="312" cy="100" r="16" fill="none" stroke="#38BDF8" strokeOpacity="0.5" strokeDasharray="4 5" className="xu-dash" />
-                <circle cx="312" cy="100" r="8" fill="#0066FF" fillOpacity="0.9" />
-                <text x="312" y="138" fill="#7DD3FC" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">AI ENGINE</text>
+                <rect x="183" y="88" width="26" height="24" rx="5" fill="#0F172A" stroke="#00D084" strokeOpacity="0.6" />
+                <circle cx="196" cy="100" r="3" fill={solved ? '#22C55E' : '#00D084'} className="led-blink" />
+                <circle cx="312" cy="100" r="16" fill="none" stroke="#00D084" strokeOpacity="0.5" strokeDasharray="4 5" className="xu-dash" />
+                <circle cx="312" cy="100" r="8" fill="#00D084" fillOpacity="0.9" />
+                <text x="312" y="138" fill="#5CE8B4" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">AI ENGINE</text>
                 <text x="95" y="72" fill={issueColor} fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2" className="xu-color">
                     {solved ? 'NODE 12 · HEALTHY' : 'NODE 12 · ISSUE'}
                 </text>
@@ -109,12 +109,12 @@ function PlacementDemo() {
     return (
         <div className="text-center">
             <svg viewBox="0 0 420 190" className="w-full" aria-hidden="true">
-                <rect x="40" y="25" width="340" height="140" rx="8" fill="none" stroke="#38BDF8" strokeOpacity="0.3" />
-                <line x1="180" y1="25" x2="180" y2="95" stroke="#38BDF8" strokeOpacity="0.18" />
-                <line x1="180" y1="95" x2="260" y2="95" stroke="#38BDF8" strokeOpacity="0.18" />
-                <rect x="280" y="120" width="70" height="26" rx="4" fill="#38BDF8" fillOpacity="0.08" stroke="#38BDF8" strokeOpacity="0.2" />
-                <rect x="70" y="45" width="46" height="10" rx="2" fill="#38BDF8" fillOpacity="0.08" stroke="#38BDF8" strokeOpacity="0.2" />
-                {analyzing && <rect x="40" y="25" width="3" height="140" fill="#38BDF8" fillOpacity="0.7" className="xu-scan" />}
+                <rect x="40" y="25" width="340" height="140" rx="8" fill="none" stroke="#00D084" strokeOpacity="0.3" />
+                <line x1="180" y1="25" x2="180" y2="95" stroke="#00D084" strokeOpacity="0.18" />
+                <line x1="180" y1="95" x2="260" y2="95" stroke="#00D084" strokeOpacity="0.18" />
+                <rect x="280" y="120" width="70" height="26" rx="4" fill="#00D084" fillOpacity="0.08" stroke="#00D084" strokeOpacity="0.2" />
+                <rect x="70" y="45" width="46" height="10" rx="2" fill="#00D084" fillOpacity="0.08" stroke="#00D084" strokeOpacity="0.2" />
+                {analyzing && <rect x="40" y="25" width="3" height="140" fill="#00D084" fillOpacity="0.7" className="xu-scan" />}
                 <text x="330" y="60" fill="#F59E0B" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2" opacity={poor ? 1 : 0} style={{ transition: 'opacity 0.8s' }}>
                     WEAK COVERAGE
                 </text>
@@ -129,9 +129,9 @@ function PlacementDemo() {
                 >
                     <circle cx="90" cy="135" r={poor ? 30 : 52} fill="none" stroke={poor ? '#F59E0B' : '#22C55E'} strokeOpacity="0.35" style={{ transition: 'all 1.2s' }} />
                     <circle cx="90" cy="135" r={poor ? 16 : 30} fill="none" stroke={poor ? '#F59E0B' : '#22C55E'} strokeOpacity="0.5" style={{ transition: 'all 1.2s' }} />
-                    <circle cx="90" cy="135" r="6" fill="#0066FF" />
+                    <circle cx="90" cy="135" r="6" fill="#00D084" />
                 </g>
-                <text x="90" y="175" fill="#7DD3FC" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2" opacity={poor ? 1 : 0} style={{ transition: 'opacity 0.8s' }}>
+                <text x="90" y="175" fill="#5CE8B4" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2" opacity={poor ? 1 : 0} style={{ transition: 'opacity 0.8s' }}>
                     GATEWAY
                 </text>
             </svg>
@@ -158,7 +158,7 @@ function InsightsDemo() {
     return (
         <div className="text-center">
             <svg viewBox="0 0 420 190" className="w-full" aria-hidden="true">
-                <line x1="30" y1="150" x2="400" y2="150" stroke="#38BDF8" strokeOpacity="0.25" />
+                <line x1="30" y1="150" x2="400" y2="150" stroke="#00D084" strokeOpacity="0.25" />
                 {BARS.map((h, i) => (
                     <rect
                         key={i}
@@ -167,7 +167,7 @@ function InsightsDemo() {
                         width="24"
                         height={mounted ? h : 0}
                         rx="3"
-                        fill={i === 6 ? '#38BDF8' : '#0066FF'}
+                        fill={i === 6 ? '#00D084' : '#00D084'}
                         fillOpacity={i === 6 ? 0.9 : 0.35 + (h / 112) * 0.4}
                         style={{ transition: `height 0.9s ${i * 0.08}s cubic-bezier(0.16, 1, 0.3, 1), y 0.9s ${i * 0.08}s cubic-bezier(0.16, 1, 0.3, 1)`, y: mounted ? 150 - h : 150 }}
                     />
@@ -179,7 +179,7 @@ function InsightsDemo() {
                     <rect x={44 + 6 * 44 - 8} y={150 - 112 - 26} width="118" height="18" rx="9" fill="#22C55E" fillOpacity="0.12" stroke="#22C55E" strokeOpacity="0.5" />
                     <text x={44 + 6 * 44 + 51} y={150 - 112 - 14} fill="#22C55E" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="1">PEAK — 3 STREAMING</text>
                 </g>
-                <rect x="30" y="20" width="2.5" height="130" fill="#38BDF8" fillOpacity="0.55" className="xu-scan-wide" />
+                <rect x="30" y="20" width="2.5" height="130" fill="#00D084" fillOpacity="0.55" className="xu-scan-wide" />
             </svg>
             <Caption text={captions[phase][0]} tone={captions[phase][1]} />
         </div>
@@ -197,13 +197,13 @@ function ProactiveDemo() {
     return (
         <div className="text-center">
             <svg viewBox="0 0 420 190" className="w-full" aria-hidden="true">
-                <line x1="30" y1="150" x2="400" y2="150" stroke="#38BDF8" strokeOpacity="0.2" />
+                <line x1="30" y1="150" x2="400" y2="150" stroke="#00D084" strokeOpacity="0.2" />
                 <line x1="30" y1="70" x2="400" y2="70" stroke="#F59E0B" strokeOpacity="0.45" strokeDasharray="4 5" />
                 <text x="396" y="64" fill="#F59E0B" fontSize="7" fontFamily="monospace" textAnchor="end" letterSpacing="1">THRESHOLD</text>
                 <path
                     d="M 35 128 L 110 124 L 160 118 L 195 78 L 225 52 L 255 60 L 290 105 L 340 122 L 395 124"
                     fill="none"
-                    stroke="#38BDF8"
+                    stroke="#00D084"
                     strokeWidth="2"
                     className="xu-draw"
                 />
@@ -241,11 +241,11 @@ export function IntelligenceShowcase() {
                             data-testid={`capability-card-${i}`}
                             className={`text-left flex gap-4 rounded-2xl border p-5 transition-all duration-300 ${
                                 active === i
-                                    ? 'border-sky-400/60 bg-sky-400/10 shadow-lg shadow-sky-400/5'
+                                    ? 'border-brand/60 bg-brand/10 shadow-lg shadow-brand/5'
                                     : 'border-white/10 bg-white/5 hover:border-white/25'
                             }`}
                         >
-                            <c.icon size={18} className={`shrink-0 mt-0.5 transition-colors duration-300 ${active === i ? 'text-sky-400' : 'text-slate-500'}`} />
+                            <c.icon size={18} className={`shrink-0 mt-0.5 transition-colors duration-300 ${active === i ? 'text-brand' : 'text-slate-500'}`} />
                             <div>
                                 <div className={`font-display font-semibold text-sm transition-colors duration-300 ${active === i ? 'text-white' : 'text-slate-300'}`}>
                                     {c.t}
@@ -259,7 +259,7 @@ export function IntelligenceShowcase() {
             <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 flex flex-col" data-testid="capability-demo">
                 <div className="flex items-center justify-between mb-4">
                     <span className="font-mono-xu text-[9px] tracking-[0.3em] text-slate-500">LIVE CAPABILITY DEMO</span>
-                    <span className="font-mono-xu text-[9px] tracking-[0.3em] text-sky-400" data-testid="demo-counter">
+                    <span className="font-mono-xu text-[9px] tracking-[0.3em] text-brand" data-testid="demo-counter">
                         0{active + 1} / 04
                     </span>
                 </div>

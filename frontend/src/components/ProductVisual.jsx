@@ -24,9 +24,9 @@ export function ProductVisual() {
             <Canvas dpr={[1, 2]} camera={{ fov: 35, position: [3.8, 1.7, 5.4] }} gl={{ antialias: true }}>
                 <ambientLight intensity={0.75} />
                 <directionalLight position={[6, 9, 7]} intensity={1.6} />
-                <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#7dd3fc" />
+                <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#5CE8B4" />
                 <Turntable />
-                <ContactShadows position={[0, -0.62, 0]} opacity={0.45} scale={9} blur={2.6} far={3} color="#1e3a5f" />
+                <ContactShadows position={[0, -0.62, 0]} opacity={0.45} scale={9} blur={2.6} far={3} color="#0B3D2E" />
             </Canvas>
             <div className="absolute bottom-5 left-5 font-mono-xu text-[10px] tracking-[0.3em] text-slate-500">
                 D71 // LIVE RENDER

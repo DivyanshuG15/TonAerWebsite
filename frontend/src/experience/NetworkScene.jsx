@@ -69,18 +69,18 @@ export function NetworkScene() {
 
     return (
         <group ref={group}>
-            <pointLight position={[0, 3, 0]} intensity={6} distance={14} color="#38bdf8" />
+            <pointLight position={[0, 3, 0]} intensity={6} distance={14} color="#00D084" />
             <ambientLight intensity={0.35} />
             <D71 scale={0.42} position={[0, 0.62, 0]} onMaterial={register} />
             <lineSegments geometry={edgeGeo} frustumCulled={false}>
-                <lineBasicMaterial ref={register} color="#38bdf8" transparent opacity={0.3} />
+                <lineBasicMaterial ref={register} color="#00D084" transparent opacity={0.3} />
             </lineSegments>
             <points geometry={nodeGeo} frustumCulled={false}>
-                <pointsMaterial ref={register} color="#bae6fd" size={0.14} sizeAttenuation transparent opacity={0.95} map={getDotTexture()} alphaTest={0.01} blending={THREE.AdditiveBlending} depthWrite={false} />
+                <pointsMaterial ref={register} color="#B7F5DB" size={0.14} sizeAttenuation transparent opacity={0.95} map={getDotTexture()} alphaTest={0.01} blending={THREE.AdditiveBlending} depthWrite={false} />
             </points>
             <Particles
                 count={pulseCount}
-                color="#7dd3fc"
+                color="#5CE8B4"
                 size={0.09}
                 materialRef={register}
                 fill={(i, v) => v.copy(edges[pulsesMeta.current[i].edge][0])}

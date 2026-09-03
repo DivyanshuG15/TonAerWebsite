@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const inputCls =
-    'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 transition-all duration-300';
+    'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all duration-300';
 
 export function LeadForm() {
     const [form, setForm] = useState({ name: '', company: '', email: '', fleet_size: '', timeframe: '' });
@@ -18,7 +18,7 @@ export function LeadForm() {
         setBusy(true);
         try {
             await axios.post(`${API}/leads`, form);
-            toast.success('Request received — the Xunison team will reach out shortly.');
+            toast.success('Request received — the TonAer team will reach out shortly.');
             setForm({ name: '', company: '', email: '', fleet_size: '', timeframe: '' });
         } catch (err) {
             toast.error('Could not send your request. Please check the details and try again.');
@@ -50,7 +50,7 @@ export function LeadForm() {
                 type="submit"
                 disabled={busy}
                 data-testid="lead-submit-button"
-                className="sm:col-span-2 rounded-full bg-[#0066FF] hover:bg-sky-500 disabled:opacity-60 text-white font-semibold tracking-wide text-sm py-4 transition-all duration-300 hover:shadow-xl hover:shadow-[#0066FF]/25 hover:-translate-y-0.5"
+                className="sm:col-span-2 rounded-full bg-[#00D084] hover:bg-brand-strong disabled:opacity-60 text-[#04150E] font-semibold tracking-wide text-sm py-4 transition-all duration-300 hover:shadow-xl hover:shadow-[#00D084]/25 hover:-translate-y-0.5"
             >
                 {busy ? 'SENDING...' : 'REQUEST A DEMO'}
             </button>

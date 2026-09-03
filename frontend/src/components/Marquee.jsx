@@ -5,7 +5,7 @@ const ITEMS = [
     '320 MHZ CHANNELS',
     '4096-QAM',
     'SMART WI-FI',
-    'XUNISON CLOUD',
+    'TONAER CLOUD',
     'AI OPTIMIZED',
     'EASYMESH',
     'TR-369 / USP',
@@ -25,7 +25,7 @@ export function Marquee({ dark = false }) {
                 {row.map((item, i) => (
                     <span key={i} className="font-mono-xu text-xs tracking-[0.35em] flex items-center">
                         <span className="px-8">{item}</span>
-                        <span className={`w-1 h-1 rounded-full ${dark ? 'bg-sky-400/60' : 'bg-[#0066FF]/50'}`} />
+                        <span className={`w-1 h-1 rounded-full ${dark ? 'bg-brand/60' : 'bg-[#00D084]/50'}`} />
                     </span>
                 ))}
             </div>
