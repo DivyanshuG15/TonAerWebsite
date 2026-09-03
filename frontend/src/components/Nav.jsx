@@ -54,13 +54,13 @@ const MENUS = [
     {
         id: 'resources',
         label: 'Resources',
-        roots: ['/support'],
+        roots: ['/support', '/resources'],
         items: [
             { t: 'Documentation', d: 'Guides, data models and API references', to: '/support#documentation' },
             { t: 'Downloads', d: 'Firmware notes and datasheets', to: '/support#downloads' },
             { t: 'Support', d: 'Help center and troubleshooting', to: '/support' },
             { t: 'FAQs', d: 'Answers, instantly', to: '/support#faqs' },
-            { t: 'Insights / Blog', d: 'Field notes from real deployments', to: '/support#insights' },
+            { t: 'Insights / Blog', d: 'Field notes from real deployments', to: '/resources/blog' },
             { t: 'Contact Us', d: 'Talk to our team', to: '/#contact' },
         ],
     },

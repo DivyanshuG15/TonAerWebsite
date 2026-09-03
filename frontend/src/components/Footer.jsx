@@ -24,7 +24,7 @@ export function Footer() {
                 <div>
                     <div className="font-mono-xu text-[10px] tracking-[0.3em] text-slate-500 mb-4">COMPANY</div>
                     <ul className="space-y-2 text-sm">
-                        <li><span className="hover:text-white transition-colors cursor-pointer">About</span></li>
+                        <li><Link to="/about" className="hover:text-white transition-colors" data-testid="footer-about-link">About</Link></li>
                         <li><span className="hover:text-white transition-colors cursor-pointer">R&D Intelligence</span></li>
                         <li><Link to="/careers" className="hover:text-white transition-colors" data-testid="footer-careers-link">Careers</Link></li>
                     </ul>
@@ -35,6 +35,7 @@ export function Footer() {
                         <li><Link to="/support" className="hover:text-white transition-colors" data-testid="footer-support-link">Help Center</Link></li>
                         <li><Link to="/support" className="hover:text-white transition-colors">Firmware</Link></li>
                         <li><Link to="/support" className="hover:text-white transition-colors">ISP Portal</Link></li>
+                        <li><Link to="/resources/blog" className="hover:text-white transition-colors" data-testid="footer-insights-link">Insights</Link></li>
                     </ul>
                 </div>
             </div>

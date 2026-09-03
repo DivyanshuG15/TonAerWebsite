@@ -69,9 +69,15 @@ export default function SupportPage() {
                     >
                         <div className="font-mono-xu text-[10px] tracking-[0.3em] text-[#00905F]">{c.t.toUpperCase()}</div>
                         <p className="text-sm text-slate-600 leading-relaxed mt-3">{c.d}</p>
-                        <Link to="/#contact" className="inline-block mt-4 text-xs font-semibold text-[#00905F] hover:text-brand-strong transition-colors">
-                            Request portal access →
-                        </Link>
+                        {c.id === 'insights' ? (
+                            <Link to="/resources/blog" data-testid="resource-insights-link" className="inline-block mt-4 text-xs font-semibold text-[#00905F] hover:text-brand-strong transition-colors">
+                                Explore TonAer Insights →
+                            </Link>
+                        ) : (
+                            <Link to="/#contact" className="inline-block mt-4 text-xs font-semibold text-[#00905F] hover:text-brand-strong transition-colors">
+                                Request portal access →
+                            </Link>
+                        )}
                     </motion.div>
                 ))}
             </section>

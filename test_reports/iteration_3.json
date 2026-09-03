@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only testing of the new TonAer Insights blog (/resources/blog) and article detail pages. Ran 5 Playwright suites on the public preview URL covering: listing structure (hero/featured/topics/search/chips/grid/load-more/most-read/newsletter/CTA), all 10 category filters + empty state + clear, search (positive, negative, combined with category), topic tile behaviour (filter + smooth scroll), article detail structure & SEO/JSON-LD, share links (copy toast, LinkedIn, X hrefs), related-insights scoring, 404 slug state, nav dropdown / footer / support-page entry points, newsletter demo state (no /api request captured), and 390px mobile layout. Everything specified in the review request passed; no functional or integration defects found. Backend testing skipped per request.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Blog listing - FEATURED card meta line",
+        "issues": ["Meta bar is hardcoded to 'TECHNOLOGY · 8 MIN READ · SEPTEMBER 2026' (BlogPage.jsx line 133) while the badge above the title reads 'CONNECTIVITY'. Should render featured.category.toUpperCase() for consistency."]
+      }
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Low priority: replace hardcoded 'TECHNOLOGY' label in the featured card meta line with featured.category.toUpperCase() (BlogPage.jsx:133).",
+    "Low priority: useSEO receives a freshly-created jsonLd object each render, so the effect deps change every render and the JSON-LD <script> is removed/re-appended on each re-render. Wrap the jsonLd object in useMemo (or serialize it) in ArticlePage.jsx.",
+    "Low priority: MOST READ is selected by hardcoded ids ['a04','a06','a09'] in BlogPage.jsx; if those ids are removed/unpublished the section silently renders fewer/zero items. Consider a mostRead flag in insights.js."
+  ],
+  "critical_code_review_comments": [
+    "useSEO does not restore title/description/canonical on unmount; only the JSON-LD script is cleaned up. Every route currently calling useSEO makes this harmless, but any page without the hook will inherit the previous page's tags.",
+    "insights.js is data-only and clean; filterArticles/relatedArticles are pure and correct (relatedArticles excludes self and scores category*2 + shared tags, verified in browser)."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "not tested (skipped per request)", "frontend": "100% (all 11 requested scenarios passed)" },
+  "seed_data_creation": "None - static content in /app/frontend/src/data/insights.js",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_self_test": true,
+  "test_credentials": "None required (public site)",
+  "context_for_next_testing_agent": "Verified counts: 12 non-featured published articles, 9 shown initially, Load More reveals all 12 and the button disappears. Category card counts: Wi-Fi 1, Industry 2, Network Intelligence 2, AI & Intelligence 2, Cloud & SaaS 1, IoT 1, Networking 1, Connectivity 1, Product & Engineering 1, Company 0 (no-insights state + Clear restores 9). Category testids slugify '&' to 'and' (category-ai-and-intelligence, category-cloud-and-saas). Search 'Wi-Fi 7' = 1 card; 'zzzznope' = no-insights; AI & Intelligence + 'troubleshooting' = 1. Topic tile topic-ai-automation sets AI filter and scrolls (scrollY 1014). Article page: title '<Title> | TonAer Insights', canonical with slug, og:type=article, 1 JSON-LD script with @type Article; share hrefs URL-encoded for linkedin.com/sharing and twitter.com/intent; copy-link toast works with clipboard permission granted. 404 slug shows 'Insight not found.' with working back link; document.title 'Article Not Found | TonAer Insights'. Newsletter submit clears input, shows info toast, zero /api network requests. Mobile 390px: no horizontal overflow on listing or article, category-nav overflowX auto (scrollW 1347 vs clientW 350), featured single column, body font 16px. No console errors observed.",
+  "rca_of_the_issue": "N/A - no defects reproduced. The only findings are cosmetic/maintainability items listed under action_items."
+}

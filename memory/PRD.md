@@ -43,6 +43,12 @@ Build the TonAer (formerly "Xunison") B2B technology website as an interactive t
 - 12-section editorial company page: hero (masked-line headline + abstract signal-ring evolution visual), Our Story, Our Evolution (5-stage timeline, no invented dates), 6 Values cards, Engineering Mindset (discipline chips), "See the Whole System" (DEVICE→…→EXPERIENCE stack with animated flow connectors), Customer Partnership, TonAer Difference (6), Culture, Vision (large statement), Road Ahead loop, final brand statement with Talk to TonAer / Explore Our Story CTAs
 - Nav Company > About Us now routes to /about; CompanyPage about section links to it ("Read our full story"); new CSS utilities `flow-y`, `spin-slow` in index.css
 
+### Insights / Blog (`/resources/blog`, July 2026)
+- Editorial insight hub: compact hero, FEATURED article ("What Comes After Faster Wi-Fi?"), Explore by Topic tiles (map to category filter + scroll), search (title/excerpt/category/tags/author), category chips (AND-combined with search), Latest Insights grid (9 + Load More), Most Read (3 curated via `mostRead` flag, no fake metrics), newsletter in DEMO state (toast, no storage, no POST), final CTA
+- Article pages `/resources/blog/:slug`: author byline (TonAer team names only), share (copy link / LinkedIn / X), generative SVG cover per category (CoverVisual.jsx, no stock photos), structured body (Key Concepts / Under the Hood / callout / Business / Practical / Takeaway), tags, related insights (category+tag scoring), 404 state
+- Content store `/data/insights.js`: 13 SAMPLE articles (isDemo: true, SAMPLE badges + demo note), status field (published/draft/archived) for future CMS; SEO via `/hooks/useSEO.js` (title, meta description, canonical, OG, JSON-LD Article)
+- Nav Resources > Insights / Blog → /resources/blog; Footer Insights link; Support insights card links to blog
+
 ### Careers Portal (`/careers`)- Hero, culture/areas sections, searchable + filterable job list (department, category), job detail pages (`/careers/:slug`)
 - Application form with resume upload → Emergent Object Storage; reference number returned
 - 8 SAMPLE/DEMO jobs seeded with `isDemo: True` → "DEMO POSITION" badge, demo applications flagged and excluded from real recruitment routing

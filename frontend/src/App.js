@@ -12,6 +12,8 @@ import CareersPage from '@/pages/CareersPage';
 import JobDetailPage from '@/pages/JobDetailPage';
 import ComparePage from '@/pages/ComparePage';
 import AboutPage from '@/pages/AboutPage';
+import BlogPage from '@/pages/BlogPage';
+import ArticlePage from '@/pages/ArticlePage';
 
 function SeriesRedirect() {
     const { seriesId } = useParams();
@@ -54,6 +56,8 @@ function App() {
                     <Route path="/series/:seriesId" element={<SeriesRedirect />} />
                     <Route path="/company" element={<CompanyPage />} />
                     <Route path="/about" element={<AboutPage />} />
+                    <Route path="/resources/blog" element={<BlogPage />} />
+                    <Route path="/resources/blog/:slug" element={<ArticlePage />} />
                     <Route path="/careers" element={<CareersPage />} />
                     <Route path="/careers/:slug" element={<JobDetailPage />} />
                 </Routes>
