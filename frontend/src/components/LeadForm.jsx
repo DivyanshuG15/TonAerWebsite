@@ -4,10 +4,13 @@ import { toast } from 'sonner';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-const inputCls =
+const inputDark =
     'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all duration-300';
+const inputLight =
+    'w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-[#00D084] focus:ring-2 focus:ring-[#00D084]/20 transition-all duration-300';
 
-export function LeadForm() {
+export function LeadForm({ light = false }) {
+    const inputCls = light ? inputLight : inputDark;
     const [form, setForm] = useState({ name: '', company: '', email: '', fleet_size: '', timeframe: '' });
     const [busy, setBusy] = useState(false);
 
@@ -28,7 +31,7 @@ export function LeadForm() {
     };
 
     return (
-        <form onSubmit={submit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left" data-testid="lead-form">
+        <form onSubmit={submit} id="lead-form" className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left" data-testid="lead-form">
             <input required className={inputCls} placeholder="Full name" value={form.name} onChange={set('name')} data-testid="lead-name-input" />
             <input required className={inputCls} placeholder="Company / Operator" value={form.company} onChange={set('company')} data-testid="lead-company-input" />
             <input required type="email" className={inputCls} placeholder="Work email" value={form.email} onChange={set('email')} data-testid="lead-email-input" />

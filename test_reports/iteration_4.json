@@ -1,0 +1,73 @@
+{
+  "summary": "Full round of testing for the LIGHT homepage redesign + Product Detail 5-tab system on the public preview URL. Backend: new pytest suite (/app/backend/tests/backend_test.py) covering health/root, POST+GET /api/leads (persistence, validation 422, blank optional fields, no _id leakage) and /api/jobs regression — 11/11 passed. Frontend (Playwright, 1920x1080 + 390x844): all 33 requested homepage data-testids present and visible; hero (chips Healthy/Connected, D71 render), Explore Platform scroll to #platform (no nav overlap), Explore Products -> /product, ecosystem 5 nodes, portfolio pills D/M/Q/O switch render+copy+CTA, hw-sw 6-step pipeline, platform dashboard marked ILLUSTRATIVE PREVIEW + DEMO DATA with 5 capability rows, dark Intelligence section with 4 interactive IntelligenceShowcase capability cards (demo panel + counter update 02/04..04/04), whitelabel-intro-cta -> /product?tab=look, 3 solutions cards with Deploy->Manage->Monitor->Optimize pills, 5 why-tonaer cards, trusted-by (Earthlink/Orangeburg IQ/Hitron/STC), 3 testimonials each marked SAMPLE TESTIMONIAL + section note, insights teaser links (featured article, teaser-all -> /resources/blog), final CTA. Lead form on light homepage POSTs /api/leads, shows success toast and clears. Zero console errors, zero large inter-section gaps (measured all section boundaries: no gap > 60px), zero horizontal overflow at 390px on the homepage. Nav is theme-aware (home pill rgba(255,255,255,0.85)/dark text; /careers rgba(2,6,23,0.7)/white text) and both dropdowns (Solutions, Products mega) render light-styled and readable on /. Product page: all 5 tabs render correct content, ?tab= persisted in URL, deep link /product?series=q&model=q20&tab=look shows only Standard+Black (no White), O series shows finish-not-supported note, logo upload renders a real decal on the 3D device (pixel-verified: 0 magenta px before, 174 after), remove + Reset Preview both clear logo/finish, Discuss Your White-Label Solution navigates to /#contact and scrolls to the contact section. Regression: /products/compare fully works (filters 9->2, search, clear, tray, Compare Now, highlight differences -> 9 diff rows, modify selection); /resources/blog, /about, /careers render normally; the old interactive white-label builder (model-select step) is GONE from the homepage. 4 defects found (1 dead CTA, 1 state-loss, 1 tab-persistence gap, 1 mobile horizontal overflow) + content/design notes.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "HomeSections final CTA",
+        "issue": "'Talk to Us' button is a dead no-op. onClick does document.querySelector('#lead-form') but LeadForm only has data-testid=\"lead-form\" (no id). Verified: #lead-form does not exist in the DOM and scrollY is unchanged (8270 -> 8270) after clicking. Fix: add id=\"lead-form\" to the <form> in LeadForm.jsx (or scroll to the wrapper).",
+        "selector": "[data-testid='cta-talk-to-us']",
+        "priority": "HIGH"
+      },
+      {
+        "component": "ProductPage / BrandPreview (Look & Feel)",
+        "issue": "Uploaded logo (and chosen finish) is silently lost when the user switches model while on the Look & Feel tab. AnimatePresence key={tab + product.id} remounts BrandPreview on every model change. Verified: logo-thumbnail count 1 before switching D71->D72, 0 after (URL correctly keeps &tab=look). Consider keying only on tab (or lifting logo/finish state above the AnimatePresence).",
+        "selector": "[data-testid='logo-thumbnail']",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "ProductPage series switcher",
+        "issue": "Switching SERIES while on a non-Overview tab drops the ?tab param and resets to Overview (selectSeries does setSearchParams({series: id})). Model switch correctly preserves the tab, so behaviour is inconsistent. Verified: on /product?series=d&model=d72&tab=look clicking series-tab-m -> /product?series=m (Look & Feel gone).",
+        "selector": "[data-testid='series-tab-m']",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "ProductPage @390px",
+        "issue": "Whole page scrolls horizontally by 84px at 390px (document.scrollWidth 474 vs viewport 390; window.scrollTo(200,0) -> scrollX 84, entire layout pans). Likely from the model-selector row (-mx-1 px-1 with min-w-[200px] cards) and/or the sticky tab-bar wrapper. The tab bar itself is correctly scrollable (scrollWidth 549 / clientWidth 340, overflowX auto). Homepage @390px has 0 overflow.",
+        "selector": "[data-testid='model-selector']",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Homepage - Product Portfolio (D Series)",
+        "issues": ["Content mismatch: the D-series flagship render/copy resolves to mD60 ('High-performance mesh gateway', badges Wi-Fi 6 / Mesh Ready) because PRODUCTS.find(series==='d') returns mD60, while SERIES_CAPS.d chips advertise 'WI-FI 7 TRI-BAND' and '10G SFP+ WAN' and the hero uses D71. Either show D71 as the D-series flagship or align the capability chips."]
+      },
+      {
+        "screen": "Mobile nav on light homepage",
+        "issues": ["The nav pill is light/white on / but the mobile hamburger drawer ([data-testid='mobile-menu']) is still dark navy — inconsistent with the light homepage theme (readable, but jarring)."]
+      },
+      {
+        "screen": "Homepage - Network Intelligence (dark) section",
+        "issues": ["The 'LIVE CAPABILITY DEMO' panel has a large empty area under the latency chart (~140px) on the 'Proactive Issue Detection' state; the left capability list is shorter than the panel, so the right column looks unbalanced."]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "HIGH: Add id=\"lead-form\" to LeadForm (or change the handler target) so the homepage 'Talk to Us' CTA actually scrolls to the form — currently a dead button.",
+    "MEDIUM: Preserve uploaded logo/finish across model switches on the Look & Feel tab (don't include product.id in the AnimatePresence key for the look tab, or lift state).",
+    "MEDIUM: Preserve ?tab= when switching series on the product page (selectSeries currently drops it).",
+    "MEDIUM: Fix 84px horizontal page overflow on /product at 390px (model-selector negative margins / sticky tab-bar wrapper).",
+    "LOW: Align homepage D-series portfolio flagship (mD60) with its advertised Wi-Fi 7 / 10G SFP+ capability chips, or show D71.",
+    "LOW: Consider a light-themed mobile drawer on the light homepage."
+  ],
+  "critical_code_review_comments": [
+    "HomeSections.jsx 'Talk to Us' relies on an id that does not exist anywhere in the tree — add a stable anchor id instead of coupling to data-testid.",
+    "BrandPreview keeps `finish` in local state but never resets it when the `fixedSeries` prop changes; today this is masked by the remount from AnimatePresence key={tab+product.id}. If that key is fixed (see action item), a finish like 'white' selected on D would leak into Q/O where it is not offered — add a useEffect resetting finish on fixedSeries change.",
+    "ProductPage.selectTab/selectProduct/selectSeries each rebuild the param object by hand; extract one helper (series, model, tab) to avoid the tab-dropping inconsistency.",
+    "HomeSections.jsx is 391 lines and holds 5 inline section components + data constants; consider moving PortfolioShowcase/InsightsTeaser and the SOLUTIONS/WHY/SERIES_CAPS constants into /components/home/ for parity with HomeVisuals.jsx."
+  ],
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": { "backend": "100% (11/11 pytest)", "frontend": "~92% (all 8 requested scenarios exercised; 4 defects: dead Talk to Us CTA, logo lost on model switch, tab lost on series switch, /product mobile overflow)" },
+  "seed_data_creation": "Created TEST_-prefixed leads via POST /api/leads (pytest + one UI submission test_qa_pw@example.com). No delete endpoint exists for leads, so they remain in db.leads.",
+  "should_call_test_agent_after_fix": true,
+  "should_main_agent_self_test": false,
+  "test_credentials": "None required (public marketing site, no auth)",
+  "context_for_next_testing_agent": "Verified: homepage docHeight ~9596px at 1920 wide, no inter-section gap > 60px, no console errors, 0 horizontal overflow at 390px (testimonials single column 342px, dashboard 342px wide, portfolio pills wrap into 2 rows h=92px, hero single column). Nav backgrounds: / => rgba(255,255,255,0.85) text rgb(15,23,42); /careers => rgba(2,6,23,0.7) text white. Explore Platform lands #platform at top 0 with navBottom 66 / kickerTop 96 (no overlap). Lead form POST /api/leads confirmed in network log with success toast + cleared fields. Look & Feel logo decal verified by pixel diff on [data-testid='brand-preview-canvas'] (magenta px 0 -> 174) — generate PNGs in-script with zlib/struct since PIL-based files worked fine. Q series finishes = standard+black only; O series = finish-not-supported. Compare page counts: 9 gateways, Wi-Fi 7 filter -> 2, search 'D71' -> 1, highlight differences -> 9 diff-row-* elements. Backend suite is regression-ready at /app/backend/tests/backend_test.py (run with pytest from /app/backend).",
+  "rca_of_the_issue": "1) 'Talk to Us': handler queries '#lead-form' but LeadForm renders only data-testid='lead-form' — querySelector returns null and the optional-chained scrollIntoView silently no-ops. 2) Logo loss: ProductPage wraps tab content in <AnimatePresence><motion.div key={tab + product.id}> so any model change unmounts BrandPreview, destroying its logoUrl/finish state. 3) Tab loss on series change: selectSeries writes only {series} to the search params. 4) /product mobile overflow: horizontally-scrolling model-selector uses -mx-1 px-1 inside a padded max-w-7xl section, leaving the document ~84px wider than the 390px viewport."
+}

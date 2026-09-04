@@ -1,36 +1,42 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-    Cpu, Cloud, Smartphone, Activity, BrainCircuit, Tag, Code2, CloudCog, Layers,
-    MonitorCheck, Settings, BarChart3, Wrench, TrendingUp, ShieldCheck, Wifi,
-    Share2, Radio, Lock, ArrowLeftRight, HardDrive, ArrowRight,
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShieldCheck, Cloud, BrainCircuit, Tag, Wrench } from 'lucide-react';
 import { SeriesVisual } from './SeriesVisual';
 import { TrustedBy } from './TrustedBy';
 import { LeadForm } from './LeadForm';
-import { BrandPreview } from './BrandPreview';
 import { IntelligenceShowcase } from './IntelligenceShowcase';
+import { EcosystemFlow, HardwareSoftwareFlow, PlatformDashboard } from './home/HomeVisuals';
+import { Testimonials } from './home/Testimonials';
+import { CoverVisual } from './insights/CoverVisual';
+import { SERIES, PRODUCTS } from '../data/catalog';
+import { publishedArticles, featuredArticle } from '../data/insights';
 
 const fadeUp = {
     initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.3 },
+    viewport: { once: true, amount: 0.25 },
     transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
 };
 
-function Section({ id, kicker, title, desc, children, className = '' }) {
+function Section({ id, kicker, title, desc, children, tone = 'white', center = false, testId }) {
     return (
-        <section id={id} className={`relative z-10 py-24 sm:py-28 px-6 sm:px-12 md:px-24 ${className}`}>
-            <div className="max-w-7xl mx-auto">
-                <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-6 flex items-center gap-3">
+        <section
+            id={id}
+            className={`relative z-10 py-16 md:py-24 px-6 sm:px-12 md:px-24 ${tone === 'alt' ? 'bg-[#F8FAFC]' : 'bg-white'}`}
+            data-testid={testId || `section-${id}`}
+        >
+            <div className={`max-w-7xl mx-auto ${center ? 'text-center' : ''}`}>
+                <motion.div {...fadeUp} className={`font-mono-xu text-[11px] tracking-[0.3em] text-[#00905F] mb-5 flex items-center gap-3 ${center ? 'justify-center' : ''}`}>
                     <span className="w-8 h-px bg-current" />
                     {kicker}
+                    {center && <span className="w-8 h-px bg-current" />}
                 </motion.div>
-                <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-3xl sm:text-4xl lg:text-5xl leading-tight text-white max-w-3xl">
+                <motion.h2 {...fadeUp} className={`font-display font-bold tracking-tight text-2xl sm:text-3xl lg:text-4xl leading-tight text-slate-900 max-w-3xl ${center ? 'mx-auto' : ''}`}>
                     {title}
                 </motion.h2>
                 {desc && (
-                    <motion.p {...fadeUp} className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-slate-400">
+                    <motion.p {...fadeUp} className={`mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-slate-600 ${center ? 'mx-auto' : ''}`}>
                         {desc}
                     </motion.p>
                 )}
@@ -40,296 +46,343 @@ function Section({ id, kicker, title, desc, children, className = '' }) {
     );
 }
 
-const ECOSYSTEM = [
-    { icon: Cpu, t: 'Advanced Hardware', d: 'White-label Wi-Fi gateways, routers and CPE — engineered per market.' },
-    { icon: Cloud, t: 'Cloud Management', d: 'One scalable platform for provisioning, configuration and fleet control.' },
-    { icon: Smartphone, t: 'Mobile Experience', d: 'Branded subscriber apps for setup, control and support.' },
-    { icon: Activity, t: 'Network Intelligence', d: 'Telemetry and analytics across every device you deploy.' },
-    { icon: BrainCircuit, t: 'AI-Powered Operations', d: 'Anomaly detection, prediction and self-optimization built in.' },
-];
+/* 03 — Product portfolio: one dominant visual per series */
+const SERIES_CAPS = {
+    d: ['Wi-Fi 7 Tri-Band', '10G SFP+ WAN', 'EasyMesh Ready', 'Cloud Managed'],
+    m: ['Wi-Fi 6 / 6E', 'Volume-Ready', 'Mesh Options', 'Cloud Managed'],
+    q: ['5G / LTE Cellular', 'e-SIM + Dual SIM', 'WAN Failover', 'Cloud Managed'],
+    o: ['Ruggedized Outdoor', 'PoE Powered', '-40°C to +65°C', 'Cloud Managed'],
+};
 
-const WHITELABEL = [
-    { icon: Tag, t: 'White-Label Hardware', d: 'Your casing, your colorway, your logo — our engineering.' },
-    { icon: Smartphone, t: 'Branded Applications', d: 'Subscriber apps shipped under your brand on iOS and Android.' },
-    { icon: CloudCog, t: 'Centralized Cloud Platform', d: 'Your operators manage everything from one branded console.' },
-    { icon: Code2, t: 'Custom Development', d: 'Firmware, features and integrations built to your roadmap.' },
-];
-
-const CLOUD_FEATURES = [
-    { icon: MonitorCheck, t: 'Real-Time Device Monitoring', d: 'Live health and status across the entire fleet.' },
-    { icon: Settings, t: 'Remote Configuration', d: 'Push settings and firmware without a truck roll.' },
-    { icon: BarChart3, t: 'Network Analytics', d: 'Usage, performance and experience trends per customer.' },
-    { icon: Wrench, t: 'Remote Troubleshooting', d: 'Diagnose and resolve issues from the operations console.' },
-    { icon: Layers, t: 'Fleet Management', d: 'Group, segment and operate millions of devices at once.' },
-    { icon: TrendingUp, t: 'Scalable Operations', d: 'Infrastructure that grows with your subscriber base.' },
-];
-
-const INDUSTRIES = [
-    {
-        t: 'Internet Service Providers',
-        d: 'Deploy and manage branded customer devices at scale with centralized operations and remote management.',
-    },
-    {
-        t: 'Telecom Operators',
-        d: 'Build scalable connectivity ecosystems with advanced gateways, cloud management, and intelligent network operations.',
-    },
-    {
-        t: 'Network Solution Providers',
-        d: 'Deliver flexible and customized networking solutions using advanced hardware and scalable software.',
-    },
-];
-
-const CAPABILITIES = [
-    { icon: Wifi, t: 'Advanced Wi-Fi', d: 'Wi-Fi 7, MLO, 320 MHz' },
-    { icon: Share2, t: 'Mesh Networking', d: 'EasyMesh self-organizing coverage' },
-    { icon: Radio, t: 'IoT Connectivity', d: 'Matter and Thread ready' },
-    { icon: Cloud, t: 'Cloud Management', d: 'TR-369 / USP fleet control' },
-    { icon: BrainCircuit, t: 'AI Intelligence', d: 'Detect, predict, optimize' },
-    { icon: ShieldCheck, t: 'Enterprise Security', d: 'WPA3, hardened firmware' },
-    { icon: Lock, t: 'Cybersecurity', d: 'Network-level threat protection' },
-    { icon: ArrowLeftRight, t: 'SIM Backup', d: 'e-SIM / SIM failover' },
-    { icon: Smartphone, t: 'Mobile App Control', d: 'Branded subscriber apps' },
-    { icon: HardDrive, t: 'Local Management', d: 'On-device administration' },
-];
-
-const WHY = [
-    { k: '10+', v: 'Years of Experience', d: 'A decade building carrier-grade connectivity.' },
-    { k: 'ENG', v: 'Engineering Teams', d: 'Hardware, firmware, cloud and apps in-house.' },
-    { k: 'R&D', v: 'Research & Development', d: 'Active programs in next-generation wireless.' },
-    { k: 'OEM', v: 'Custom Development', d: 'Hardware and software shaped to each market.' },
-    { k: 'E2E', v: 'Complete Ecosystem', d: 'Hardware, cloud, apps and intelligence — one partner.' },
-];
-
-function CloudVisual() {
+function PortfolioShowcase() {
+    const [active, setActive] = useState('d');
+    const series = SERIES.find((s) => s.id === active);
+    const flagship = PRODUCTS.find((p) => p.id === { d: 'd71', m: 'm40', q: 'q20', o: 'o10' }[active]) || PRODUCTS.find((p) => p.series === active);
     return (
-        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6" data-testid="cloud-visual">
-            <div className="flex items-center gap-1.5 mb-5">
-                <span className="w-2 h-2 rounded-full bg-white/20" />
-                <span className="w-2 h-2 rounded-full bg-white/20" />
-                <span className="w-2 h-2 rounded-full bg-brand/60" />
-                <div className="ml-4 flex gap-4 font-mono-xu text-[9px] tracking-[0.25em] text-slate-500">
-                    <span className="text-brand">FLEET</span>
-                    <span>CONFIG</span>
-                    <span>ANALYTICS</span>
-                </div>
-            </div>
-            <svg viewBox="0 0 400 160" className="w-full" aria-hidden="true">
-                <g stroke="#00D084" strokeOpacity="0.25" strokeWidth="1">
-                    <line x1="200" y1="30" x2="60" y2="120" />
-                    <line x1="200" y1="30" x2="130" y2="120" />
-                    <line x1="200" y1="30" x2="200" y2="120" />
-                    <line x1="200" y1="30" x2="270" y2="120" />
-                    <line x1="200" y1="30" x2="340" y2="120" />
-                </g>
-                <circle cx="200" cy="30" r="10" fill="#00D084" fillOpacity="0.9" />
-                <circle cx="200" cy="30" r="16" fill="none" stroke="#00D084" strokeOpacity="0.4" />
-                {[60, 130, 200, 340].map((x) => (
-                    <circle key={x} cx={x} cy="120" r="6" fill="#5CE8B4" fillOpacity="0.8" />
+        <div className="mt-12" data-testid="portfolio-showcase">
+            <div className="flex gap-2 flex-wrap">
+                {SERIES.map((s) => (
+                    <button
+                        key={s.id}
+                        onClick={() => setActive(s.id)}
+                        data-testid={`series-pill-${s.id}`}
+                        className={`rounded-full border px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
+                            active === s.id
+                                ? 'border-[#00D084] bg-[#E6FBF3] text-slate-900'
+                                : 'border-slate-200 text-slate-500 hover:border-slate-300 hover:text-slate-900'
+                        }`}
+                    >
+                        {s.name}
+                    </button>
                 ))}
-                <circle cx="270" cy="120" r="6" fill="#F59E0B" fillOpacity="0.9" />
-                <circle cx="270" cy="120" r="11" fill="none" stroke="#F59E0B" strokeOpacity="0.5" strokeDasharray="3 3" />
-                <text x="270" y="148" fill="#F59E0B" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLAGGED</text>
-                <text x="200" y="14" fill="#5CE8B4" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="2">FLEET HUB</text>
-            </svg>
+            </div>
+            <div className="mt-8 grid lg:grid-cols-2 gap-10 items-center">
+                <motion.div
+                    key={active}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <SeriesVisual variant={series.variant} label={`${series.name.toUpperCase()} // ${flagship?.name?.toUpperCase() || ''}`} />
+                </motion.div>
+                <motion.div
+                    key={active + '-copy'}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.05 }}
+                >
+                    <div className="font-mono-xu text-[10px] tracking-[0.3em] text-[#00905F]">{series.name.toUpperCase()}</div>
+                    <h3 className="font-display font-bold tracking-tight text-2xl sm:text-3xl text-slate-900 mt-3">
+                        {flagship ? flagship.tag : series.name}
+                    </h3>
+                    <p className="mt-4 text-slate-600 leading-relaxed max-w-lg">{series.desc}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                        {SERIES_CAPS[active].map((c) => (
+                            <span key={c} className="font-mono-xu text-[10px] tracking-[0.12em] border border-slate-200 text-slate-600 rounded-full px-3 py-1.5">
+                                {c.toUpperCase()}
+                            </span>
+                        ))}
+                    </div>
+                    <Link
+                        to={`/product?series=${active}`}
+                        data-testid={`series-explore-${active}`}
+                        className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#00D084] hover:bg-[#00B874] text-[#04150E] text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5"
+                    >
+                        Explore {series.name} <ArrowRight size={15} />
+                    </Link>
+                </motion.div>
+            </div>
+        </div>
+    );
+}
+
+/* 08 — Solutions */
+const SOLUTIONS = [
+    { role: 'ISPs', task: 'Deploy, manage and monitor connected devices at scale.', flow: ['Deploy', 'Manage', 'Monitor', 'Optimize'] },
+    { role: 'Telecom Operators', task: 'Deliver reliable connectivity experiences with centralized visibility.', flow: ['Deploy', 'Manage', 'Monitor', 'Optimize'] },
+    { role: 'Network Service Providers', task: 'Combine hardware, cloud management and intelligence.', flow: ['Deploy', 'Manage', 'Monitor', 'Optimize'] },
+];
+
+/* 09 — Why TonAer */
+const WHY = [
+    { icon: ShieldCheck, t: 'Advanced Hardware', d: 'Connectivity devices designed for evolving requirements.' },
+    { icon: Cloud, t: 'Cloud Management', d: 'Centralized visibility and control.' },
+    { icon: BrainCircuit, t: 'Network Intelligence', d: 'Turn network data into actionable insight.' },
+    { icon: Tag, t: 'White-Label', d: 'Deliver technology under your own brand.' },
+    { icon: Wrench, t: 'Engineering', d: 'Technology built around customer requirements.' },
+];
+
+/* 11 — Insights teaser */
+function InsightsTeaser() {
+    const featured = featuredArticle();
+    const latest = publishedArticles().filter((a) => !a.featured).slice(0, 2);
+    return (
+        <div className="mt-12 grid lg:grid-cols-2 gap-5" data-testid="insights-teaser">
+            {featured && (
+                <Link to={`/resources/blog/${featured.slug}`} className="group rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300" data-testid="teaser-featured">
+                    <CoverVisual category={featured.category} className="aspect-[16/8]" />
+                    <div className="p-7">
+                        <div className="font-mono-xu text-[9px] tracking-[0.2em] text-[#00905F]">FEATURED · {featured.category.toUpperCase()}</div>
+                        <div className="font-display font-semibold text-xl text-slate-900 mt-2 leading-snug group-hover:text-[#00905F] transition-colors">{featured.title}</div>
+                        <p className="text-sm text-slate-500 mt-2 leading-relaxed line-clamp-2">{featured.excerpt}</p>
+                        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#00905F]">
+                            Read More <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                        </span>
+                    </div>
+                </Link>
+            )}
+            <div className="grid gap-5">
+                {latest.map((a) => (
+                    <Link key={a.id} to={`/resources/blog/${a.slug}`} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex gap-5 items-start" data-testid={`teaser-${a.slug}`}>
+                        <div className="flex-1">
+                            <div className="font-mono-xu text-[9px] tracking-[0.2em] text-[#00905F]">{a.category.toUpperCase()}</div>
+                            <div className="font-display font-semibold text-slate-900 mt-2 leading-snug group-hover:text-[#00905F] transition-colors">{a.title}</div>
+                            <div className="font-mono-xu text-[9px] tracking-[0.15em] text-slate-400 mt-3">{a.date.toUpperCase()} · {a.readingTime} MIN READ</div>
+                        </div>
+                        <ArrowUpRight size={16} className="text-slate-300 group-hover:text-[#00D084] shrink-0 mt-1 transition-colors" />
+                    </Link>
+                ))}
+                <Link to="/resources/blog" data-testid="teaser-all" className="inline-flex items-center gap-2 text-sm font-semibold text-[#00905F] hover:text-[#00B874] transition-colors pl-1">
+                    Explore all insights <ArrowRight size={14} />
+                </Link>
+            </div>
         </div>
     );
 }
 
 export function HomeSections() {
     return (
-        <div className="relative z-10 text-white bg-[#020617]">
+        <div className="relative z-10 bg-white text-slate-900">
+            {/* 02 — ECOSYSTEM */}
             <Section
                 id="ecosystem"
-                kicker="WHAT WE PROVIDE"
-                title="One Complete Connectivity Ecosystem."
-                desc="From advanced hardware to cloud intelligence, we provide the technology infrastructure needed to build, manage, and scale modern connectivity services."
-                className="border-t border-white/5"
+                tone="alt"
+                kicker="CONNECTED ECOSYSTEM"
+                title="Hardware. Software. Intelligence. One Connected Ecosystem."
+                desc="TonAer brings together connectivity hardware, cloud-based management and network intelligence to help service providers build and manage better connected experiences."
             >
-                <div className="mt-10 flex flex-wrap items-center gap-2 font-mono-xu text-[10px] tracking-[0.25em] text-slate-500">
-                    {['DEVICES', 'GATEWAY', 'CLOUD', 'MOBILE', 'INTELLIGENCE'].map((s, i) => (
-                        <span key={s} className="flex items-center gap-2">
-                            <span className="text-brand border border-brand/30 rounded-full px-3 py-1.5">{s}</span>
-                            {i < 4 && <ArrowRight size={12} className="text-slate-600" />}
-                        </span>
-                    ))}
-                </div>
-                <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                    {ECOSYSTEM.map((c, i) => (
-                        <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                            className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-brand/40 transition-colors duration-300">
-                            <c.icon size={20} className="text-brand" />
-                            <div className="font-display font-semibold mt-4 text-sm">{c.t}</div>
-                            <p className="text-xs text-slate-400 mt-2 leading-relaxed">{c.d}</p>
-                        </motion.div>
-                    ))}
-                </div>
+                <EcosystemFlow />
             </Section>
 
-            <Section
-                id="whitelabel"
-                kicker="THE WHITE-LABEL ADVANTAGE"
-                title="Your Brand. Our Technology."
-                desc="Launch and scale your own branded connectivity ecosystem without building the entire technology stack from scratch."
-            >
-                <div className="mt-12 grid lg:grid-cols-2 gap-10 items-center">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                        {WHITELABEL.map((c, i) => (
-                            <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                                className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                                <c.icon size={20} className="text-brand" />
-                                <div className="font-display font-semibold mt-4 text-sm">{c.t}</div>
-                                <p className="text-xs text-slate-400 mt-2 leading-relaxed">{c.d}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                    <motion.div {...fadeUp}>
-                        <BrandPreview />
-                    </motion.div>
-                </div>
-            </Section>
-
+            {/* 03 — PORTFOLIO */}
             <Section
                 id="portfolio"
                 kicker="PRODUCT PORTFOLIO"
-                title="Advanced Hardware. Built for What's Next."
-                desc="Four series of gateways and CPE covering flagship Wi-Fi 7, mass-market fiber, cellular and outdoor deployments — all managed from the same cloud."
+                title="Connectivity Built Around Your Network."
+                desc="Explore TonAer's gateway portfolio, designed for evolving connectivity and network requirements."
             >
-                <div className="mt-12 grid lg:grid-cols-2 gap-8 items-stretch">
-                    <motion.div {...fadeUp} className="rounded-3xl overflow-hidden border border-white/10 bg-slate-100">
-                        <SeriesVisual label="D71 — FLAGSHIP" />
-                    </motion.div>
-                    <div className="grid gap-4">
+                <PortfolioShowcase />
+            </Section>
+
+            {/* 04 — HARDWARE → SOFTWARE */}
+            <Section
+                id="flow"
+                tone="alt"
+                kicker="INTEGRATED FLOW"
+                title="Hardware and Software, Working as One."
+                desc="From physical deployment to cloud visibility — every TonAer gateway is part of a managed, intelligent ecosystem."
+            >
+                <HardwareSoftwareFlow />
+            </Section>
+
+            {/* 05 — PLATFORM */}
+            <Section
+                id="platform"
+                kicker="CLOUD MANAGEMENT"
+                title="One Platform to Manage the Connected Experience."
+                desc="Manage devices, monitor networks, troubleshoot remotely and gain actionable visibility through a centralized cloud platform."
+            >
+                <div className="mt-12 grid lg:grid-cols-[1.5fr_1fr] gap-10 items-start">
+                    <PlatformDashboard />
+                    <div className="space-y-1" data-testid="platform-caps">
                         {[
-                            { id: 'd', n: 'D Series', d: 'Flagship Wi-Fi 7 tri-band gateway — the D71 leads the line.' },
-                            { id: 'm', n: 'M Series', d: 'High-volume gateways for mass-market fiber rollouts.' },
-                            { id: 'q', n: 'Q Series', d: '5G / LTE CPE with e-SIM and dual-SIM failover.' },
-                            { id: 'o', n: 'O Series', d: 'Ruggedized outdoor units for hard-to-reach markets.' },
-                        ].map((s, i) => (
-                            <motion.div key={s.id} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}>
-                                <Link to={`/series/${s.id}`} data-testid={`portfolio-${s.id}`}
-                                    className="flex items-center gap-5 rounded-2xl border border-white/10 bg-white/5 hover:border-brand/40 p-5 transition-all duration-300 group">
-                                    <span className="font-display font-bold text-2xl text-brand w-8">{s.id.toUpperCase()}</span>
-                                    <span className="flex-1">
-                                        <span className="block font-display font-semibold text-sm text-white">{s.n}</span>
-                                        <span className="block text-xs text-slate-400 mt-1">{s.d}</span>
-                                    </span>
-                                    <ArrowRight size={16} className="text-slate-500 group-hover:text-brand group-hover:translate-x-1 transition-all duration-300" />
-                                </Link>
+                            ['Zero-Touch Provisioning', 'Devices configure themselves on first boot.'],
+                            ['Live Fleet Monitoring', 'Online status, health and performance in one view.'],
+                            ['Remote Troubleshooting', 'Diagnose and resolve without a truck roll.'],
+                            ['Fleet Analytics', 'Usage and experience trends across deployments.'],
+                            ['OTA Firmware', 'Staged, verifiable updates across the fleet.'],
+                        ].map(([t, d], i) => (
+                            <motion.div key={t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
+                                className="border-b border-slate-100 py-5 flex gap-4 items-start">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00D084] mt-2 shrink-0" />
+                                <div>
+                                    <div className="font-display font-semibold text-slate-900">{t}</div>
+                                    <p className="text-sm text-slate-500 mt-1">{d}</p>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
                 </div>
-                <motion.div {...fadeUp} className="mt-10">
-                    <Link to="/product" data-testid="portfolio-cta"
-                        className="inline-block rounded-full border border-brand/40 text-brand-soft hover:bg-brand/10 text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300">
-                        Explore Product Portfolio
-                    </Link>
-                </motion.div>
             </Section>
 
+            {/* 06 — INTELLIGENCE (dark contrast section) */}
+            <section id="intelligence" className="relative z-10 py-16 md:py-24 px-6 sm:px-12 md:px-24 bg-[#020617] text-white" data-testid="section-intelligence">
+                <div className="max-w-7xl mx-auto">
+                    <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.3em] text-brand mb-5 flex items-center gap-3">
+                        <span className="w-8 h-px bg-current" />
+                        NETWORK INTELLIGENCE
+                    </motion.div>
+                    <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-2xl sm:text-3xl lg:text-4xl leading-tight max-w-3xl">
+                        Turn Network Data Into Action.
+                    </motion.h2>
+                    <motion.p {...fadeUp} className="mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-slate-400">
+                        AI-powered diagnostics analyze gateway behavior in real time — detecting issues, recommending
+                        actions and optimizing networks before subscribers notice.
+                    </motion.p>
+                    <div className="mt-12">
+                        <IntelligenceShowcase />
+                    </div>
+                </div>
+            </section>
+
+            {/* 07 — WHITE-LABEL INTRO (lightweight; interactive tool lives in Product → Look & Feel) */}
             <Section
-                id="cloud"
-                kicker="CLOUD MANAGEMENT PLATFORM"
-                title="Complete Visibility. Total Control."
-                desc="Manage devices, configurations, customers, and network operations through one highly scalable cloud platform."
+                id="whitelabel"
+                tone="alt"
+                kicker="WHITE-LABEL TECHNOLOGY"
+                title="Your Brand. Your Experience. Our Technology."
+                desc="Deliver branded connectivity experiences with white-labelled hardware, software and customer-facing applications."
             >
                 <div className="mt-12 grid lg:grid-cols-2 gap-10 items-center">
-                    <CloudVisual />
-                    <div className="grid sm:grid-cols-2 gap-4">
-                        {CLOUD_FEATURES.map((c, i) => (
-                            <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-                                className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                                <c.icon size={18} className="text-brand" />
-                                <div className="font-display font-semibold mt-3 text-sm">{c.t}</div>
-                                <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">{c.d}</p>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <motion.div {...fadeUp} className="relative">
+                        <SeriesVisual variant={{}} label="D71 // WHITE-LABEL READY" />
+                        <div className="absolute top-5 right-5 rounded-full border border-[#00D084]/40 bg-white/90 backdrop-blur px-4 py-2 font-mono-xu text-[9px] tracking-[0.2em] text-[#00905F]">
+                            YOUR LOGO HERE
+                        </div>
+                    </motion.div>
+                    <motion.div {...fadeUp}>
+                        <h3 className="font-display font-bold tracking-tight text-2xl text-slate-900">See it with your brand.</h3>
+                        <p className="mt-4 text-slate-600 leading-relaxed max-w-md">
+                            Upload your logo and preview it on real TonAer hardware — casing finishes included where the
+                            model supports them. The interactive preview lives with each product.
+                        </p>
+                        <Link
+                            to="/product?tab=look"
+                            data-testid="whitelabel-intro-cta"
+                            className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#00D084] hover:bg-[#00B874] text-[#04150E] text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300 hover:-translate-y-0.5"
+                        >
+                            Explore White-Label <ArrowRight size={15} />
+                        </Link>
+                    </motion.div>
                 </div>
             </Section>
 
+            {/* 08 — SOLUTIONS */}
             <Section
-                id="intelligence"
-                kicker="INTELLIGENT NETWORK OPERATIONS"
-                title="Turn Network Data Into Action."
-                desc="Transform device and network data into meaningful insights that help teams detect issues, optimize performance, and improve customer experience."
-            >
-                <IntelligenceShowcase />
-            </Section>
-
-            <Section
-                id="industries"
-                kicker="BUILT FOR YOUR INDUSTRY"
+                id="solutions"
+                kicker="INDUSTRY SOLUTIONS"
                 title="Built for the Businesses That Build Connectivity."
             >
-                <div className="mt-12 grid md:grid-cols-3 gap-6">
-                    {INDUSTRIES.map((g, i) => (
-                        <motion.div key={g.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                            className="rounded-2xl border border-white/10 bg-white/5 p-8">
-                            <div className="font-mono-xu text-[10px] tracking-[0.3em] text-brand">0{i + 1}</div>
-                            <div className="font-display font-semibold text-lg mt-3">{g.t}</div>
-                            <p className="mt-4 text-sm text-slate-400 leading-relaxed">{g.d}</p>
+                <div className="mt-12 grid md:grid-cols-3 gap-5" data-testid="solutions">
+                    {SOLUTIONS.map((s, i) => (
+                        <motion.div key={s.role} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.08 }}
+                            className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+                            <div className="font-display font-semibold text-lg text-slate-900">{s.role}</div>
+                            <p className="mt-3 text-sm text-slate-600 leading-relaxed">{s.task}</p>
+                            <div className="mt-6 flex flex-wrap items-center gap-1.5">
+                                {s.flow.map((f, j) => (
+                                    <span key={f} className="flex items-center gap-1.5">
+                                        <span className={`font-mono-xu text-[9px] tracking-[0.12em] rounded-full px-2.5 py-1 border ${j === 3 ? 'border-[#00D084]/40 text-[#00905F] bg-[#E6FBF3]' : 'border-slate-200 text-slate-500'}`}>
+                                            {f.toUpperCase()}
+                                        </span>
+                                        {j < s.flow.length - 1 && <ArrowRight size={10} className="text-slate-300" />}
+                                    </span>
+                                ))}
+                            </div>
                         </motion.div>
                     ))}
                 </div>
             </Section>
 
-            <TrustedBy dark />
-
-            <Section
-                id="capabilities"
-                kicker="TECHNOLOGY CAPABILITIES"
-                title="Technology That Keeps Moving Forward."
-            >
-                <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                    {CAPABILITIES.map((c, i) => (
-                        <motion.div key={c.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: (i % 4) * 0.05 }}
-                            className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-brand/40 transition-colors duration-300">
-                            <c.icon size={18} className="text-brand" />
-                            <div className="font-display font-semibold mt-3 text-sm">{c.t}</div>
-                            <p className="text-[11px] text-slate-500 mt-1.5">{c.d}</p>
-                        </motion.div>
-                    ))}
-                </div>
-            </Section>
-
+            {/* 09 — WHY TONAER */}
             <Section
                 id="why"
-                kicker="WHY PARTNER WITH US"
-                title="Built on Experience. Driven by Innovation."
+                tone="alt"
+                kicker="WHY TONAER"
+                title="One Partner for the Complete Connectivity Stack."
             >
-                <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" data-testid="why-tonaer">
                     {WHY.map((w, i) => (
-                        <motion.div key={w.v} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-                            className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">
-                            <div className="font-display font-bold text-2xl text-brand">{w.k}</div>
-                            <div className="font-display font-semibold text-sm mt-2">{w.v}</div>
-                            <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">{w.d}</p>
+                        <motion.div key={w.t} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.05 }}
+                            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                            <w.icon size={18} className="text-[#00905F]" />
+                            <div className="font-display font-semibold text-sm text-slate-900 mt-3">{w.t}</div>
+                            <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">{w.d}</p>
                         </motion.div>
                     ))}
                 </div>
             </Section>
 
-            <section id="contact" className="relative z-10 py-28 px-6 sm:px-12 md:px-24 border-t border-white/5">
+            {/* 10 — TRUST: verified names + sample testimonials */}
+            <TrustedBy dark={false} />
+            <Section
+                id="proof"
+                kicker="CUSTOMER PROOF"
+                title="Trusted by Teams Building Connected Experiences."
+                desc="See how businesses use TonAer technology to simplify connectivity, improve visibility and deliver better connected experiences."
+            >
+                <Testimonials />
+            </Section>
+
+            {/* 11 — INSIGHTS */}
+            <Section
+                id="insights"
+                tone="alt"
+                kicker="TONAER INSIGHTS"
+                title="What We're Learning, Building and Thinking About."
+            >
+                <InsightsTeaser />
+            </Section>
+
+            {/* 12 — FINAL CTA + contact form */}
+            <section id="contact" className="relative z-10 py-16 md:py-24 px-6 sm:px-12 md:px-24 bg-white" data-testid="section-contact">
                 <div className="max-w-3xl mx-auto text-center">
-                    <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.35em] text-brand mb-6 flex items-center justify-center gap-3">
+                    <motion.div {...fadeUp} className="font-mono-xu text-[11px] tracking-[0.3em] text-[#00905F] mb-5 flex items-center justify-center gap-3">
                         <span className="w-8 h-px bg-current" />
                         GET STARTED
                         <span className="w-8 h-px bg-current" />
                     </motion.div>
-                    <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-3xl sm:text-4xl lg:text-5xl leading-tight">
-                        Ready to Build Your Connectivity Ecosystem?
+                    <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-3xl sm:text-4xl lg:text-5xl leading-tight text-slate-900">
+                        Build the Connected Experience You Want.
                     </motion.h2>
-                    <motion.p {...fadeUp} className="mt-6 text-base md:text-lg text-slate-400 leading-relaxed max-w-xl mx-auto">
-                        Partner with us to create advanced, scalable, and fully branded connectivity solutions for your customers.
+                    <motion.p {...fadeUp} className="mt-5 text-base md:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto">
+                        Explore TonAer's hardware, software and intelligent connectivity solutions.
                     </motion.p>
-                    <motion.div {...fadeUp} className="mt-10 max-w-xl mx-auto text-left">
-                        <LeadForm />
-                    </motion.div>
-                    <motion.div {...fadeUp} className="mt-6">
-                        <Link to="/support" data-testid="cta-talk-to-team" className="text-sm text-slate-400 hover:text-brand transition-colors underline underline-offset-4 decoration-slate-600">
-                            Talk to Our Team
+                    <motion.div {...fadeUp} className="mt-9 flex flex-col sm:flex-row justify-center gap-4">
+                        <Link to="/product" data-testid="cta-explore-products"
+                            className="rounded-full bg-[#00D084] hover:bg-[#00B874] text-[#04150E] text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25">
+                            Explore Products
                         </Link>
+                        <button
+                            onClick={() => document.querySelector('#lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+                            data-testid="cta-talk-to-us"
+                            className="rounded-full border border-slate-300 hover:border-[#00D084] text-slate-700 hover:text-slate-900 text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300"
+                        >
+                            Talk to Us
+                        </button>
+                    </motion.div>
+                    <motion.div {...fadeUp} className="mt-12 max-w-xl mx-auto text-left rounded-3xl border border-slate-200 bg-[#F8FAFC] p-7 sm:p-9 shadow-sm">
+                        <LeadForm light />
                     </motion.div>
                 </div>
             </section>

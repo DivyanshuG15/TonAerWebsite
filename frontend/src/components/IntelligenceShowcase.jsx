@@ -230,7 +230,7 @@ export function IntelligenceShowcase() {
     const Demo = DEMOS[active];
 
     return (
-        <div className="mt-12 grid lg:grid-cols-2 gap-10 items-stretch" data-testid="intelligence-showcase">
+        <div className="mt-12 grid lg:grid-cols-2 gap-10 items-start" data-testid="intelligence-showcase">
             <div>
                 <div className="font-mono-xu text-[9px] tracking-[0.3em] text-slate-500 mb-4">SELECT A CAPABILITY TO EXPLORE</div>
                 <div className="grid gap-3">

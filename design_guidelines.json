@@ -1,247 +1,300 @@
 {
-  "project_info": {
-    "name": "XUNISON",
-    "tagline": "CONNECTIVITY, REIMAGINED.",
-    "concept": "A continuous 3D/WebGL cinematic scroll narrative showcasing the D71 Wi-Fi 7 Tri-Band Gateway, telemetry, AI optimization, and R&D Environmental Intelligence.",
-    "archetype": "Swiss & High-Contrast Performance Pro (Apple Product Launch x NVIDIA Tech Visualization x Premium Automotive)",
-    "file_extension": "js"
-  },
-  "typography": {
-    "heading": {
-      "font_family": "Space Grotesk, Syne, Cabinet Grotesk, sans-serif",
-      "font_weights": ["font-light", "font-medium", "font-bold"],
-      "tracking": "tracking-tight",
-      "max_hero_size": "text-4xl sm:text-5xl lg:text-6xl"
-    },
-    "body": {
-      "font_family": "Inter, DM Sans, sans-serif",
-      "font_weights": ["font-normal", "font-medium"],
-      "leading": "leading-relaxed"
-    },
-    "mono_labels": {
-      "font_family": "JetBrains Mono, Fira Code, monospace",
-      "formatting": "uppercase tracking-[0.25em] text-xs font-mono"
-    },
-    "narrative_signature": {
-      "chapters": "01 / 02 / 03 / 04 / 05 / 06 / 07 / 08",
-      "signature_story": "TODAY Xunison connects devices. NOW Xunison helps service providers understand and manage networks. NEXT Xunison is exploring how connected networks can understand their surroundings."
-    }
-  },
-  "color_system": {
-    "theme_evolution": [
-      {
-        "scene": "SCENE 01: Hero D71",
-        "progress_range": "0-15%",
-        "background": "#F8FAFC",
-        "accent": "#0066FF",
-        "text_theme": "dark"
-      },
-      {
-        "scene": "SCENE 02: Smart Wi-Fi 7 Tri-Band",
-        "progress_range": "15-30%",
-        "background": "#EFF6FF",
-        "accent": "#0284C7",
-        "text_theme": "dark"
-      },
-      {
-        "scene": "SCENE 03: Network Topology",
-        "progress_range": "30-45%",
-        "background": "#0F172A",
-        "accent": "#38BDF8",
-        "text_theme": "light"
-      },
-      {
-        "scene": "SCENE 04: Telemetry Intelligence",
-        "progress_range": "45-60%",
-        "background": "#020617",
-        "accent": "#38BDF8",
-        "text_theme": "light"
-      },
-      {
-        "scene": "SCENE 05: Abstract Cloud Brain",
-        "progress_range": "60-72%",
-        "background": "#090D16",
-        "accent": "#818CF8",
-        "text_theme": "light"
-      },
-      {
-        "scene": "SCENE 06: AI Anomaly & Optimization",
-        "progress_range": "72-82%",
-        "background": "#0F172A",
-        "accent": "#F43F5E",
-        "text_theme": "light"
-      },
-      {
-        "scene": "SCENE 07: Environmental Intelligence",
-        "progress_range": "82-94%",
-        "background": "#1E293B",
-        "accent": "#22C55E",
-        "text_theme": "light"
-      },
-      {
-        "scene": "SCENE 08: Global Ecosystem & CTA",
-        "progress_range": "94-100%",
-        "background": "#FFFFFF",
-        "accent": "#0066FF",
-        "text_theme": "dark"
-      }
-    ],
-    "neutrals": {
-      "light_bg": "#F8FAFC",
-      "dark_bg": "#020617",
-      "card_dark": "#0F172A",
-      "card_light": "#FFFFFF"
-    },
-    "accents": {
-      "cyan_particle": "#38BDF8",
-      "electric_blue": "#0066FF",
-      "warning_rose": "#F43F5E",
-      "success_emerald": "#22C55E",
-      "tri_band_24ghz": "#F59E0B",
-      "tri_band_5ghz": "#0284C7",
-      "tri_band_6ghz": "#8B5CF6"
-    }
-  },
-  "scene_architecture": [
-    {
-      "id": "scene_01",
-      "title": "CONNECTIVITY, REIMAGINED.",
-      "chapter": "01",
-      "progress": "0 - 15%",
-      "mode": "3D Canvas + Hero Overlay",
-      "visuals": "Photorealistic D71 unibody gateway on soft studio background with 3/4 slow orbital camera move, glowing ring antenna LED, Wi-Fi particle ignition."
-    },
-    {
-      "id": "scene_02",
-      "title": "SMART WI-FI 7 TRI-BAND",
-      "chapter": "02",
-      "progress": "15 - 30%",
-      "mode": "Volumetric Spatial Particle Field",
-      "visuals": "Three distinct overlapping spatial layers (2.4GHz Amber, 5GHz Cyan, 6GHz Purple). Interactive density slider demo toggling 5 -> 20 -> 50 device nodes."
-    },
-    {
-      "id": "scene_03",
-      "title": "ELEGANT TOPOLOGY & ROUTING",
-      "chapter": "03",
-      "progress": "30 - 45%",
-      "mode": "Interactive Graph Nodes",
-      "visuals": "Connected mesh nodes with dynamic glowing data pulses flowing from client devices -> D71 -> Edge -> Cloud."
-    },
-    {
-      "id": "scene_04",
-      "title": "EVERY CONNECTION CREATES DATA",
-      "chapter": "04",
-      "progress": "45 - 60%",
-      "mode": "Bloomberg Density + Apple Simplicity",
-      "visuals": "Thousands of telemetry data points organizing into real-time health waveforms, signal strength vectors, and packet distribution metrics."
-    },
-    {
-      "id": "scene_05",
-      "title": "ABSTRACT DIGITAL CLOUD BRAIN",
-      "chapter": "05",
-      "progress": "60 - 72%",
-      "mode": "Particle Convergence Sphere",
-      "visuals": "High-density particle vortex forming an abstract neural computing cloud, reflecting central intelligence without cartoon icons."
-    },
-    {
-      "id": "scene_06",
-      "title": "OBSERVE. UNDERSTAND. ACT.",
-      "chapter": "06",
-      "progress": "72 - 82%",
-      "mode": "AI Anomaly Detection Story",
-      "visuals": "Normal network -> Node misbehaves (Rose alert) -> AI pattern highlight -> Neighbor analysis -> Automated optimization -> Health restored."
-    },
-    {
-      "id": "scene_07",
-      "title": "EXPLORING ENVIRONMENTAL INTELLIGENCE",
-      "chapter": "07",
-      "progress": "82 - 94%",
-      "mode": "XUNISON R&D 3D Spatial Room",
-      "visuals": "3D Architectural living room with human spatial silhouettes (no faces, no tracking boxes). Wireless wave distortion reveals movement patterns."
-    },
-    {
-      "id": "scene_08",
-      "title": "THE INTELLIGENT ECOSYSTEM",
-      "chapter": "08",
-      "progress": "94 - 100%",
-      "mode": "Continuous Zoom-Out Finale",
-      "visuals": "D71 -> Home -> Neighborhood -> Global Mesh -> Xunison Brand resolve + Lead Capture & Partner CTA."
-    }
-  ],
-  "components_and_layouts": {
-    "header": {
-      "style": "Glassmorphism with backdrop blur (`backdrop-blur-xl bg-slate-900/60 border-b border-white/10 text-white`)",
-      "elements": [
-        "XUNISON wordmark logo with glowing dot",
-        "Navigation items: D71 Gateway, Technology, R&D Intelligence, Support, Enterprise",
-        "Primary CTA button: 'Request Demo' / 'Partner Portal'",
-        "Scroll progress bar at bottom of nav"
-      ]
-    },
-    "loading_experience": {
-      "title": "XUNISON",
-      "subtitle": "CONNECTING EXPERIENCE...",
-      "effects": "Pulsing network signal ring, percentage counter, smooth curtain reveal into Scene 01."
-    },
-    "hud_overlays": {
-      "style": "Thin monospaced labels with 1px laser lines and coordinate dots",
-      "labels": [
-        "D71 // WI-FI 7 GATEWAY",
-        "TRI-BAND // 2.4GHz + 5GHz + 6GHz",
-        "LATENCY // <1.2ms MLO ACTIVE",
-        "TELEMETRY STREAM // 12.4k PKTS/S",
-        "AI ENGINE // PATTERN RECOGNITION OK",
-        "R&D // SPATIAL SENSING ACTIVE"
-      ]
-    },
-    "supporting_pages": {
-      "products": "Full D71 Specs, Tri-band architecture, Port configuration, ISP management platform overview.",
-      "technology": "MLO (Multi-Link Operation), 320MHz channels, 4096-QAM modulation, AI anomaly engine breakdown.",
-      "support": "Interactive troubleshooting guide, firmware updates, ISP setup docs, FAQs."
-    },
-    "lead_capture": {
-      "form": "Operator / Enterprise Partner Inquiry (Name, Company, Fleet Size, Email, Select Wi-Fi 7 deployment timeframe)",
-      "validation": "Instant feedback, Sonner toast notifications, data-testid attributes."
-    }
-  },
-  "media_assets": {
-    "images": [
-      {
-        "category": "hero_device_fallback",
-        "description": "Close-up wireless hardware studio fallback",
-        "url": "https://images.unsplash.com/photo-1745847768408-b7b83796cae6?crop=entropy&cs=srgb&fm=jpg&q=85"
-      },
-      {
-        "category": "architectural_room_reference",
-        "description": "Minimal architectural living room scene for Environmental Intelligence",
-        "url": "https://images.unsplash.com/photo-1724582586495-d050726cf354?crop=entropy&cs=srgb&fm=jpg&q=85"
-      },
-      {
-        "category": "lifestyle_interior_clean",
-        "description": "Futuristic white interior space reference",
-        "url": "https://images.unsplash.com/photo-1725042893312-5ec0dea9e369?crop=entropy&cs=srgb&fm=jpg&q=85"
-      }
+  "project_title": "TonAer B2B Technology Website — Complete Light Version & Visual Refinement",
+  "version": "2.0.0-light",
+  "target_audience": "ISPs, Telecom Operators, Enterprise IT leaders, Network Service Providers, B2B Device Fleet Managers",
+  "design_philosophy": {
+    "core_principle": "One section = one clear message. Simple + Clean + Premium + Realistic + Engaging + Easy-to-Understand B2B Technology Website.",
+    "visual_tone": "Light, trustworthy, technical, authoritative, crisp, and clean. Grounded in real device hardware 3D procedural visuals, illustrative cloud dashboard UIs, and real network analytics workflows.",
+    "anti_patterns_avoided": [
+      "No generic SaaS template syndrome (no repeating headline + paragraph + 3 cards + icons across every section)",
+      "No neon green / cyberpunk / dark matrix themes",
+      "No floating abstract AI brain or particle glow graphics",
+      "No empty or excessive padding/margin blank spaces",
+      "No dark-only backgrounds for core marketing sections",
+      "No fabricated customer statistics or unverified customer names",
+      "No full spec dumps on homepage"
     ]
   },
-  "motion_and_performance": {
-    "lenis": "Smooth momentum scrolling enabled globally.",
-    "scroll_timeline": "Centralized normalized scroll progress value (0 to 1) passed to Three.js canvas & GSAP timeline.",
-    "accessibility": "Detects `prefers-reduced-motion` and provides step-by-step section navigation tabs.",
-    "adaptive_canvas": "Auto-scales particle counts and DPR based on frame rates (60fps target, auto-downscale on low-tier mobile)."
+  "color_palette": {
+    "mode": "Light Dominant (with selective dark navy accents & Signal Green highlights)",
+    "background_primary": "#FFFFFF",
+    "background_secondary": "#F8FAFC",
+    "background_tertiary": "#F1F5F9",
+    "background_dark_accent": "#020617",
+    "background_dark_surface": "#0B1120",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "text_muted": "#64748B",
+    "text_on_dark": "#F8FAFC",
+    "border_light": "rgba(226, 232, 240, 0.8)",
+    "border_subtle": "#E2E8F0",
+    "border_dark": "rgba(148, 163, 184, 0.14)",
+    "signal_green": {
+      "hex": "#00D084",
+      "soft": "#E6FBF3",
+      "hover": "#00B874",
+      "border": "rgba(0, 208, 132, 0.3)",
+      "usage": [
+        "Primary action buttons (Explore Products, Talk to Us, Compare Now)",
+        "Active navigation & tab indicators",
+        "Positive network health states ('Healthy', 'Connected', 'Optimal')",
+        "Selected hardware model highlights & Compare tray counter",
+        "Key tech badge accent borders and small status dots"
+      ]
+    }
   },
-  "instructions_to_main_agent": [
-    "Install required 3D and animation packages in /app/frontend using yarn: `three`, `@react-three/fiber`, `@react-three/drei`, `gsap`, `lenis`, `@studio-freight/lenis` or `@lenis/react`, `lucide-react`, `framer-motion`, `sonner`.",
-    "Ensure ALL interactive elements (buttons, inputs, scene controls, nav links, tabs) have explicit `data-testid` attributes (e.g. data-testid='nav-d71-link', data-testid='lead-submit-button').",
-    "Build the procedural D71 3D model in Three.js/R3F with matte white unibody, chamfered curves, metallic vents, rear ports, and glowing LED status ring.",
-    "Implement the 8 continuous scenes driven by scroll position with smooth camera interpolation and background color interpolation.",
-    "Do NOT use transparent headers; use glassmorphic blur with solid fallback background.",
-    "Ensure supporting modals or page tabs for Products, Technology, and Support exist so visitors can explore full technical specifications and ISP portal details."
+  "typography": {
+    "font_display": "'Space Grotesk', sans-serif",
+    "font_body": "'Inter', -apple-system, sans-serif",
+    "font_mono": "'JetBrains Mono', monospace",
+    "hierarchy_rules": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-slate-900 leading-[1.1]",
+      "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold font-display tracking-tight text-slate-900 leading-tight",
+      "h3_card": "text-xl sm:text-2xl font-semibold font-display text-slate-900",
+      "eyebrow": "text-xs font-mono font-medium tracking-[0.2em] uppercase text-emerald-600 bg-emerald-50 border border-emerald-200/60 px-3 py-1 rounded-full inline-block",
+      "body_lead": "text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl",
+      "body_standard": "text-sm sm:text-base text-slate-600 leading-relaxed",
+      "caption_mono": "text-xs font-mono text-slate-500"
+    }
+  },
+  "spacing_and_layout": {
+    "section_padding": "py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto",
+    "card_padding": "p-6 sm:p-8",
+    "grid_gap": "gap-8 lg:gap-12",
+    "blank_space_prevention_rules": [
+      "Remove absolute positioning wrapper height assumptions",
+      "Set h-auto with responsive min-h-[400px] on 3D canvases instead of fixed 800px containers",
+      "Grid cards must stretch children with align-items: stretch",
+      "Eliminate empty placeholder divs or hidden DOM blocks consuming layout flow"
+    ]
+  },
+  "homepage_story_flow": [
+    {
+      "step": "01",
+      "id": "hero",
+      "title": "What is TonAer?",
+      "eyebrow": "CONNECTED INTELLIGENCE",
+      "headline": "Every Device. One Intelligent Platform.",
+      "subheadline": "Connect your devices, centralize your data, and gain meaningful insights through one intelligent platform.",
+      "ctas": [
+        { "text": "Explore Platform", "href": "#platform", "variant": "primary" },
+        { "text": "Explore Products", "href": "/product", "variant": "secondary" }
+      ],
+      "dominant_visual_description": "Clean light hero split. Left text block; Right realistic hardware + platform composite: 3D TonAer Gateway hardware turntable on crisp off-white stage with subtle floating glass telemetry indicators showing live throughput, status: healthy, and cloud sync connection.",
+      "section_theme": "Light (#FFFFFF)"
+    },
+    {
+      "step": "02",
+      "id": "ecosystem",
+      "title": "What does TonAer provide?",
+      "eyebrow": "CONNECTED ECOSYSTEM",
+      "headline": "Hardware. Software. Intelligence. One Connected Ecosystem.",
+      "subheadline": "TonAer brings together connectivity hardware, cloud-based management and network intelligence to help service providers build and manage better connected experiences.",
+      "flow_architecture": "Gateway (D/M/Q/O Series) ──► TonAer Cloud Platform ──► Network Data Telemetry ──► AI Intelligence ──► Connected Experience",
+      "dominant_visual_description": "Interactive horizontal flow diagram with 5 sequential nodes. Clicking a node details its role in the ecosystem, with live Signal Green pulse path connecting hardware to cloud.",
+      "section_theme": "Light (#F8FAFC)"
+    },
+    {
+      "step": "03",
+      "id": "portfolio",
+      "title": "What hardware is available?",
+      "eyebrow": "PRODUCT PORTFOLIO",
+      "headline": "Connectivity Built Around Your Network.",
+      "subheadline": "Explore TonAer's gateway portfolio, designed for evolving connectivity and network requirements.",
+      "series_items": [
+        { "code": "D Series", "name": "Desktop 5G/LTE Gateways", "value": "High-speed indoor connectivity for branch office & home office.", "specs": ["Wi-Fi 6 AX3000", "5G Sub-6GHz", "Dual SIM Failover", "4x GbE Ports"] },
+        { "code": "M Series", "name": "Mobile & Portable Gateways", "value": "Rugged, portable wireless hubs for field operations and mobile fleets.", "specs": ["Battery / Vehicle Power", "GPS Tracking", "Shock Resistant", "E-SIM Ready"] },
+        { "code": "Q Series", "name": "Enterprise Quad-WAN Routers", "value": "Multi-gigabit connectivity with quad broadband redundancy for mission-critical IT.", "specs": ["2.5 GbE WAN/LAN", "Quad SIM Redundancy", "SFP Fiber Slot", "IPsec VPN Hub"] },
+        { "code": "O Series", "name": "Outdoor Industrial Gateways", "value": "Weatherproof IP67 gateways built for harsh outdoor installations & smart cities.", "specs": ["IP67 Enclosure", "PoE In/Out", "High Gain Antennas", "-40°C to +75°C"] }
+      ],
+      "dominant_visual_description": "Interactive 4-tab Series Showcase. Dominant 3D procedural gateway render per series with interactive rotation, model spec highlights, and Explore CTA linking directly to /product.",
+      "section_theme": "Light (#FFFFFF)"
+    },
+    {
+      "step": "04",
+      "id": "software_flow",
+      "title": "How does hardware & software work together?",
+      "eyebrow": "INTEGRATED FLOW",
+      "headline": "Seamless Hardware-to-Cloud Integration.",
+      "subheadline": "From physical deployment to cloud visibility in seconds.",
+      "diagram_nodes": [
+        "01 TonAer Gateway",
+        "02 Network Connection",
+        "03 TonAer Cloud",
+        "04 Device Management",
+        "05 Analytics",
+        "06 Intelligent Insights"
+      ],
+      "dominant_visual_description": "Horizontal architectural pipeline visualization showing data packet telemetry flow from physical device antennas into the centralized cloud management engine.",
+      "section_theme": "Light (#F8FAFC)"
+    },
+    {
+      "step": "05",
+      "id": "platform",
+      "title": "How does the software work?",
+      "eyebrow": "CLOUD MANAGEMENT",
+      "headline": "One Platform to Manage the Connected Experience.",
+      "subheadline": "Manage devices, monitor networks, troubleshoot remotely and gain actionable visibility through a centralized cloud platform.",
+      "dominant_visual_description": "Large realistic illustrative dashboard UI window showing active fleet state: 1,420 Gateways Online, 99.8% Uptime, Signal Quality Heatmap, Real-time Traffic Graph, and Remote Config Panel. Concise side capability badges (Zero-Touch Provisioning, Live Diagnostics, Bulk Firmware, Multi-tenant Role Access).",
+      "section_theme": "Light (#FFFFFF)"
+    },
+    {
+      "step": "06",
+      "id": "intelligence",
+      "title": "What intelligence?",
+      "eyebrow": "NETWORK INTELLIGENCE",
+      "headline": "Turn Network Telemetry Into Proactive Action.",
+      "subheadline": "AI-driven diagnostics analyze gateway behavior in real time to optimize traffic and prevent downtime before subscribers notice.",
+      "interactive_scenarios": [
+        { "title": "Proactive Issue Detection", "state": "Anomaly Detected", "insight": "High packet loss on Cell Tower B", "action": "Automatic failover to SIM 2 executed" },
+        { "title": "Gateway Placement Insights", "state": "Sub-optimal Signal", "insight": "RSRP -108 dBm detected on M70", "action": "Relocation recommendation sent to subscriber app" },
+        { "title": "Behavioral Anomaly Analysis", "state": "Unusual Traffic Spike", "insight": "Sustained UDP upload saturation", "action": "Bandwidth throttle rule staged for review" },
+        { "title": "Network Health Optimization", "state": "Optimal State", "insight": "Spectrum congestion predicted at 18:00", "action": "Pre-emptive channel switching enabled" }
+      ],
+      "dominant_visual_description": "Split UI view: Realistic Network Diagnostic console showing Detection -> Insight -> Recommended Action pipeline with live simulation toggle.",
+      "section_theme": "Dark Navy Accent (#020617) for Contrast"
+    },
+    {
+      "step": "07",
+      "id": "whitelabel_intro",
+      "title": "White-Label Capabilities",
+      "eyebrow": "WHITE-LABEL TECHNOLOGY",
+      "headline": "Your Brand. Your Experience. Our Technology.",
+      "subheadline": "Deliver branded connectivity experiences with white-labelled hardware, software and customer-facing applications.",
+      "cta": { "text": "Explore White-Label in Product Catalog", "href": "/product?tab=look-and-feel", "variant": "secondary" },
+      "dominant_visual_description": "Lightweight side-by-side preview showing a TonAer D71 gateway with a custom brand logo watermark badge and matching custom software UI color theme accent.",
+      "section_theme": "Light (#F8FAFC)"
+    },
+    {
+      "step": "08",
+      "id": "solutions",
+      "title": "Who is it for?",
+      "eyebrow": "INDUSTRY SOLUTIONS",
+      "headline": "Engineered for Telecom, ISPs & Service Providers.",
+      "solutions_list": [
+        { "role": "ISPs", "task": "Deploy, manage and monitor connected devices at scale.", "workflow": ["Zero-Touch Shipping", "Subscriber Portal", "Auto Diagnostics"] },
+        { "role": "Telecom Operators", "task": "Deliver reliable connectivity experiences with centralized visibility.", "workflow": ["5G Fixed Wireless", "SLA Monitoring", "Cell Tower Optimization"] },
+        { "role": "Network Service Providers", "task": "Combine hardware, cloud management and intelligence into turnkey managed services.", "workflow": ["Multi-Tenant Admin", "White-Label Billing", "24/7 Fleet Health"] }
+      ],
+      "dominant_visual_description": "3-column structured solution card layout with clear 3-step workflow pills for each persona.",
+      "section_theme": "Light (#FFFFFF)"
+    },
+    {
+      "step": "09",
+      "id": "why_tonaer",
+      "title": "Why trust TonAer?",
+      "eyebrow": "TONAER ADVANTAGE",
+      "headline": "Built for Mission-Critical Connected Operations.",
+      "pillars": [
+        { "title": "Advanced Hardware", "desc": "Carrier-grade 5G/Wi-Fi 6 design with thermal resilience and sub-6GHz antenna arrays." },
+        { "title": "Cloud Management", "desc": "Zero-touch provisioning, cloud APIs, and granular device telemetry control." },
+        { "title": "Network Intelligence", "desc": "Proactive automated diagnostics and real-time subscriber experience insights." },
+        { "title": "White-Label Ready", "desc": "Hardware casing finishes, custom firmware branding, and branded subscriber apps." },
+        { "title": "European Engineering", "desc": "Rigorous security compliance, GDPR-first cloud hosting, and enterprise SLAs." }
+      ],
+      "section_theme": "Light (#F8FAFC)"
+    },
+    {
+      "step": "10",
+      "id": "proof",
+      "title": "Verified Partners & Customer Proof",
+      "eyebrow": "TRUSTED BY TEAMS",
+      "headline": "Trusted by Teams Building Connected Experiences.",
+      "subheadline": "See how businesses use TonAer technology to simplify connectivity, improve visibility and deliver better connected experiences.",
+      "verified_logos": ["Earthlink", "Orangeburg IQ", "Hitron", "STC"],
+      "testimonials_demo": [
+        {
+          "name": "David Miller",
+          "role": "VP of Network Infrastructure",
+          "company": "Regional Fiber & Wireless ISP",
+          "industry": "ISP & Broadband",
+          "quote": "TonAer's unified hardware and cloud management reduced our truck rolls by 40%. The proactive AI diagnostic alerts catch signal degradation before subscribers report outages.",
+          "demo_status": "Sample Customer Data"
+        },
+        {
+          "name": "Elena Rostova",
+          "role": "Director of Managed Services",
+          "company": "Global Telecom Solutions",
+          "industry": "Telecommunications",
+          "quote": "The white-label Look & Feel integration allowed us to launch our branded 5G Fixed Wireless Access service in under three weeks with complete firmware customizability.",
+          "demo_status": "Sample Customer Data"
+        },
+        {
+          "name": "Marcus Vance",
+          "role": "Chief Technology Officer",
+          "company": "Enterprise Fleet Networks",
+          "industry": "Network Service Provider",
+          "quote": "Managing thousands of M-Series gateways across remote logistics hubs used to be a headache. TonAer Cloud gives us single-pane-of-glass control and instant telemetry.",
+          "demo_status": "Sample Customer Data"
+        }
+      ],
+      "section_theme": "Light (#FFFFFF)"
+    },
+    {
+      "step": "11",
+      "id": "insights",
+      "title": "Resources & Technical Insights",
+      "eyebrow": "KNOWLEDGE BASE",
+      "headline": "Latest Network & Technology Insights.",
+      "featured_article": "Understanding 5G Fixed Wireless Access Architecture for Enterprise Redundancy",
+      "recent_articles": [
+        "How AI Telemetry Reduces MTTR in Multi-Tenant Gateway Fleets",
+        "White-Labeling FWA Devices: A Strategic Guide for Regional ISPs"
+      ],
+      "section_theme": "Light (#F8FAFC)"
+    },
+    {
+      "step": "12",
+      "id": "final_cta",
+      "title": "What next?",
+      "eyebrow": "GET STARTED",
+      "headline": "Build the Connected Experience You Want.",
+      "subheadline": "Explore TonAer's hardware, software and intelligent connectivity solutions.",
+      "ctas": [
+        { "text": "Explore Products", "href": "/product", "variant": "primary" },
+        { "text": "Talk to Us", "href": "#contact", "variant": "secondary" }
+      ],
+      "section_theme": "Light (#FFFFFF) with Signal Green accent shadow frame"
+    }
   ],
-  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
-    "Avoid AI slop, default generic gradients, or boring centered boxes.",
-    "Use generous spacing (p-8, p-12, py-20, py-32).",
-    "Never rely on raw transparent backgrounds over 3D scenes without backdrop-blur.",
-    "Verify APCA / WCAG text contrast across light and dark scene transitions.",
-    "Maintain strict data-testid naming conventions across all pages."
-  ]
+  "product_detail_tabs_system": {
+    "location": "/product",
+    "tabs": [
+      { "id": "overview", "label": "Overview", "description": "High level value proposition, key deployment benefits, 3D interactive model turntable, core features strip." },
+      { "id": "features", "label": "Features", "description": "Deep dive into Wi-Fi 6, 5G Sub-6, Dual SIM, Security VPN, Remote Cloud Sync." },
+      { "id": "specifications", "label": "Specifications", "description": "Full technical breakdown: Processor, Memory, Antennas, Ports, Power, Environment, Certifications." },
+      { "id": "compare", "label": "Compare", "description": "Embedded gateway comparison engine with AND filter logic, tray selector, spec contrast matrix." },
+      { "id": "look-and-feel", "label": "Look & Feel", "description": "Interactive White-Label Brand Visualizer: 'See Your Brand on Your Gateway'." }
+    ],
+    "look_and_feel_experience_spec": {
+      "title": "See Your Brand on Your Gateway",
+      "subtitle": "Test your corporate branding on TonAer hardware and cloud UI in real time.",
+      "controls": {
+        "logo_upload": "Support PNG, JPG, SVG logo upload with drag-and-drop, aspect ratio preservation, and clear/reset button.",
+        "casing_finish_rules": {
+          "D_Series": ["Pure White Matte", "Obsidian Black Matte"],
+          "M_Series": ["Tactile White", "Stealth Black"],
+          "Q_Series": ["Industrial Black Anodized (Fixed)"],
+          "O_Series": ["IP67 Weatherproof Off-White (Fixed)"]
+        },
+        "preview_modes": ["3D Hardware Casing View", "Front Logo Placement View", "Cloud Admin UI Branding View"]
+      }
+    }
+  },
+  "comparison_engine_specs": {
+    "filter_logic": "AND condition technology filters (e.g. 5G + Wi-Fi 6 + Dual SIM)",
+    "tray_capacity": "Maximum 4 devices in compare tray",
+    "tray_visibility": "Sticky bottom bar with Compare Now button & count badge",
+    "compare_page": "/products/compare",
+    "table_features": ["Categorized spec sections", "Highlight Differences toggle button", "Individual remove buttons", "Direct Request Quote CTA per model"]
+  },
+  "component_overhauls": {
+    "Nav.jsx": { "style": "Glassmorphism light background (bg-white/85 backdrop-blur-xl border-b border-slate-200/80 z-50 fixed top-0 w-full)", "links": ["Products (Mega Menu)", "Technology", "Solutions", "Company", "Careers", "Blog"], "cta": "Request Demo" },
+    "Footer.jsx": { "style": "Dark Navy Contrast Footer (bg-slate-950 text-slate-400 py-16 px-8)", "brand": "TonAer Connected Intelligence", "sections": ["Product Portfolio", "Cloud Platform", "Company & Careers", "Legal & Compliance"] },
+    "LeadForm.jsx": { "style": "Clean light modal / embedded form with Signal Green submit CTA and testid 'lead-submit-button'" }
+  },
+  "testing_and_accessibility": {
+    "data_testid_convention": "kebab-case role based identifiers on all interactive elements (e.g. data-testid='explore-products-btn', data-testid='compare-tray-toggle', data-testid='logo-upload-input')",
+    "contrast_standard": "WCAG AA / APCA compliant text contrast (minimum 4.5:1 for body text, Signal Green used on dark slate or with dark green text for light backgrounds)"
+  }
 }

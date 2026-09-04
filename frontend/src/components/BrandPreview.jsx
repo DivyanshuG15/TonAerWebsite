@@ -99,15 +99,15 @@ function Turntable({ variant, logoUrl, placement }) {
 
 const stepKicker = 'font-mono-xu text-[10px] tracking-[0.3em] text-brand';
 
-export function BrandPreview() {
-    const [model, setModel] = useState(null);
+export function BrandPreview({ fixedSeries = null }) {
+    const [model, setModel] = useState(fixedSeries);
     const [logoUrl, setLogoUrl] = useState(null);
     const [logoName, setLogoName] = useState('');
     const [finish, setFinish] = useState('standard');
     const fileRef = useRef();
     const navigate = useNavigate();
 
-    const selected = SERIES.find((s) => s.id === model);
+    const selected = SERIES.find((s) => s.id === (fixedSeries || model));
     const availableFinishes = selected
         ? FINISHES.filter((f) => f.id === 'standard' || (selected.finishes || []).includes(f.id))
         : FINISHES;
@@ -144,37 +144,68 @@ export function BrandPreview() {
         if (fileRef.current) fileRef.current.value = '';
     };
 
+    const resetPreview = () => {
+        clearLogo();
+        setFinish('standard');
+    };
+
+    // Casing finishes are per-model — reset when the underlying series changes.
+    useEffect(() => {
+        setFinish('standard');
+    }, [fixedSeries]);
+
     const goContact = () => {
-        if (scrollStore.lenis) scrollStore.lenis.scrollTo('#contact', { duration: 1.4 });
-        else document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+        const el = document.querySelector('#contact');
+        if (el) {
+            if (scrollStore.lenis) scrollStore.lenis.scrollTo('#contact', { duration: 1.4 });
+            else el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            navigate('/#contact');
+        }
     };
 
     return (
         <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-8" data-testid="brand-preview">
-            <div className="font-mono-xu text-[10px] tracking-[0.4em] text-slate-500 mb-6">BUILD YOUR BRANDED GATEWAY</div>
-
-            <div className={stepKicker}>01 / SELECT YOUR MODEL</div>
-            <p className="text-xs text-slate-500 mt-1.5 mb-4">Choose a gateway model to start your brand preview.</p>
-            <div className="flex sm:grid sm:grid-cols-4 gap-3 overflow-x-auto pb-1 -mx-1 px-1">
-                {SERIES.map((s) => (
-                    <button
-                        key={s.id}
-                        onClick={() => pickModel(s.id)}
-                        data-testid={`model-select-${s.id}`}
-                        className={`min-w-[130px] text-left rounded-xl border p-4 transition-all duration-300 ${
-                            model === s.id
-                                ? 'border-brand bg-brand/10 shadow-lg shadow-brand/10'
-                                : 'border-white/10 bg-white/5 hover:border-white/25'
-                        }`}
-                    >
-                        <div className={`font-display font-bold text-xl ${model === s.id ? 'text-brand' : 'text-slate-300'}`}>
-                            {s.id.toUpperCase()}
-                        </div>
-                        <div className="text-xs font-medium text-white mt-1">{s.name}</div>
-                        <div className="text-[10px] text-slate-500 mt-1 leading-snug">{s.pos}</div>
-                    </button>
-                ))}
+            <div className="font-mono-xu text-[10px] tracking-[0.4em] text-slate-500 mb-2">
+                {fixedSeries ? 'LOOK & FEEL // WHITE-LABEL PREVIEW' : 'BUILD YOUR BRANDED GATEWAY'}
             </div>
+            {fixedSeries && (
+                <>
+                    <h3 className="font-display font-bold tracking-tight text-2xl sm:text-3xl text-white mt-3">
+                        See Your Brand on Your Gateway
+                    </h3>
+                    <p className="text-sm text-slate-400 mt-2 mb-4 max-w-xl leading-relaxed">
+                        Explore how your gateway could look with your brand identity. Upload your logo and preview the experience.
+                    </p>
+                </>
+            )}
+
+            {!fixedSeries && (
+                <>
+                    <div className={`${stepKicker} mt-4`}>01 / SELECT YOUR MODEL</div>
+                    <p className="text-xs text-slate-500 mt-1.5 mb-4">Choose a gateway model to start your brand preview.</p>
+                    <div className="flex sm:grid sm:grid-cols-4 gap-3 overflow-x-auto pb-1 -mx-1 px-1">
+                        {SERIES.map((s) => (
+                            <button
+                                key={s.id}
+                                onClick={() => pickModel(s.id)}
+                                data-testid={`model-select-${s.id}`}
+                                className={`min-w-[130px] text-left rounded-xl border p-4 transition-all duration-300 ${
+                                    model === s.id
+                                        ? 'border-brand bg-brand/10 shadow-lg shadow-brand/10'
+                                        : 'border-white/10 bg-white/5 hover:border-white/25'
+                                }`}
+                            >
+                                <div className={`font-display font-bold text-xl ${model === s.id ? 'text-brand' : 'text-slate-300'}`}>
+                                    {s.id.toUpperCase()}
+                                </div>
+                                <div className="text-xs font-medium text-white mt-1">{s.name}</div>
+                                <div className="text-[10px] text-slate-500 mt-1 leading-snug">{s.pos}</div>
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
 
             <div className="mt-7">
                 <div className="flex items-center justify-between mb-3">
@@ -225,7 +256,7 @@ export function BrandPreview() {
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                     >
-                        <div className={`${stepKicker} mt-7`}>02 / ADD YOUR BRAND</div>
+                        <div className={`${stepKicker} mt-7`}>{fixedSeries ? '01 / ADD YOUR BRAND' : '02 / ADD YOUR BRAND'}</div>
                         <p className="text-xs text-slate-500 mt-1.5 mb-4">
                             Upload your company logo to preview it on the selected gateway. PNG, SVG or JPG.
                         </p>
@@ -251,7 +282,7 @@ export function BrandPreview() {
                             </button>
                         )}
 
-                        <div className={`${stepKicker} mt-7`}>03 / DEVICE FINISH</div>
+                        <div className={`${stepKicker} mt-7`}>{fixedSeries ? '02 / DEVICE FINISH' : '03 / DEVICE FINISH'}</div>
                         {casingSupported ? (
                             <>
                                 <p className="text-xs text-slate-500 mt-1.5 mb-1">
@@ -304,12 +335,21 @@ export function BrandPreview() {
                                 >
                                     Discuss Your White-Label Solution
                                 </button>
+                                {!fixedSeries && (
+                                    <button
+                                        onClick={() => navigate(`/series/${selected.id}`)}
+                                        data-testid="whitelabel-cta-secondary"
+                                        className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300"
+                                    >
+                                        Explore This Product
+                                    </button>
+                                )}
                                 <button
-                                    onClick={() => navigate(`/series/${selected.id}`)}
-                                    data-testid="whitelabel-cta-secondary"
-                                    className="rounded-full border border-white/20 hover:border-brand/60 text-slate-300 hover:text-white text-sm font-semibold tracking-wide px-7 py-3.5 transition-all duration-300"
+                                    onClick={resetPreview}
+                                    data-testid="preview-reset"
+                                    className="rounded-full text-slate-500 hover:text-white text-xs font-semibold tracking-wide px-4 py-3.5 transition-colors duration-300"
                                 >
-                                    Explore This Product
+                                    Reset Preview
                                 </button>
                             </div>
                         </div>

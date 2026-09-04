@@ -51,8 +51,8 @@ export function MediaViewer({ variant, productName }) {
     const [angle, setAngle] = useState('front');
 
     return (
-        <div data-testid="media-viewer">
-            <div className="flex gap-1 rounded-full border border-white/10 bg-white/5 p-1 w-max mb-4">
+        <div data-testid="media-viewer" className="min-w-0 w-full">
+            <div className="flex gap-1 rounded-full border border-white/10 bg-white/5 p-1 w-max max-w-full overflow-x-auto mb-4">
                 {TABS.map((t) => (
                     <button
                         key={t.id}
