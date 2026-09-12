@@ -130,7 +130,6 @@ export function HomeSections() {
             {/* CH 02 — ECOSYSTEM */}
             <Chapter
                 id="ecosystem"
-                kicker="Integrated Flow"
                 tone="alt"
                 title="Hardware and Software, Working as One."
                 desc="From the device in the field to the data in the cloud, TonAer brings connectivity, management and intelligence together in one ecosystem."
@@ -141,7 +140,6 @@ export function HomeSections() {
             {/* CH — HARDWARE */}
             <Chapter
                 id="hardware"
-                kicker="Hardware"
                 title="Built to Connect. Designed to Perform."
                 desc="A gateway portfolio engineered for evolving connectivity and network requirements — from flagship broadband to outdoor and cellular deployments."
             >
@@ -151,7 +149,6 @@ export function HomeSections() {
             {/* CH — CONNECTIVITY */}
             <Chapter
                 id="connectivity"
-                kicker="Connectivity"
                 title="Connectivity Built Around Your Network."
                 desc="TonAer hardware is never isolated. Every gateway connects into the same managed ecosystem from the moment it powers on."
             >
@@ -161,7 +158,6 @@ export function HomeSections() {
             {/* CH — SOFTWARE */}
             <Chapter
                 id="platform"
-                kicker="Software"
                 tone="alt"
                 title="One Platform. Complete Visibility."
                 desc="Manage devices, monitor networks, troubleshoot remotely and gain actionable visibility through a centralized cloud platform."
@@ -185,7 +181,6 @@ export function HomeSections() {
             {/* CH — HARDWARE TO INTELLIGENCE (signature) */}
             <Chapter
                 id="journey"
-                kicker="The TonAer Flow"
                 title="From Hardware to Intelligence."
                 desc="One continuous journey — the connection captured by the device becomes the intelligence that improves it."
             >
@@ -195,7 +190,6 @@ export function HomeSections() {
             {/* CH — DATA / INTELLIGENCE (one deliberate dark technology moment) */}
             <Chapter
                 id="intelligence"
-                kicker="Intelligence"
                 dark
                 title={<>Turn Network Data <span className="text-brand">Into Action.</span></>}
             >
@@ -205,7 +199,6 @@ export function HomeSections() {
             {/* CH — BUSINESS VALUE */}
             <Chapter
                 id="value"
-                kicker="Business Value"
                 title="Technology That Works for Your Business."
             >
                 <div className="mt-12 divide-y divide-slate-200 border-y border-slate-200" data-testid="business-value">
@@ -223,7 +216,6 @@ export function HomeSections() {
             {/* CH 09 — SOLUTIONS + WHITE-LABEL */}
             <Chapter
                 id="solutions"
-                kicker="Connected Experience"
                 tone="alt"
                 title="Built for the Businesses That Build Connectivity."
             >
@@ -273,7 +265,8 @@ export function HomeSections() {
             <TrustedBy dark={false} />
             <Chapter
                 id="proof"
-                kicker="Proof"
+                tone="alt"
+                pad="pt-8 pb-14 md:pt-10 md:pb-20"
                 title="Trusted by Teams Building Connected Experiences."
                 desc="See how businesses use TonAer technology to simplify connectivity, improve visibility and deliver better connected experiences."
             >
@@ -283,7 +276,6 @@ export function HomeSections() {
             {/* CH — INSIGHTS */}
             <Chapter
                 id="insights"
-                kicker="Insights"
                 tone="alt"
                 title="What We're Learning, Building and Thinking About."
             >
@@ -291,13 +283,9 @@ export function HomeSections() {
             </Chapter>
 
             {/* CH 12 — LET'S CONNECT */}
-            <section id="contact" className="relative z-10 py-24 md:py-32 px-6 sm:px-10 bg-white" data-testid="chapter-contact">
+            <section id="contact" className="relative z-10 py-14 md:py-20 px-6 sm:px-10 bg-white" data-testid="chapter-contact">
                 <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
                     <div>
-                        <div className="flex items-center gap-4 mb-6">
-                            <span className="w-8 h-[2px] bg-[#00D084]" />
-                            <span className="text-[13px] max-sm:text-[12px] font-semibold tracking-[0.16em] text-[#00905F] uppercase">Let's Connect</span>
-                        </div>
                         <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-[clamp(2.1rem,4.2vw,3.75rem)] leading-[1.08] text-slate-900">
                             Build the Connected Experience You Want.
                         </motion.h2>

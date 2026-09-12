@@ -54,6 +54,11 @@ Build the TonAer (formerly "Xunison") B2B technology website as an interactive t
 - Backend LeadCreate extended: optional phone, message. LeadForm.jsx deleted (replaced by RequestDemoForm)
 - Footer reorganized (Products/Technology/Company/Resources). prefers-reduced-motion disables all flow animations (longhands). All grids use grid-cols-1 base (no overflow 320-1920px)
 
+### Design Correction Pass 3 (July 2026)
+- ALL kicker labels removed from homepage — every chapter opens directly with its strong navy H2 (Kicker component deleted from Chapter shell). Section padding tightened to py-14/md:py-20, internal margins reduced; TrustedBy strip py-12, proof chapter pt-8 — continuous rhythm, no dead gaps
+- Hero main visual is now a LARGE premium video player (16/8 desktop, 16/10 mobile): Sora 2-generated 8s cinematic loop (white gateway, green LED, emerald data rising into cloud) at /videos/hero-connectivity.webm (VP9 first) + .mp4 (H.264) fallback; falls back to 3D HeroStage if both 404. Generation script: /app/backend/generate_hero_video.py. Replace the files with real TonAer footage anytime
+- Hero headline has no kicker; green only on "Platform."
+
 ### Design Correction Pass 2 (July 2026)
 - Hero rethought: copy block top + large full-width cinematic stage (bare close-camera D71 render on technical grid, vertical NETWORK→CLOUD→INTELLIGENCE journey with traveling pulse, TELEMETRY·LIVE marker), video-ready
 - Header scaled up (pill py-3.5→2.5 on scroll, text-sm menus, bigger logo/CTA). ALL numeric kicker prefixes removed (green line + 13px semibold uppercase). Green H2 words removed everywhere except hero "Platform." and intelligence "Into Action."

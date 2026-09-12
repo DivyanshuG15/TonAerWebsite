@@ -5,7 +5,7 @@ const CLIENTS = ['EARTHLINK', 'ORANGEBURG IQ', 'HITRON', 'STC'];
 export function TrustedBy({ dark = false }) {
     return (
         <section
-            className={`relative z-10 py-20 px-6 sm:px-12 md:px-24 ${dark ? 'bg-[#020617] text-white' : 'bg-[#F8FAFC] text-slate-900'}`}
+            className={`relative z-10 py-12 px-6 sm:px-12 md:px-24 ${dark ? 'bg-[#020617] text-white' : 'bg-[#F8FAFC] text-slate-900'}`}
             data-testid="trusted-by"
         >
             <div className="max-w-6xl mx-auto">

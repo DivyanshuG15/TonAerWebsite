@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Wifi, Cloud, BrainCircuit } from 'lucide-react';
@@ -8,9 +9,8 @@ import { HomeSections } from '../components/HomeSections';
 import { Footer } from '../components/Footer';
 import { useSEO } from '../hooks/useSEO';
 
-// Video-ready: set HERO_VIDEO_URL to a real TonAer product video to replace the
-// composed stage — layout and copy remain unchanged.
-const HERO_VIDEO_URL = null;
+// The hero video. If the file is unavailable, the composed 3D stage is shown instead.
+const HERO_VIDEO_URL = '/videos/hero-connectivity.mp4';
 
 const FLOW_NODES = [
     { icon: Wifi, label: 'NETWORK', desc: 'The connection' },
@@ -104,6 +104,44 @@ function HeroStage() {
     );
 }
 
+// Large premium hero video player — the main visual element of the opening experience.
+function HeroVideo() {
+    const [failed, setFailed] = useState(false);
+    useEffect(() => {
+        fetch(HERO_VIDEO_URL, { method: 'HEAD' })
+            .then((r) => {
+                if (!r.ok) setFailed(true);
+            })
+            .catch(() => setFailed(true));
+    }, []);
+    if (failed) return <HeroStage />;
+    return (
+        <div
+            className="relative rounded-3xl border border-slate-200 bg-slate-950 overflow-hidden shadow-2xl shadow-slate-900/15"
+            data-testid="hero-video"
+        >
+            <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="w-full aspect-[16/8] max-sm:aspect-[16/10] object-cover"
+            >
+                <source src="/videos/hero-connectivity.webm" type="video/webm" />
+                <source src={HERO_VIDEO_URL} type="video/mp4" onError={() => setFailed(true)} />
+            </video>
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/40 to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-5 sm:bottom-5 sm:left-7 flex items-center gap-3 rounded-full bg-slate-950/60 backdrop-blur px-4 py-2 pointer-events-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00D084]" />
+                <span className="font-mono-xu text-[10px] tracking-[0.25em] text-white/90">
+                    HARDWARE · CONNECTIVITY · SOFTWARE · INTELLIGENCE
+                </span>
+            </div>
+        </div>
+    );
+}
+
 export default function HomePage() {
     useSEO({
         title: 'TonAer | Every Device. One Intelligent Platform.',
@@ -122,25 +160,14 @@ export default function HomePage() {
             <ScrollRig />
             <main id="scroll-track" className="relative z-10">
                 {/* HERO — CONNECTED INTELLIGENCE */}
-                <section className="px-6 sm:px-10 pt-32 md:pt-40 pb-20 md:pb-28" data-testid="hero-section">
+                <section className="px-6 sm:px-10 pt-28 md:pt-36 pb-14 md:pb-20" data-testid="hero-section">
                     <div className="max-w-[1240px] mx-auto">
                         <div className="max-w-3xl">
-                            <motion.div
-                                initial={{ opacity: 0, y: 14 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                className="flex items-center gap-4"
-                            >
-                                <span className="w-8 h-[2px] bg-[#00D084]" />
-                                <span className="text-[13px] max-sm:text-[12px] font-semibold tracking-[0.16em] text-[#00905F] uppercase">
-                                    Connected Intelligence
-                                </span>
-                            </motion.div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="font-display font-bold tracking-tight text-[clamp(2.2rem,9vw,5.25rem)] leading-[1.05] text-slate-900 mt-7"
+                                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                                className="font-display font-bold tracking-tight text-[clamp(2.2rem,9vw,5.25rem)] leading-[1.05] text-slate-900"
                                 data-testid="hero-headline"
                             >
                                 Every Device.
@@ -181,14 +208,14 @@ export default function HomePage() {
                             </motion.div>
                         </div>
 
-                        {/* the cinematic stage */}
+                        {/* the large premium video */}
                         <motion.div
                             initial={{ opacity: 0, y: 32 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                            className="mt-14 md:mt-20"
+                            className="mt-12 md:mt-16"
                         >
-                            <HeroStage />
+                            <HeroVideo />
                         </motion.div>
                     </div>
                 </section>

@@ -1,0 +1,27 @@
+{
+  "summary": "Iteration 7 frontend-only verification of TonAer homepage third correction pass (hero video, kicker removal, tighter padding). All 6 requested test areas pass. Previous iteration_6 design bug (green words in contact H2) is confirmed FIXED.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Homepage — chapter-solutions to chapter-proof transition", "issues": ["Vertical gap between #solutions bottom (7744px) and #proof top (8086px) is ~342px — larger than the spec's 140px soft-cap. The whitelabel-band sits inside solutions (ends at 7688), so 342px of empty background separates the two chapters. Visually the flow still reads OK (the page background is a continuous soft gradient), but if pixel-perfect rhythm is required, main agent may want to trim bottom padding of chapter-solutions (currently 80px) or top padding of chapter-proof, or reduce the mt spacing after the whitelabel band. Every other inter-chapter gap measured 0px."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "OPTIONAL: Tighten spacing between chapter-solutions (whitelabel-band area) and chapter-proof — currently ~342px of continuous whitespace vs ~0px elsewhere. Not a blocker."
+  ],
+  "critical_code_review_comments": [
+    "THREE.Clock deprecation warning still emitted (non-blocking) — persists across iterations.",
+    "BrandPreview.jsx numeric kickers (01/02/03) on /product Look & Feel remain — flagged in iter_6 as well. Homepage spec is clean; /product is separate but 'no numeric kickers site-wide' consistency choice is up to product."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped per request)", "frontend": "100% (with 1 minor design nit)"},
+  "test_credentials": "N/A — public site",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Tested on https://network-journey-3.preview.emergentagent.com with cache-busters. VERIFIED: (1) hero-video present with dual sources — webm listed FIRST (https://.../videos/hero-connectivity.webm) then mp4 fallback; caption chip 'HARDWARE · CONNECTIVITY · SOFTWARE · INTELLIGENCE' visible bottom-left; desktop aspect 1.997 (≈16/8), mobile 390 aspect 1.594 (≈16/10). Headless Chromium video element properties returned None from JS (likely CSP/serialization quirk with the automation harness) but the video RENDERS with visible frames on both desktop and mobile screenshots (white gateway + green cloud data lines — confirmed AI Sora 2 placeholder per user note), so playback is working. (2) NO kicker testids present anywhere ([data-testid^='kicker'] returns []); no '0X /' numeric prefixes on homepage (regex scan clean). (3) Hero headline 'Every Device. One Intelligent Platform.' with green only on 'Platform.' (single element matched green filter) — no kicker above it. (4) Section padding measured: ecosystem/hardware/connectivity/platform/intelligence/contact all show computed padding 80px top + 80px bottom = py-20 desktop ✓. (5) Inter-chapter gaps all 0px EXCEPT solutions→proof = 342px (see design_issues). (6) All chapter testids present: ecosystem, hardware, connectivity, platform, journey, intelligence, value, solutions, proof, insights, contact. (7) All key components mount: hardware-showcase, connectivity-bridge, platform-dashboard, signature-flow, intelligence-moment, business-value, solutions, whitelabel-band, testimonials, insights-teaser, demo-form. (8) series-pill-d/m/q/o all present. (9) intel-stage-0..4 all present. (10) Contact H2 'Build the Connected Experience You Want.' — GREEN WORDS REMOVED (iter_6 bug fixed, 0 green descendants). (11) Contact form submit → demo-success visible with 'Request received. Thanks for reaching out...'. (12) Mobile 390: scrollW=clientW=390, no horizontal overflow; hero video 342x215 with caption chip visible; headline wraps cleanly across 3 lines. (13) Cross-page 200 OK: /product ('D Series'), /products/compare, /resources/blog, /about, /careers all render.",
+  "rca of the issue": "Sole remaining design nit: chapter-solutions bottom padding + chapter-proof top padding + the natural offset after the whitelabel-band produces a ~342px void where every other inter-chapter transition is 0px. Not blocking. Recommend reducing pb on chapter-solutions or the mt spacing that follows whitelabel-band."
+}

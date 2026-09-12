@@ -15,7 +15,7 @@ const ECO_NODES = [
 
 export function EcosystemArchitecture() {
     return (
-        <div className="mt-16" data-testid="ecosystem-architecture">
+        <div className="mt-12" data-testid="ecosystem-architecture">
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-y-10">
                 {ECO_NODES.map((n, i) => (
                     <motion.div
@@ -85,7 +85,7 @@ const FLOW_STAGES = [
 
 export function SignatureFlow() {
     return (
-        <div className="mt-16" data-testid="signature-flow">
+        <div className="mt-12" data-testid="signature-flow">
             <div className="relative">
                 {/* spine */}
                 <span className="hidden lg:block absolute top-[7px] left-0 right-0 h-[2px] bg-slate-200">
@@ -234,7 +234,7 @@ const INTEL_STAGES = [
 
 export function IntelligenceMoment() {
     return (
-        <div className="mt-16" data-testid="intelligence-moment">
+        <div className="mt-12" data-testid="intelligence-moment">
             <div className="relative">
                 {/* continuous spine */}
                 <span className="hidden lg:block absolute top-[22px] left-0 right-0 h-px bg-white/10">
