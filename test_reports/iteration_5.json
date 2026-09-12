@@ -1,0 +1,43 @@
+{
+  "summary": "Iteration 5 — verified the LIGHT homepage chapter redesign (hero + chapters 02-12), the new RequestDemoForm (phone/message), Testimonials video placeholders, Nav shrink-on-scroll, reorganized Footer, prefers-reduced-motion behaviour, and regression pages. Backend: /app/backend/tests/backend_test.py extended with two new tests covering optional phone/message on POST /api/leads (round-trip + omitted) — pytest 13/13 PASSED (5 lead tests including new fields, 3 health, 3 jobs, 2 earlier lead cases). Frontend (1920x1080 + 390x844 + 320x800 + reduced-motion): all 55 requested data-testids present (hero-section/headline/cta-primary/secondary/visual, chapter-ecosystem + eco-node-0..5, hardware-showcase + series-pill-d/m/q/o, connectivity-bridge, platform-dashboard + platform-caps, signature-flow + flow-stage-0..5, chapter-intelligence + intelligence-flow + capability-card-0..3 + capability-demo, business-value, solutions, whitelabel-band + whitelabel-intro-cta, trusted-by, testimonials + video-testimonial-featured/story-2/story-3 + testimonials-demo-note, insights-teaser + teaser-featured + teaser-all, chapter-contact + demo-form + demo-first-name/last-name/email/company/phone/message/submit + demo-success + demo-another, site-footer). Hero CTAs work: Explore Platform scrolls to #platform chapter top (scrollY=3390, platform-dashboard inner at y=3825 — lands at chapter top before Kicker+heading, expected); Explore Products → /product. Hardware chapter: all 4 series pills switch render + annotations (D71 shows WI-FI 7 TRI-BAND / 10G SFP+ WAN, Q20 shows 5G + E-SIM / DUAL SIM FAILOVER, M40 Wi-Fi 6E, O10 outdoor IP-rated), each Explore CTA deep-links correctly (/product?series=d&model=d71, ...m&m40, ...q&q20, ...o&o10). Intelligence dark chapter: 4 capability cards switch demo panel, capability-demo present. Video testimonials: 3 placeholders each contain 'Coming Soon' and 'VIDEO', no fabricated quotes. Contact form: empty submit blocked (no demo-success rendered), valid submit → demo-success replaces form, 'Send another request' clears fields (first-name value '' after reset). Backend POST /api/leads confirmed to accept + persist phone + message (pytest). Nav shrinks on scroll: height 50→46, py 8px→6.1px. Regression pages 200 OK: /product, /products/compare, /resources/blog, /careers, /about. Nav Request Demo from /careers → /#contact. Mobile 390px: 0 horizontal overflow (scrollWidth=clientWidth=390). Mobile 320px: 2px overflow (322 vs 320) — negligible. Reduced-motion: .flow-x, intelligence-flow SVG, connectivity-bridge paths all correctly animation-name:none — BUT .xu-dash still reports computed animation-name='xu-dash' 1.2s despite an `.xu-dash { animation: none !important }` rule inside @media (prefers-reduced-motion:reduce) in index.css. Playwright reload with reduced-motion emulation was applied — this looks like a legitimate specificity/inheritance issue on SVG elements (possibly `.xu-dash` inline `style={{animationDelay}}` interaction) and warrants verification. 0 console/page errors on any homepage load.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "prefers-reduced-motion — .xu-dash class on SVG dash paths (HomePage.jsx hero flow, IntelligenceShowcase.jsx)",
+        "issue": "Under emulated `prefers-reduced-motion: reduce`, `.flow-x`, the intelligence-flow strip and connectivity-bridge SVGs all correctly report animation-name:none, but `.xu-dash` still reports computed animation-name='xu-dash' with duration 1.2s. The @media rule in index.css:198 includes `.xu-dash` with `animation: none !important`, so the rule is present but not taking effect on the first .xu-dash element queried. Likely cause: React inline `style={{ animationDelay: '0.5s' }}` on some paths interacting with the shorthand reset, or the class being applied to an SVG element where the media rule specificity is being overridden. Recommend switching the reduced-motion rule to explicit longhands (`animation-name: none !important; animation-duration: 0s !important;`) OR adding the class to a wrapping group instead of individual paths.",
+        "selector": ".xu-dash",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "Mobile 320px viewport (homepage)",
+        "issue": "scrollWidth=322 vs clientWidth=320 → 2px horizontal overflow at 320px. Not visible, but fails a strict 'no horizontal overflow ANYWHERE' check. 390px is clean (390/390).",
+        "selector": "html",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "MEDIUM: Verify prefers-reduced-motion actually disables the .xu-dash animation on hero + IntelligenceShowcase SVG dash paths — the shorthand `animation: none !important` currently doesn't zero out the computed animation-name for .xu-dash. Switch to explicit longhands or move the class to a wrapper group.",
+    "LOW: Trim the 2px horizontal overflow at 320px viewport on the homepage (scrollWidth 322 / clientWidth 320)."
+  ],
+  "critical_code_review_comments": [
+    "HardwareShowcase in HomeSections.jsx uses `motion.div key={active + '-copy'}` — the fresh mount + 0.05s delay + 0.5s duration means the new series-explore-{id} link is not queryable for ~500ms after pill click; consider omitting the copy remount or reducing animation, so downstream automation / anchor links remain stable.",
+    "index.css:198 uses `animation: none !important` for reduced-motion; on SVG paths that also carry an inline `style={{animationDelay}}`, prefer explicit longhands (`animation-name: none !important`) for reliable disabling.",
+    "HomeSections.jsx is still 341 lines and houses multiple section components + data constants (SERIES_NOTES, FLAGSHIP, OUTCOMES, ...). Consider extracting per-chapter files under /components/home/ for parity with HomeVisuals.jsx & Testimonials.jsx."
+  ],
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": { "backend": "100% (13/13 pytest)", "frontend": "~95% (all 12 requested scenarios exercised; 2 minor issues: reduced-motion .xu-dash + 2px 320px overflow)" },
+  "seed_data_creation": "3 TEST_-prefixed leads created via pytest (phone+message round-trip, omitted-optional, and generic) + 1 UI submission TEST_qa_*@example.com. No delete endpoint for /api/leads.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "test_credentials": "None (public marketing site).",
+  "context_for_next_testing_agent": "Homepage doc height at 1920 ~9500px, all 55 requested testids visible after 4s wait. Backend regression suite at /app/backend/tests/backend_test.py — run: `cd /app/backend && pytest tests/backend_test.py -v --junitxml=/app/test_reports/pytest/pytest_results.xml`. New tests: TestLeads::test_create_lead_with_phone_and_message (round-trip + persistence check on GET /api/leads) and TestLeads::test_create_lead_phone_message_omitted (verifies fields remain OPTIONAL). Hardware pill switching needs ~1500ms wait for framer-motion opacity transition before series-explore-{id} testid is queryable. Nav shrink measured: height 50→46 at scrollY 400. Video testimonials all contain 'Coming Soon' string (intentional, per app description). Reduced-motion works for .flow-x / intelligence-flow / connectivity-bridge but NOT for .xu-dash — needs code fix.",
+  "rca_of_the_issue": "1) .xu-dash under reduced-motion: the CSS `.xu-dash { animation: none !important }` inside @media (prefers-reduced-motion: reduce) is present in index.css:203 but computed style still shows animation-name='xu-dash'. Suspected cause is that .xu-dash is applied to SVG <path> elements which additionally carry inline style={{animationDelay: '0.5s'}} — the shorthand `animation: none` on the class should reset name+duration, but browsers can behave inconsistently when the shorthand is overridden by longhand inline styles + !important. Fix: use explicit `animation-name: none !important; animation-duration: 0s !important;` (longhands) inside the media query, OR wrap the animated paths in a <g class='xu-dash'> and stop applying inline animation-delay. 2) 320px 2px overflow is likely a max-width or padding miscalculation in one of the chapter grids at ultra-narrow viewports."
+}

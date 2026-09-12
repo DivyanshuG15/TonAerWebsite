@@ -7,6 +7,10 @@ import { HomeSections } from '../components/HomeSections';
 import { Footer } from '../components/Footer';
 import { useSEO } from '../hooks/useSEO';
 
+// Video-ready: set HERO_VIDEO_URL to a real TonAer product video to replace the
+// composed render — layout and copy remain unchanged.
+const HERO_VIDEO_URL = null;
+
 function HeroChip({ label, value, className, delay }) {
     return (
         <motion.div
@@ -21,6 +25,41 @@ function HeroChip({ label, value, className, delay }) {
                 <span className="font-display font-semibold text-xs text-slate-900">{value}</span>
             </div>
         </motion.div>
+    );
+}
+
+// Hardware → network → cloud → data → intelligence: the hero composition.
+function HeroComposition() {
+    if (HERO_VIDEO_URL) {
+        return (
+            <video
+                src={HERO_VIDEO_URL}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full rounded-2xl border border-slate-200 aspect-[4/3] object-cover"
+                data-testid="hero-video"
+            />
+        );
+    }
+    return (
+        <div className="relative" data-testid="hero-visual">
+            {/* data-flow overlay: device → cloud → intelligence */}
+            <svg viewBox="0 0 600 460" className="absolute -top-10 -right-4 w-[70%] z-10 pointer-events-none" aria-hidden="true">
+                <path d="M 180 330 C 300 260 340 160 470 90" fill="none" stroke="#00D084" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="5 7" className="xu-dash" />
+                <path d="M 200 350 C 340 330 420 280 520 230" fill="none" stroke="#00D084" strokeOpacity="0.35" strokeWidth="1.5" strokeDasharray="5 7" className="xu-dash" style={{ animationDelay: '0.5s' }} />
+                <circle cx="470" cy="90" r="5" fill="none" stroke="#00D084" strokeWidth="1.5" />
+                <circle cx="470" cy="90" r="2" fill="#00D084" />
+                <text x="470" y="70" fill="#64748B" fontSize="10" fontFamily="monospace" textAnchor="middle" letterSpacing="2">CLOUD</text>
+                <circle cx="520" cy="230" r="5" fill="none" stroke="#00D084" strokeWidth="1.5" />
+                <circle cx="520" cy="230" r="2" fill="#00D084" />
+                <text x="520" y="212" fill="#64748B" fontSize="10" fontFamily="monospace" textAnchor="middle" letterSpacing="2">DATA</text>
+            </svg>
+            <SeriesVisual variant={{}} label="D71 // TONAER GATEWAY" />
+            <HeroChip label="GATEWAY STATUS" value="Healthy" className="top-4 -left-2 sm:left-4" delay={0.7} />
+            <HeroChip label="CLOUD SYNC" value="Connected" className="bottom-14 right-2 sm:right-6" delay={0.85} />
+        </div>
     );
 }
 
@@ -41,55 +80,60 @@ export default function HomePage() {
         <div data-testid="home-page" className="bg-white">
             <ScrollRig />
             <main id="scroll-track" className="relative z-10">
-                {/* 01 — HERO */}
-                <section className="px-6 sm:px-12 md:px-24 pt-32 pb-16 md:pb-24 max-w-7xl mx-auto" data-testid="hero-section">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                {/* CH 01 — HERO: CONNECTED INTELLIGENCE */}
+                <section className="px-6 sm:px-10 pt-36 pb-20 md:pt-44 md:pb-28" data-testid="hero-section">
+                    <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
                         <div>
                             <motion.div
                                 initial={{ opacity: 0, y: 14 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6 }}
-                                className="inline-block font-mono-xu text-[10px] tracking-[0.25em] text-[#00905F] bg-[#E6FBF3] border border-[#00D084]/25 rounded-full px-4 py-1.5"
+                                className="flex items-center gap-4"
                             >
-                                CONNECTED INTELLIGENCE
+                                <span className="w-10 h-[2px] bg-[#00D084]" />
+                                <span className="font-mono-xu text-[13px] max-sm:text-[11px] font-semibold tracking-[0.18em] text-[#00905F] uppercase">
+                                    01 / Connected Intelligence
+                                </span>
                             </motion.div>
                             <motion.h1
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                                className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.08] text-slate-900 mt-6"
+                                className="font-display font-bold tracking-tight text-[clamp(2.2rem,9vw,5.25rem)] leading-[1.05] text-slate-900 mt-7"
                                 data-testid="hero-headline"
                             >
                                 Every Device.
                                 <br />
-                                One Intelligent <span className="text-[#00B874]">Platform.</span>
+                                One <span className="text-[#00B874]">Intelligent</span>
+                                <br />
+                                Platform.
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7, delay: 0.22 }}
-                                className="mt-6 max-w-lg text-base md:text-lg leading-relaxed text-slate-600"
+                                className="mt-7 max-w-lg text-[17px] md:text-lg leading-relaxed text-slate-600"
                             >
-                                Connect your devices, centralize your data, and gain meaningful insights through one
-                                intelligent platform.
+                                Connect hardware, networks and data through one intelligent ecosystem built for the
+                                connected world.
                             </motion.p>
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7, delay: 0.34 }}
-                                className="mt-9 flex flex-col sm:flex-row gap-4"
+                                className="mt-10 flex flex-col sm:flex-row gap-4"
                             >
                                 <button
                                     onClick={explorePlatform}
                                     data-testid="hero-cta-primary"
-                                    className="rounded-full bg-[#00D084] hover:bg-[#00B874] text-[#04150E] text-sm font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25"
+                                    className="rounded-full bg-[#00D084] hover:bg-[#00B874] text-[#04150E] text-[15px] font-semibold tracking-wide px-8 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#00D084]/25"
                                 >
                                     Explore Platform
                                 </button>
                                 <Link
                                     to="/product"
                                     data-testid="hero-cta-secondary"
-                                    className="rounded-full border border-slate-300 hover:border-[#00D084] text-slate-700 hover:text-slate-900 text-sm font-semibold tracking-wide px-8 py-4 text-center transition-all duration-300"
+                                    className="rounded-full border border-slate-300 hover:border-[#00D084] text-slate-700 hover:text-slate-900 text-[15px] font-semibold tracking-wide px-8 py-4 text-center transition-all duration-300"
                                 >
                                     Explore Products
                                 </Link>
@@ -99,12 +143,8 @@ export default function HomePage() {
                             initial={{ opacity: 0, scale: 0.97 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative"
-                            data-testid="hero-visual"
                         >
-                            <SeriesVisual variant={{}} label="D71 // TONAER GATEWAY" />
-                            <HeroChip label="GATEWAY STATUS" value="Healthy" className="top-5 -left-2 sm:left-5" delay={0.7} />
-                            <HeroChip label="CLOUD SYNC" value="Connected" className="bottom-16 -right-2 sm:right-5" delay={0.85} />
+                            <HeroComposition />
                         </motion.div>
                     </div>
                 </section>

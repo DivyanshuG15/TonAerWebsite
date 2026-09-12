@@ -40,6 +40,8 @@ class LeadCreate(BaseModel):
     email: EmailStr
     fleet_size: Optional[str] = None
     timeframe: Optional[str] = None
+    phone: Optional[str] = Field(default=None, max_length=40)
+    message: Optional[str] = Field(default=None, max_length=2000)
 
 
 class Lead(LeadCreate):

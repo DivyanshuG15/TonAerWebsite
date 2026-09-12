@@ -85,6 +85,40 @@ class TestLeads:
         r = client.post(f"{API}/leads", json=payload)
         assert r.status_code == 422, f"{label}: {r.status_code} {r.text[:200]}"
 
+    def test_create_lead_with_phone_and_message(self, client):
+        # New homepage RequestDemoForm posts optional phone + message fields.
+        email = f"TEST_lead_{uuid.uuid4().hex[:8]}@example.com"
+        payload = {
+            "name": "TEST_QA Phone",
+            "company": "TEST_QA Co",
+            "email": email,
+            "phone": "+1 415 555 0199",
+            "message": "TEST_QA_MESSAGE_" + uuid.uuid4().hex[:6],
+        }
+        r = client.post(f"{API}/leads", json=payload)
+        assert r.status_code == 200, r.text
+        data = r.json()
+        assert data["phone"] == payload["phone"]
+        assert data["message"] == payload["message"]
+        assert "_id" not in data
+        # Persistence
+        leads = client.get(f"{API}/leads").json()
+        match = [x for x in leads if x["email"] == email]
+        assert len(match) == 1
+        assert match[0]["phone"] == payload["phone"]
+        assert match[0]["message"] == payload["message"]
+
+    def test_create_lead_phone_message_omitted(self, client):
+        # phone/message must remain OPTIONAL (existing form posts without them)
+        email = f"TEST_lead_{uuid.uuid4().hex[:8]}@example.com"
+        r = client.post(f"{API}/leads", json={
+            "name": "TEST_NoPhone", "company": "TEST_Co", "email": email,
+        })
+        assert r.status_code == 200, r.text
+        d = r.json()
+        assert d.get("phone") is None
+        assert d.get("message") is None
+
     def test_list_leads_schema(self, client):
         r = client.get(f"{API}/leads")
         assert r.status_code == 200

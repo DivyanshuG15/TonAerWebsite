@@ -230,19 +230,29 @@ export function IntelligenceShowcase() {
     const Demo = DEMOS[active];
 
     return (
-        <div className="mt-12 grid lg:grid-cols-2 gap-10 items-start" data-testid="intelligence-showcase">
+        <div data-testid="intelligence-showcase">
+            {/* data → action strip */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-10" data-testid="intelligence-flow">
+                {['NETWORK DATA', 'ANALYTICS', 'INSIGHTS', 'INTELLIGENCE', 'ACTION'].map((s, i, arr) => (
+                    <span key={s} className="flex items-center gap-4">
+                        <span className={`font-mono-xu text-[10px] tracking-[0.25em] ${i === arr.length - 1 ? 'text-brand' : 'text-slate-500'}`}>{s}</span>
+                        {i < arr.length - 1 && <span className="w-6 h-px bg-brand/40" />}
+                    </span>
+                ))}
+            </div>
+            <div className="grid lg:grid-cols-2 gap-10 items-start">
             <div>
                 <div className="font-mono-xu text-[9px] tracking-[0.3em] text-slate-500 mb-4">SELECT A CAPABILITY TO EXPLORE</div>
-                <div className="grid gap-3">
+                <div className="divide-y divide-white/10 border-y border-white/10">
                     {FEATURES.map((c, i) => (
                         <button
                             key={c.t}
                             onClick={() => setActive(i)}
                             data-testid={`capability-card-${i}`}
-                            className={`text-left flex gap-4 rounded-2xl border p-5 transition-all duration-300 ${
+                            className={`w-full text-left flex gap-5 py-5 pl-5 border-l-2 transition-all duration-300 ${
                                 active === i
-                                    ? 'border-brand/60 bg-brand/10 shadow-lg shadow-brand/5'
-                                    : 'border-white/10 bg-white/5 hover:border-white/25'
+                                    ? 'border-brand bg-white/5'
+                                    : 'border-transparent hover:border-white/25'
                             }`}
                         >
                             <c.icon size={18} className={`shrink-0 mt-0.5 transition-colors duration-300 ${active === i ? 'text-brand' : 'text-slate-500'}`} />
@@ -277,6 +287,7 @@ export function IntelligenceShowcase() {
                         </motion.div>
                     </AnimatePresence>
                 </div>
+            </div>
             </div>
         </div>
     );

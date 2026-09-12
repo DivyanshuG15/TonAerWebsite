@@ -130,10 +130,18 @@ export function Nav() {
     const [open, setOpen] = useState(null);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [mobileExpanded, setMobileExpanded] = useState(null);
+    const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const rootRef = useRef();
     const light = location.pathname === '/' || location.pathname.startsWith('/support');
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 40);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     useEffect(() => {
         let raf;
@@ -174,7 +182,9 @@ export function Nav() {
 
     return (
         <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4" data-testid="main-nav" ref={rootRef}>
-            <nav className={`relative flex items-center gap-1 rounded-full backdrop-blur-xl border pl-5 pr-2 py-2 shadow-2xl transition-colors duration-300 ${
+            <nav className={`relative flex items-center gap-1 rounded-full backdrop-blur-xl border pl-5 pr-2 shadow-2xl transition-all duration-300 ${
+                scrolled ? 'py-1.5' : 'py-2'
+            } ${
                 light ? 'bg-white/85 border-slate-200/80 text-slate-900 shadow-slate-900/5' : 'bg-slate-950/70 border-white/10 text-white shadow-slate-950/30'
             }`}>
                 <Link to="/" className="font-display font-bold tracking-[0.22em] text-sm mr-3 flex items-center gap-2" data-testid="nav-logo">

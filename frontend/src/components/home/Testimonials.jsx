@@ -1,76 +1,57 @@
 import { motion } from 'framer-motion';
+import { Play } from 'lucide-react';
+import { fadeUp } from './Chapter';
 
-// SAMPLE / DEMO testimonials — layout preview only.
-// Replace with verified customer quotes when available (see data flags below).
-const TESTIMONIALS = [
-    {
-        quote: 'Having hardware, cloud management and network intelligence from one partner removed the gaps between our operations teams. Deployment visibility changed how we support subscribers.',
-        name: 'Network Operations Lead',
-        designation: 'VP Network Operations',
-        company: 'Regional ISP',
-        industry: 'Internet Service Provider',
-        logo: null,
-        featured: true,
-        isDemo: true,
-    },
-    {
-        quote: 'The white-label approach let us launch a fully branded connectivity service without building the technology stack ourselves — hardware, apps and cloud under our name.',
-        name: 'Head of Product',
-        designation: 'Product Director',
-        company: 'Telecom Operator',
-        industry: 'Telecommunications',
-        logo: null,
-        featured: false,
-        isDemo: true,
-    },
-    {
-        quote: 'Centralized device management turned thousands of deployed gateways from a support burden into a managed fleet. Remote diagnostics alone changed our response times.',
-        name: 'Technical Director',
-        designation: 'CTO Office',
-        company: 'Network Service Provider',
-        industry: 'Managed Network Services',
-        logo: null,
-        featured: false,
-        isDemo: true,
-    },
+// Video-first testimonials. No real customer videos exist yet — these are
+// polished placeholders. Data model is ready for real videos (videoUrl/poster).
+const VIDEO_STORIES = [
+    { id: 'featured', title: 'Customer Story', subtitle: 'Coming Soon', videoUrl: null, poster: null, name: null, designation: null, company: null, industry: 'Internet Service Provider', featured: true, isDemo: true },
+    { id: 'story-2', title: 'Customer Story', subtitle: 'Coming Soon', videoUrl: null, poster: null, name: null, designation: null, company: null, industry: 'Telecom Operator', featured: false, isDemo: true },
+    { id: 'story-3', title: 'Customer Story', subtitle: 'Coming Soon', videoUrl: null, poster: null, name: null, designation: null, company: null, industry: 'Network Service Provider', featured: false, isDemo: true },
 ];
 
-const fadeUp = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.3 },
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-};
+function VideoCard({ story, large }) {
+    return (
+        <motion.div
+            {...fadeUp}
+            className={`group relative rounded-2xl overflow-hidden bg-[#020617] border border-slate-800 ${large ? 'aspect-[16/9]' : 'aspect-[16/10]'}`}
+            data-testid={`video-testimonial-${story.id}`}
+        >
+            {/* subtle tech texture */}
+            <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'linear-gradient(#5CE8B4 1px, transparent 1px), linear-gradient(90deg, #5CE8B4 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent" />
+            {/* play */}
+            <div className="absolute inset-0 flex items-center justify-center">
+                <span className={`${large ? 'w-20 h-20' : 'w-14 h-14'} rounded-full border-2 border-[#00D084]/70 bg-[#00D084]/10 backdrop-blur flex items-center justify-center transition-all duration-300 group-hover:bg-[#00D084]/25 group-hover:scale-105`}>
+                    <Play size={large ? 26 : 18} className="text-[#00D084] ml-1" fill="currentColor" />
+                </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 flex items-end justify-between gap-4">
+                <div>
+                    <div className="font-mono-xu text-[9px] tracking-[0.25em] text-[#00D084]">{story.industry.toUpperCase()}</div>
+                    <div className={`font-display font-semibold text-white mt-1.5 ${large ? 'text-xl' : 'text-base'}`}>{story.title}</div>
+                    <div className="text-xs text-slate-500 mt-0.5">{story.subtitle}</div>
+                </div>
+                <span className="font-mono-xu text-[8px] tracking-[0.18em] text-slate-500 border border-white/10 rounded-full px-2.5 py-1 shrink-0">VIDEO</span>
+            </div>
+        </motion.div>
+    );
+}
 
 export function Testimonials() {
+    const [featured, ...rest] = VIDEO_STORIES;
     return (
         <div className="mt-14" data-testid="testimonials">
-            <div className="grid md:grid-cols-3 gap-5">
-                {TESTIMONIALS.map((t, i) => (
-                    <motion.figure
-                        key={t.company}
-                        {...fadeUp}
-                        transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                        className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm flex flex-col"
-                        data-testid={`testimonial-${i}`}
-                    >
-                        <blockquote className="text-sm text-slate-600 leading-relaxed flex-1">"{t.quote}"</blockquote>
-                        <figcaption className="mt-6 pt-5 border-t border-slate-100">
-                            <div className="font-display font-semibold text-sm text-slate-900">{t.name}</div>
-                            <div className="text-xs text-slate-500 mt-1">
-                                {t.designation} · {t.company}
-                            </div>
-                            {t.isDemo && (
-                                <span className="inline-block mt-3 font-mono-xu text-[8px] tracking-[0.18em] text-slate-400 border border-slate-200 rounded-full px-2 py-0.5">
-                                    SAMPLE TESTIMONIAL
-                                </span>
-                            )}
-                        </figcaption>
-                    </motion.figure>
-                ))}
+            <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-5">
+                <VideoCard story={featured} large />
+                <div className="grid gap-5">
+                    {rest.map((s) => (
+                        <VideoCard key={s.id} story={s} />
+                    ))}
+                </div>
             </div>
-            <p className="mt-5 font-mono-xu text-[9px] tracking-[0.15em] text-slate-400" data-testid="testimonials-demo-note">
-                SAMPLE TESTIMONIALS FOR LAYOUT PREVIEW — REPLACED WITH VERIFIED CUSTOMER QUOTES WHEN AVAILABLE.
+            <p className="mt-6 font-mono-xu text-[9px] tracking-[0.15em] text-slate-400" data-testid="testimonials-demo-note">
+                CUSTOMER STORY VIDEOS ARE IN PRODUCTION — SLOTS ARE READY FOR REAL TESTIMONIALS.
             </p>
         </div>
     );

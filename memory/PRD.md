@@ -45,9 +45,14 @@ Build the TonAer (formerly "Xunison") B2B technology website as an interactive t
 
 ### Light Homepage Redesign (July 2026)
 - Homepage rebuilt LIGHT (white/off-white/#F8FAFC rhythm, Signal Green accent): simplified hero ("Every Device. One Intelligent Platform." + D71 render with status chips; WebGL canvas + loading screen removed) → Ecosystem flow → Portfolio showcase (series pills, flagship map d71/m40/q20/o10) → Hardware→Software pipeline → Cloud Platform (illustrative dashboard, marked DEMO DATA) → dark Network Intelligence section → White-Label intro (interactive tool moved to product Look & Feel tab) → Solutions (3 personas + workflow pills) → Why TonAer (5) → TrustedBy (light) → Testimonials (SAMPLE-marked demo data) → Insights teaser → final CTA + lead form
-- Nav is theme-aware: light glass on / + /support, dark pill elsewhere; mobile drawer themed too
+- Nav is theme-aware: light glass on / + /support, dark pill elsewhere; mobile drawer themed too; shrinks on scroll
 - Product Detail now 5 tabs (sticky bar, ?tab= param): Overview | Features | Specifications | Compare | Look & Feel — BrandPreview gained fixedSeries prop (no model step, Reset Preview, finish reset on series change, goContact falls back to /#contact)
-- LeadForm has light variant; MediaViewer min-w-0 mobile fix; design blueprint in /app/design_guidelines.json
+- MediaViewer min-w-0 mobile fix; design blueprint in /app/design_guidelines.json
+
+### Chapter-Based Homepage v2 (July 2026)
+- Full redesign into 12 numbered visual chapters (shared Chapter shell + Kicker "NN / LABEL", max-w-[1240px] grid, py-24/32 rhythm): 01 cinematic hero (dominant D71 render + animated data-flow lines to CLOUD/DATA nodes, video-ready via HERO_VIDEO_URL) → 02 Ecosystem (6-node aligned architecture, animated pulses) → 03 Hardware (big render + real catalog annotations) → 04 Connectivity bridge (dark Gateway→Network→Cloud) → 05 Software (large dashboard + hairline caps) → 06 signature "From Hardware to Intelligence" flow (spine + traveling pulse) → 07 Intelligence (one dark chapter, editorial selectors + DATA→ACTION strip) → 08 Business Value editorial rows (Connect/Manage/Understand/Grow) → 09 Solutions rows + dark white-label band → 10 Proof (TrustedBy + video-first testimonial placeholders "Coming Soon", no fabricated quotes) → 11 Insights editorial teaser → 12 Let's Connect (two-col premium RequestDemoForm: first/last/email/company/phone?/message → POST /api/leads)
+- Backend LeadCreate extended: optional phone, message. LeadForm.jsx deleted (replaced by RequestDemoForm)
+- Footer reorganized (Products/Technology/Company/Resources). prefers-reduced-motion disables all flow animations (longhands). All grids use grid-cols-1 base (no overflow 320-1920px)
 
 ### Insights / Blog (`/resources/blog`, July 2026)
 - Editorial insight hub: compact hero, FEATURED article ("What Comes After Faster Wi-Fi?"), Explore by Topic tiles (map to category filter + scroll), search (title/excerpt/category/tags/author), category chips (AND-combined with search), Latest Insights grid (9 + Load More), Most Read (3 curated via `mostRead` flag, no fake metrics), newsletter in DEMO state (toast, no storage, no POST), final CTA

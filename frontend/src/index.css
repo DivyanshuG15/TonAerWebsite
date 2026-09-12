@@ -182,6 +182,43 @@ body {
     100% { transform: translateY(320%); opacity: 0; }
 }
 
+
+/* Signature data-flow motif: pulse traveling along a horizontal line */
+@keyframes flow-x {
+    0% { left: -4%; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+.flow-x {
+    animation: flow-x 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flow-y,
+    .flow-x,
+    .spin-slow,
+    .signal-ring,
+    .xu-dash,
+    .xu-pulse,
+    .xu-scan,
+    .xu-scan-wide,
+    .xu-draw,
+    .xu-alert,
+    .xu-settle,
+    .led-blink {
+        animation-name: none !important;
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+    }
+}
+
+/* guard against sub-pixel overflow at ultra-narrow viewports */
+body {
+    overflow-x: clip;
+}
+
 .flow-y {
     animation: flow-y 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
