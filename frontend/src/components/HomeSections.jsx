@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { Chapter, fadeUp } from './home/Chapter';
-import { EcosystemArchitecture, ConnectivityBridge, SignatureFlow, PlatformDashboard } from './home/HomeVisuals';
+import { EcosystemArchitecture, ConnectivityBridge, SignatureFlow, PlatformDashboard, IntelligenceMoment } from './home/HomeVisuals';
 import { Testimonials } from './home/Testimonials';
 import { RequestDemoForm } from './home/RequestDemoForm';
 import { SeriesVisual } from './SeriesVisual';
 import { TrustedBy } from './TrustedBy';
-import { IntelligenceShowcase } from './IntelligenceShowcase';
 import { CoverVisual } from './insights/CoverVisual';
 import { SERIES, PRODUCTS } from '../data/catalog';
 import { publishedArticles, featuredArticle } from '../data/insights';
@@ -131,44 +130,40 @@ export function HomeSections() {
             {/* CH 02 — ECOSYSTEM */}
             <Chapter
                 id="ecosystem"
-                num="02"
-                kicker="The Ecosystem"
+                kicker="Integrated Flow"
                 tone="alt"
-                title={<>Hardware and Software. <span className="text-[#00B874]">Working as One.</span></>}
+                title="Hardware and Software, Working as One."
                 desc="From the device in the field to the data in the cloud, TonAer brings connectivity, management and intelligence together in one ecosystem."
             >
                 <EcosystemArchitecture />
             </Chapter>
 
-            {/* CH 03 — HARDWARE */}
+            {/* CH — HARDWARE */}
             <Chapter
                 id="hardware"
-                num="03"
                 kicker="Hardware"
-                title={<>Built to Connect. <span className="text-[#00B874]">Designed to Perform.</span></>}
+                title="Built to Connect. Designed to Perform."
                 desc="A gateway portfolio engineered for evolving connectivity and network requirements — from flagship broadband to outdoor and cellular deployments."
             >
                 <HardwareShowcase />
             </Chapter>
 
-            {/* CH 04 — CONNECTIVITY */}
+            {/* CH — CONNECTIVITY */}
             <Chapter
                 id="connectivity"
-                num="04"
                 kicker="Connectivity"
-                title={<>Connectivity Built Around <span className="text-[#00B874]">Your Network.</span></>}
+                title="Connectivity Built Around Your Network."
                 desc="TonAer hardware is never isolated. Every gateway connects into the same managed ecosystem from the moment it powers on."
             >
                 <ConnectivityBridge />
             </Chapter>
 
-            {/* CH 05 — SOFTWARE */}
+            {/* CH — SOFTWARE */}
             <Chapter
                 id="platform"
-                num="05"
                 kicker="Software"
                 tone="alt"
-                title={<>One Platform. <span className="text-[#00B874]">Complete Visibility.</span></>}
+                title="One Platform. Complete Visibility."
                 desc="Manage devices, monitor networks, troubleshoot remotely and gain actionable visibility through a centralized cloud platform."
             >
                 <PlatformDashboard />
@@ -187,37 +182,31 @@ export function HomeSections() {
                 </div>
             </Chapter>
 
-            {/* CH 06 — HARDWARE TO INTELLIGENCE (signature) */}
+            {/* CH — HARDWARE TO INTELLIGENCE (signature) */}
             <Chapter
                 id="journey"
-                num="06"
                 kicker="The TonAer Flow"
-                title={<>From Hardware <span className="text-[#00B874]">to Intelligence.</span></>}
+                title="From Hardware to Intelligence."
                 desc="One continuous journey — the connection captured by the device becomes the intelligence that improves it."
             >
                 <SignatureFlow />
             </Chapter>
 
-            {/* CH 07 — DATA / INTELLIGENCE (one intentional dark chapter) */}
+            {/* CH — DATA / INTELLIGENCE (one deliberate dark technology moment) */}
             <Chapter
                 id="intelligence"
-                num="07"
                 kicker="Intelligence"
                 dark
                 title={<>Turn Network Data <span className="text-brand">Into Action.</span></>}
-                desc="AI-powered diagnostics analyze gateway behavior in real time — detecting issues, recommending actions and optimizing networks before subscribers notice."
             >
-                <div className="mt-14">
-                    <IntelligenceShowcase />
-                </div>
+                <IntelligenceMoment />
             </Chapter>
 
-            {/* CH 08 — BUSINESS VALUE */}
+            {/* CH — BUSINESS VALUE */}
             <Chapter
                 id="value"
-                num="08"
                 kicker="Business Value"
-                title={<>Technology That Works <span className="text-[#00B874]">for Your Business.</span></>}
+                title="Technology That Works for Your Business."
             >
                 <div className="mt-12 divide-y divide-slate-200 border-y border-slate-200" data-testid="business-value">
                     {OUTCOMES.map((o, i) => (
@@ -234,10 +223,9 @@ export function HomeSections() {
             {/* CH 09 — SOLUTIONS + WHITE-LABEL */}
             <Chapter
                 id="solutions"
-                num="09"
                 kicker="Connected Experience"
                 tone="alt"
-                title={<>Built for the Businesses <span className="text-[#00B874]">That Build Connectivity.</span></>}
+                title="Built for the Businesses That Build Connectivity."
             >
                 <div className="mt-12 divide-y divide-slate-200 border-y border-slate-200" data-testid="solutions">
                     {SOLUTIONS.map((s, i) => (
@@ -285,21 +273,19 @@ export function HomeSections() {
             <TrustedBy dark={false} />
             <Chapter
                 id="proof"
-                num="10"
                 kicker="Proof"
-                title={<>Trusted by Teams <span className="text-[#00B874]">Building Connected Experiences.</span></>}
+                title="Trusted by Teams Building Connected Experiences."
                 desc="See how businesses use TonAer technology to simplify connectivity, improve visibility and deliver better connected experiences."
             >
                 <Testimonials />
             </Chapter>
 
-            {/* CH 11 — INSIGHTS */}
+            {/* CH — INSIGHTS */}
             <Chapter
                 id="insights"
-                num="11"
                 kicker="Insights"
                 tone="alt"
-                title={<>What We're Learning, Building <span className="text-[#00B874]">and Thinking About.</span></>}
+                title="What We're Learning, Building and Thinking About."
             >
                 <InsightsTeaser />
             </Chapter>
@@ -309,11 +295,11 @@ export function HomeSections() {
                 <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
                     <div>
                         <div className="flex items-center gap-4 mb-6">
-                            <span className="w-10 h-[2px] bg-[#00D084]" />
-                            <span className="font-mono-xu text-[13px] max-sm:text-[11px] font-semibold tracking-[0.18em] text-[#00905F] uppercase">12 / Let's Connect</span>
+                            <span className="w-8 h-[2px] bg-[#00D084]" />
+                            <span className="text-[13px] max-sm:text-[12px] font-semibold tracking-[0.16em] text-[#00905F] uppercase">Let's Connect</span>
                         </div>
                         <motion.h2 {...fadeUp} className="font-display font-bold tracking-tight text-[clamp(2.1rem,4.2vw,3.75rem)] leading-[1.08] text-slate-900">
-                            Build the Connected <span className="text-[#00B874]">Experience You Want.</span>
+                            Build the Connected Experience You Want.
                         </motion.h2>
                         <motion.p {...fadeUp} className="mt-6 text-[17px] text-slate-600 leading-relaxed max-w-lg">
                             Tell us what you're building. Let's explore how TonAer can connect the hardware, network,

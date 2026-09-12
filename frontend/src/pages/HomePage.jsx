@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Wifi, Cloud, BrainCircuit } from 'lucide-react';
 import { ScrollRig } from '../experience/ScrollRig';
 import { scrollStore } from '../experience/store';
 import { SeriesVisual } from '../components/SeriesVisual';
@@ -8,28 +9,17 @@ import { Footer } from '../components/Footer';
 import { useSEO } from '../hooks/useSEO';
 
 // Video-ready: set HERO_VIDEO_URL to a real TonAer product video to replace the
-// composed render — layout and copy remain unchanged.
+// composed stage — layout and copy remain unchanged.
 const HERO_VIDEO_URL = null;
 
-function HeroChip({ label, value, className, delay }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay, duration: 0.6 }}
-            className={`absolute rounded-xl border border-slate-200 bg-white/90 backdrop-blur px-4 py-2.5 shadow-lg shadow-slate-900/5 ${className}`}
-        >
-            <div className="font-mono-xu text-[8px] tracking-[0.2em] text-slate-400">{label}</div>
-            <div className="flex items-center gap-1.5 mt-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00D084]" />
-                <span className="font-display font-semibold text-xs text-slate-900">{value}</span>
-            </div>
-        </motion.div>
-    );
-}
+const FLOW_NODES = [
+    { icon: Wifi, label: 'NETWORK', desc: 'The connection' },
+    { icon: Cloud, label: 'TONAER CLOUD', desc: 'The platform' },
+    { icon: BrainCircuit, label: 'INTELLIGENCE', desc: 'The insight' },
+];
 
-// Hardware → network → cloud → data → intelligence: the hero composition.
-function HeroComposition() {
+// The cinematic hardware → network → cloud → intelligence stage.
+function HeroStage() {
     if (HERO_VIDEO_URL) {
         return (
             <video
@@ -38,27 +28,78 @@ function HeroComposition() {
                 muted
                 loop
                 playsInline
-                className="w-full rounded-2xl border border-slate-200 aspect-[4/3] object-cover"
+                className="w-full rounded-3xl border border-slate-200 aspect-[16/8] object-cover"
                 data-testid="hero-video"
             />
         );
     }
     return (
-        <div className="relative" data-testid="hero-visual">
-            {/* data-flow overlay: device → cloud → intelligence */}
-            <svg viewBox="0 0 600 460" className="absolute -top-10 -right-4 w-[70%] z-10 pointer-events-none" aria-hidden="true">
-                <path d="M 180 330 C 300 260 340 160 470 90" fill="none" stroke="#00D084" strokeOpacity="0.5" strokeWidth="1.5" strokeDasharray="5 7" className="xu-dash" />
-                <path d="M 200 350 C 340 330 420 280 520 230" fill="none" stroke="#00D084" strokeOpacity="0.35" strokeWidth="1.5" strokeDasharray="5 7" className="xu-dash" style={{ animationDelay: '0.5s' }} />
-                <circle cx="470" cy="90" r="5" fill="none" stroke="#00D084" strokeWidth="1.5" />
-                <circle cx="470" cy="90" r="2" fill="#00D084" />
-                <text x="470" y="70" fill="#64748B" fontSize="10" fontFamily="monospace" textAnchor="middle" letterSpacing="2">CLOUD</text>
-                <circle cx="520" cy="230" r="5" fill="none" stroke="#00D084" strokeWidth="1.5" />
-                <circle cx="520" cy="230" r="2" fill="#00D084" />
-                <text x="520" y="212" fill="#64748B" fontSize="10" fontFamily="monospace" textAnchor="middle" letterSpacing="2">DATA</text>
-            </svg>
-            <SeriesVisual variant={{}} label="D71 // TONAER GATEWAY" />
-            <HeroChip label="GATEWAY STATUS" value="Healthy" className="top-4 -left-2 sm:left-4" delay={0.7} />
-            <HeroChip label="CLOUD SYNC" value="Connected" className="bottom-14 right-2 sm:right-6" delay={0.85} />
+        <div
+            className="relative rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white overflow-hidden"
+            data-testid="hero-visual"
+        >
+            {/* faint technical grid + horizon */}
+            <div
+                className="absolute inset-0 opacity-[0.5]"
+                style={{ backgroundImage: 'linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)', backgroundSize: '56px 56px' }}
+            />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+
+            <div className="relative grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] items-center gap-6 px-6 sm:px-12 py-10 lg:py-0 lg:h-[520px]">
+                {/* large gateway render */}
+                <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative"
+                >
+                    <SeriesVisual variant={{}} bare close className="max-w-[560px] mx-auto" />
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 font-mono-xu text-[10px] tracking-[0.3em] text-slate-400 whitespace-nowrap">
+                        D71 // TONAER GATEWAY — LIVE RENDER
+                    </div>
+                </motion.div>
+
+                {/* the journey: network → cloud → intelligence */}
+                <div className="relative lg:pr-6 pb-8 lg:pb-0">
+                    <div className="hidden lg:block absolute left-0 top-8 bottom-8 w-px bg-slate-200">
+                        <span className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#00D084] flow-y" />
+                    </div>
+                    <div className="space-y-2 lg:pl-10">
+                        {FLOW_NODES.map((n, i) => (
+                            <motion.div
+                                key={n.label}
+                                initial={{ opacity: 0, x: 16 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: 0.5 + i * 0.18 }}
+                                className="flex items-center gap-4 py-4"
+                                data-testid={`hero-node-${i}`}
+                            >
+                                <span className="relative w-11 h-11 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center shrink-0">
+                                    <n.icon size={18} className="text-[#00905F]" />
+                                    {i === FLOW_NODES.length - 1 && (
+                                        <span className="absolute inset-0 rounded-full border border-[#00D084]/50 signal-ring" />
+                                    )}
+                                </span>
+                                <div>
+                                    <div className="font-mono-xu text-[11px] tracking-[0.2em] text-slate-800">{n.label}</div>
+                                    <div className="text-[13px] text-slate-500 mt-0.5">{n.desc}</div>
+                                </div>
+                            </motion.div>
+                        ))}
+                        <motion.div
+                            initial={{ opacity: 0, x: 16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6, delay: 1.1 }}
+                            className="lg:pl-10 lg:-ml-10 mt-2 lg:ml-0"
+                        >
+                            <div className="lg:pl-10 flex items-center gap-2.5 font-mono-xu text-[10px] tracking-[0.2em] text-[#00905F]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#00D084]" />
+                                TELEMETRY · LIVE
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
@@ -80,19 +121,19 @@ export default function HomePage() {
         <div data-testid="home-page" className="bg-white">
             <ScrollRig />
             <main id="scroll-track" className="relative z-10">
-                {/* CH 01 — HERO: CONNECTED INTELLIGENCE */}
-                <section className="px-6 sm:px-10 pt-36 pb-20 md:pt-44 md:pb-28" data-testid="hero-section">
-                    <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
-                        <div>
+                {/* HERO — CONNECTED INTELLIGENCE */}
+                <section className="px-6 sm:px-10 pt-32 md:pt-40 pb-20 md:pb-28" data-testid="hero-section">
+                    <div className="max-w-[1240px] mx-auto">
+                        <div className="max-w-3xl">
                             <motion.div
                                 initial={{ opacity: 0, y: 14 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6 }}
                                 className="flex items-center gap-4"
                             >
-                                <span className="w-10 h-[2px] bg-[#00D084]" />
-                                <span className="font-mono-xu text-[13px] max-sm:text-[11px] font-semibold tracking-[0.18em] text-[#00905F] uppercase">
-                                    01 / Connected Intelligence
+                                <span className="w-8 h-[2px] bg-[#00D084]" />
+                                <span className="text-[13px] max-sm:text-[12px] font-semibold tracking-[0.16em] text-[#00905F] uppercase">
+                                    Connected Intelligence
                                 </span>
                             </motion.div>
                             <motion.h1
@@ -104,15 +145,15 @@ export default function HomePage() {
                             >
                                 Every Device.
                                 <br />
-                                One <span className="text-[#00B874]">Intelligent</span>
+                                One Intelligent
                                 <br />
-                                Platform.
+                                <span className="text-[#00B874]">Platform.</span>
                             </motion.h1>
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7, delay: 0.22 }}
-                                className="mt-7 max-w-lg text-[17px] md:text-lg leading-relaxed text-slate-600"
+                                className="mt-7 max-w-xl text-[17px] md:text-lg leading-relaxed text-slate-600"
                             >
                                 Connect hardware, networks and data through one intelligent ecosystem built for the
                                 connected world.
@@ -139,12 +180,15 @@ export default function HomePage() {
                                 </Link>
                             </motion.div>
                         </div>
+
+                        {/* the cinematic stage */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.97 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            initial={{ opacity: 0, y: 32 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                            className="mt-14 md:mt-20"
                         >
-                            <HeroComposition />
+                            <HeroStage />
                         </motion.div>
                     </div>
                 </section>

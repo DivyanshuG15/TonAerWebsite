@@ -182,7 +182,7 @@ export function BrandPreview({ fixedSeries = null }) {
 
             {!fixedSeries && (
                 <>
-                    <div className={`${stepKicker} mt-4`}>01 / SELECT YOUR MODEL</div>
+                    <div className={`${stepKicker} mt-4`}>SELECT YOUR MODEL</div>
                     <p className="text-xs text-slate-500 mt-1.5 mb-4">Choose a gateway model to start your brand preview.</p>
                     <div className="flex sm:grid sm:grid-cols-4 gap-3 overflow-x-auto pb-1 -mx-1 px-1">
                         {SERIES.map((s) => (
@@ -256,7 +256,7 @@ export function BrandPreview({ fixedSeries = null }) {
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                     >
-                        <div className={`${stepKicker} mt-7`}>{fixedSeries ? '01 / ADD YOUR BRAND' : '02 / ADD YOUR BRAND'}</div>
+                        <div className={`${stepKicker} mt-7`}>ADD YOUR BRAND</div>
                         <p className="text-xs text-slate-500 mt-1.5 mb-4">
                             Upload your company logo to preview it on the selected gateway. PNG, SVG or JPG.
                         </p>
@@ -282,7 +282,7 @@ export function BrandPreview({ fixedSeries = null }) {
                             </button>
                         )}
 
-                        <div className={`${stepKicker} mt-7`}>{fixedSeries ? '02 / DEVICE FINISH' : '03 / DEVICE FINISH'}</div>
+                        <div className={`${stepKicker} mt-7`}>DEVICE FINISH</div>
                         {casingSupported ? (
                             <>
                                 <p className="text-xs text-slate-500 mt-1.5 mb-1">

@@ -54,6 +54,11 @@ Build the TonAer (formerly "Xunison") B2B technology website as an interactive t
 - Backend LeadCreate extended: optional phone, message. LeadForm.jsx deleted (replaced by RequestDemoForm)
 - Footer reorganized (Products/Technology/Company/Resources). prefers-reduced-motion disables all flow animations (longhands). All grids use grid-cols-1 base (no overflow 320-1920px)
 
+### Design Correction Pass 2 (July 2026)
+- Hero rethought: copy block top + large full-width cinematic stage (bare close-camera D71 render on technical grid, vertical NETWORK→CLOUD→INTELLIGENCE journey with traveling pulse, TELEMETRY·LIVE marker), video-ready
+- Header scaled up (pill py-3.5→2.5 on scroll, text-sm menus, bigger logo/CTA). ALL numeric kicker prefixes removed (green line + 13px semibold uppercase). Green H2 words removed everywhere except hero "Platform." and intelligence "Into Action."
+- Dark intelligence chapter = one unified IntelligenceMoment (5-stage spine: Network Data→Analytics→Insights→Intelligence→Action with SVG mini-viz); IntelligenceShowcase.jsx deleted. Connectivity bridge uses real gateway render. Ecosystem nodes simplified (plain icons, no boxes). BrandPreview step labels de-numbered
+
 ### Insights / Blog (`/resources/blog`, July 2026)
 - Editorial insight hub: compact hero, FEATURED article ("What Comes After Faster Wi-Fi?"), Explore by Topic tiles (map to category filter + scroll), search (title/excerpt/category/tags/author), category chips (AND-combined with search), Latest Insights grid (9 + Load More), Most Read (3 curated via `mostRead` flag, no fake metrics), newsletter in DEMO state (toast, no storage, no POST), final CTA
 - Article pages `/resources/blog/:slug`: author byline (TonAer team names only), share (copy link / LinkedIn / X), generative SVG cover per category (CoverVisual.jsx, no stock photos), structured body (Key Concepts / Under the Hood / callout / Business / Practical / Takeaway), tags, related insights (category+tag scoring), 404 state

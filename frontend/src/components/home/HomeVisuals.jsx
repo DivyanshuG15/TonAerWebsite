@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Cpu, Wifi, Cloud, Database, BrainCircuit, Home, Zap } from 'lucide-react';
+import { SeriesVisual } from '../SeriesVisual';
 import { fadeUp } from './Chapter';
 
 /* CH 02 — The Ecosystem: one coherent aligned architecture */
@@ -30,11 +31,8 @@ export function EcosystemArchitecture() {
                                 <span className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#00D084] flow-x" style={{ animationDelay: `${i * 0.45}s`, position: 'absolute' }} />
                             </span>
                         )}
-                        <div className="relative z-10 w-10 h-10 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center">
-                            <n.icon size={17} className="text-[#00905F]" />
-                        </div>
-                        <div className="font-mono-xu text-[10px] tracking-[0.2em] text-slate-400 mt-5">0{i + 1}</div>
-                        <div className="font-display font-semibold text-slate-900 mt-1.5">{n.label}</div>
+                        <n.icon size={20} className="text-[#00905F]" />
+                        <div className="font-display font-semibold text-slate-900 mt-4">{n.label}</div>
                         <p className="text-sm text-slate-500 mt-2 leading-relaxed">{n.desc}</p>
                     </motion.div>
                 ))}
@@ -43,32 +41,33 @@ export function EcosystemArchitecture() {
     );
 }
 
-/* CH 04 — Connectivity bridge: hardware is not isolated */
+/* CH 04 — Connectivity bridge: real product, not abstract decoration */
 export function ConnectivityBridge() {
     return (
         <div className="mt-16 rounded-3xl bg-[#020617] p-8 sm:p-14 overflow-hidden relative" data-testid="connectivity-bridge">
             <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'linear-gradient(#5CE8B4 1px, transparent 1px), linear-gradient(90deg, #5CE8B4 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
-            <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-8 md:gap-6">
-                {[
-                    { icon: Cpu, label: 'TONAER GATEWAY', desc: 'Captures the connection' },
-                    { icon: Wifi, label: 'NETWORK', desc: 'Carries the experience' },
-                    { icon: Cloud, label: 'TONAER CLOUD', desc: 'Understands the fleet' },
-                ].map((n, i) => (
-                    <motion.div key={n.label} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.15 }} className="contents">
-                        <div className="text-center">
-                            <div className="w-16 h-16 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                                <n.icon size={24} className="text-[#00D084]" />
-                            </div>
-                            <div className="font-mono-xu text-[11px] tracking-[0.2em] text-white mt-5">{n.label}</div>
-                            <p className="text-sm text-slate-500 mt-2">{n.desc}</p>
-                        </div>
-                        {i < 2 && (
-                            <div className="hidden md:block relative h-px w-full min-w-[60px] bg-white/15">
-                                <span className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#00D084] flow-x" style={{ animationDelay: `${i * 0.7}s` }} />
-                            </div>
-                        )}
-                    </motion.div>
-                ))}
+            <div className="relative grid grid-cols-1 lg:grid-cols-[1.2fr_auto_1fr_auto_1fr] items-center gap-8 lg:gap-6">
+                <motion.div {...fadeUp} className="text-center">
+                    <SeriesVisual variant={{}} bare className="max-w-[300px] mx-auto" />
+                    <div className="font-mono-xu text-[11px] tracking-[0.2em] text-white mt-2">TONAER GATEWAY</div>
+                    <p className="text-sm text-slate-500 mt-2">Captures the connection</p>
+                </motion.div>
+                <div className="hidden lg:block relative h-px w-full min-w-[50px] bg-white/15">
+                    <span className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#00D084] flow-x" />
+                </div>
+                <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.15 }} className="text-center">
+                    <Wifi size={30} className="mx-auto text-[#00D084]" />
+                    <div className="font-mono-xu text-[11px] tracking-[0.2em] text-white mt-4">NETWORK</div>
+                    <p className="text-sm text-slate-500 mt-2">Carries the experience</p>
+                </motion.div>
+                <div className="hidden lg:block relative h-px w-full min-w-[50px] bg-white/15">
+                    <span className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#00D084] flow-x" style={{ animationDelay: '0.7s' }} />
+                </div>
+                <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.3 }} className="text-center">
+                    <Cloud size={30} className="mx-auto text-[#00D084]" />
+                    <div className="font-mono-xu text-[11px] tracking-[0.2em] text-white mt-4">TONAER CLOUD</div>
+                    <p className="text-sm text-slate-500 mt-2">Understands the fleet</p>
+                </motion.div>
             </div>
         </div>
     );
@@ -173,3 +172,95 @@ export function PlatformDashboard() {
 }
 
 export { Zap };
+
+/* CH 07 — One unified dark technology moment: data → action */
+const INTEL_STAGES = [
+    {
+        label: 'Network Data',
+        desc: 'Live telemetry from every gateway',
+        viz: (
+            <svg viewBox="0 0 120 44" className="w-full h-11" aria-hidden="true">
+                <path d="M0 26 Q 12 24 20 26 T 40 22 T 60 28 T 80 18 T 100 24 T 120 20" fill="none" stroke="#475569" strokeWidth="1.5" />
+                <circle cx="80" cy="18" r="2.5" fill="#00D084" />
+                <circle cx="40" cy="22" r="2" fill="#64748B" />
+            </svg>
+        ),
+    },
+    {
+        label: 'Analytics',
+        desc: 'Patterns separated from noise',
+        viz: (
+            <svg viewBox="0 0 120 44" className="w-full h-11" aria-hidden="true">
+                {[10, 26, 42, 58, 74, 90, 106].map((x, i) => (
+                    <rect key={x} x={x} y={36 - [8, 14, 10, 20, 16, 28, 22][i]} width="8" rx="2" fill={i === 5 ? '#00D084' : '#475569'} />
+                ))}
+            </svg>
+        ),
+    },
+    {
+        label: 'Insights',
+        desc: 'Anomalies surfaced with context',
+        viz: (
+            <svg viewBox="0 0 120 44" className="w-full h-11" aria-hidden="true">
+                <path d="M0 30 L100 30" stroke="#334155" strokeWidth="1.5" strokeDasharray="3 5" />
+                <circle cx="60" cy="16" r="5" fill="none" stroke="#00D084" strokeWidth="1.5" />
+                <circle cx="60" cy="16" r="1.8" fill="#00D084" />
+                <text x="60" y="42" fill="#64748B" fontSize="8" fontFamily="monospace" textAnchor="middle" letterSpacing="1">ANOMALY DETECTED</text>
+            </svg>
+        ),
+    },
+    {
+        label: 'Intelligence',
+        desc: 'Behavior understood across the fleet',
+        viz: (
+            <svg viewBox="0 0 120 44" className="w-full h-11" aria-hidden="true">
+                {[18, 12, 6].map((r, i) => (
+                    <circle key={r} cx="60" cy="22" r={r} fill="none" stroke={i === 2 ? '#00D084' : '#334155'} strokeWidth="1.5" strokeDasharray={i === 1 ? '4 4' : undefined} />
+                ))}
+                <circle cx="60" cy="22" r="2" fill="#00D084" />
+            </svg>
+        ),
+    },
+    {
+        label: 'Action',
+        desc: 'Networks optimized before customers notice',
+        viz: (
+            <div className="h-11 flex items-center justify-center">
+                <span className="font-mono-xu text-[9px] tracking-[0.15em] text-[#04150E] bg-[#00D084] rounded-full px-3.5 py-1.5">OPTIMIZED</span>
+            </div>
+        ),
+    },
+];
+
+export function IntelligenceMoment() {
+    return (
+        <div className="mt-16" data-testid="intelligence-moment">
+            <div className="relative">
+                {/* continuous spine */}
+                <span className="hidden lg:block absolute top-[22px] left-0 right-0 h-px bg-white/10">
+                    <span className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#00D084] flow-x" />
+                    <span className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#00D084] flow-x" style={{ animationDelay: '1.4s' }} />
+                </span>
+                <span className="lg:hidden absolute top-0 bottom-0 left-[22px] w-px bg-white/10" />
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-y-12 lg:gap-x-8">
+                    {INTEL_STAGES.map((s, i) => (
+                        <motion.div key={s.label} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.1 }} className="relative pl-16 lg:pl-0" data-testid={`intel-stage-${i}`}>
+                            <span className={`absolute lg:relative left-0 top-1 lg:top-0 lg:mx-auto block w-11 h-11 rounded-full border flex items-center justify-center ${i === INTEL_STAGES.length - 1 ? 'border-[#00D084] bg-[#00D084]/10' : 'border-white/15 bg-[#020617]'}`}>
+                                <span className={`w-2 h-2 rounded-full ${i === INTEL_STAGES.length - 1 ? 'bg-[#00D084]' : 'bg-slate-500'}`} />
+                            </span>
+                            <div className="lg:mt-6 lg:text-center">
+                                {s.viz}
+                                <div className="font-display font-semibold text-white mt-4">{s.label}</div>
+                                <p className="text-sm text-slate-500 mt-1.5 leading-relaxed">{s.desc}</p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+            <motion.p {...fadeUp} className="mt-16 text-center text-slate-400 text-[15px] max-w-2xl mx-auto leading-relaxed">
+                AI-powered diagnostics analyze gateway behavior in real time — detecting issues, recommending actions and
+                optimizing networks before subscribers notice.
+            </motion.p>
+        </div>
+    );
+}

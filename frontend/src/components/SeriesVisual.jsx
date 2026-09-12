@@ -15,13 +15,22 @@ function Turntable({ variant }) {
     );
 }
 
-export function SeriesVisual({ variant = {}, label }) {
+// bare: no card chrome (for composed scenes like the hero). close: tighter camera for larger product presence.
+export function SeriesVisual({ variant = {}, label, bare = false, close = false, className = '' }) {
     return (
         <div
-            className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 bg-gradient-to-b from-white to-slate-100 grain aspect-[4/3]"
+            className={
+                bare
+                    ? `relative aspect-[4/3] ${className}`
+                    : `relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 bg-gradient-to-b from-white to-slate-100 grain aspect-[4/3] ${className}`
+            }
             data-testid="series-visual"
         >
-            <Canvas dpr={[1, 2]} camera={{ fov: 35, position: [3.8, 1.7, 5.4] }} gl={{ antialias: true }}>
+            <Canvas
+                dpr={[1, 2]}
+                camera={close ? { fov: 32, position: [2.9, 1.25, 4.1] } : { fov: 35, position: [3.8, 1.7, 5.4] }}
+                gl={{ antialias: true, alpha: bare }}
+            >
                 <ambientLight intensity={0.75} />
                 <directionalLight position={[6, 9, 7]} intensity={1.6} />
                 <directionalLight position={[-7, 5, -6]} intensity={0.5} color="#5CE8B4" />

@@ -182,12 +182,12 @@ export function Nav() {
 
     return (
         <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4" data-testid="main-nav" ref={rootRef}>
-            <nav className={`relative flex items-center gap-1 rounded-full backdrop-blur-xl border pl-5 pr-2 shadow-2xl transition-all duration-300 ${
-                scrolled ? 'py-1.5' : 'py-2'
+            <nav className={`relative flex items-center gap-1.5 rounded-full backdrop-blur-xl border pl-6 pr-2.5 shadow-2xl transition-all duration-300 ${
+                scrolled ? 'py-2.5' : 'py-3.5'
             } ${
                 light ? 'bg-white/85 border-slate-200/80 text-slate-900 shadow-slate-900/5' : 'bg-slate-950/70 border-white/10 text-white shadow-slate-950/30'
             }`}>
-                <Link to="/" className="font-display font-bold tracking-[0.22em] text-sm mr-3 flex items-center gap-2" data-testid="nav-logo">
+                <Link to="/" className="font-display font-bold tracking-[0.22em] text-base mr-4 flex items-center gap-2" data-testid="nav-logo">
                     TONAER
                     <span className="w-1.5 h-1.5 rounded-full bg-brand led-blink" />
                 </Link>
@@ -203,7 +203,7 @@ export function Nav() {
                             <button
                                 onClick={() => setOpen(open === menu.id ? null : menu.id)}
                                 data-testid={`nav-menu-${menu.id}`}
-                                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors duration-300 ${
+                                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-colors duration-300 ${
                                     isGroupActive(menu, location.pathname)
                                         ? light ? 'text-slate-900 bg-slate-900/5' : 'text-white bg-white/10'
                                         : light ? 'text-slate-500 hover:text-slate-900' : 'text-slate-400 hover:text-white'
@@ -252,7 +252,7 @@ export function Nav() {
                 <button
                     onClick={goDemo}
                     data-testid="nav-cta-demo"
-                    className="ml-2 rounded-full bg-[#00D084] hover:bg-brand-strong transition-colors duration-300 text-[#04150E] text-xs font-semibold tracking-wide px-4 py-2"
+                    className="ml-2 rounded-full bg-[#00D084] hover:bg-brand-strong transition-colors duration-300 text-[#04150E] text-sm font-semibold tracking-wide px-6 py-2.5"
                 >
                     Request Demo
                 </button>
