@@ -1,0 +1,47 @@
+{
+  "app_type": "marketing_site",
+  "brand": {
+    "name": "TonAer",
+    "tagline": "Intelligent Connectivity",
+    "primary_color": "#00C7A5",
+    "background_color": "#F6F7F8",
+    "theme": "light"
+  },
+  "typography": {
+    "headline_font": "Outfit, sans-serif",
+    "body_font": "Plus Jakarta Sans, sans-serif",
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight font-bold",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold",
+      "h3": "text-xl sm:text-2xl font-semibold",
+      "body": "text-base leading-relaxed text-slate-600"
+    }
+  },
+  "colors": {
+    "primary": "#00C7A5",
+    "primary_hover": "#00B092",
+    "background": "#F6F7F8",
+    "card_bg": "#FFFFFF",
+    "text_main": "#0F172A",
+    "text_muted": "#64748B",
+    "border": "#E2E8F0"
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-white/80 border border-slate-200/60 shadow-sm",
+    "card_style": "bg-white rounded-2xl p-8 border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,199,165,0.08)] transition-all duration-300"
+  },
+  "component_path": "/app/frontend/src/components/",
+  "image_urls": {
+    "telecom_tower": "https://images.unsplash.com/photo-1602823284936-463177448097?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "router_device": "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "analytics_dashboard": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "instructions_to_main_agent": "Build a production-quality, responsive TonAer homepage with sticky navigation, video-first hero with teal cinematic gradient, editorial transition, AI network intelligence matrix, hardware ecosystem (5G/Wi-Fi 7/eSIM), large dashboard preview, network topology interconnect (gateway to client), operations & analytics, white-label platform management, and interactive contact modal. Use Tailwind CSS with primary color #00C7A5 and light background #F6F7F8. Ensure all interactive items have data-testid attributes.",
+  "universal_guidelines_for_main_agent": [
+    "Ensure all interactive elements have data-testid attributes",
+    "Do not use universal transitions like transition: all",
+    "Never use complete transparent backgrounds for dropdowns or headers",
+    "Maintain generous spacing (p-8, p-12, py-20)",
+    "Use Outfit for headers and Plus Jakarta Sans for body text"
+  ]
+}
