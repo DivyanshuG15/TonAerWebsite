@@ -4,9 +4,9 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { useLenis } from "lenis/react";
 import "./hero.css";
 
-// Set HERO_VIDEO_URL to the final 15–20s TonAer brand film when ready — the hero is video-ready,
-// the animated cinematic stage below renders as the placeholder/poster until then.
-const HERO_VIDEO_URL = null;
+// The final TonAer brand film — plays as the full-viewport hero background.
+// If the video ever fails to load, the hero falls back to the poster image.
+const HERO_VIDEO_URL = "https://customer-assets-39nsmqrw.emergentagent.net/job_network-intelligence-3/artifacts/a090118016dbec97_gemini_generated_video_ea85614d.mp4";
 const HERO_POSTER = "https://images.unsplash.com/photo-1602823284936-463177448097?crop=entropy&cs=srgb&fm=jpg&q=85";
 
 const NODES = [
@@ -34,6 +34,7 @@ export default function Hero({ onContact }) {
   const ref = useRef(null);
   const lenis = useLenis();
   const [intro, setIntro] = useState(true);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIntro(false), 1500);
@@ -50,8 +51,25 @@ export default function Hero({ onContact }) {
   return (
     <section className="hx-hero" ref={ref} data-testid="hero-section">
       <motion.div className="hx-media" style={{ y: mediaY }}>
-        {HERO_VIDEO_URL ? (
-          <video className="hx-video" src={HERO_VIDEO_URL} poster={HERO_POSTER} autoPlay muted loop playsInline data-testid="hero-video" />
+        {HERO_VIDEO_URL && !videoFailed ? (
+          <video
+            className="hx-video"
+            src={HERO_VIDEO_URL}
+            poster={HERO_POSTER}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            onError={() => setVideoFailed(true)}
+            data-testid="hero-video"
+          />
+        ) : videoFailed ? (
+          <div className="hx-stage" data-testid="hero-media-fallback" role="img" aria-label="TonAer brand film poster">
+            <div className="hx-photo" style={{ backgroundImage: `url(${HERO_POSTER})` }} />
+            <div className="hx-aura" />
+          </div>
         ) : (
           <div className="hx-stage" data-testid="hero-media-placeholder" role="img" aria-label="Cinematic placeholder for the upcoming TonAer brand film">
             <div className="hx-photo" style={{ backgroundImage: `url(${HERO_POSTER})` }} />

@@ -1,6 +1,6 @@
 .hx-hero{position:relative;height:100svh;min-height:660px;background:#04100f;color:#f2faf8;overflow:hidden}
 .hx-media{position:absolute;inset:-14% 0 0;z-index:0}
-.hx-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hx-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center}
 .hx-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(120% 90% at 50% 38%,#0c3634 0%,#072220 42%,#04100f 78%)}
 .hx-photo{position:absolute;inset:0;background-size:cover;background-position:center 32%;opacity:.38;filter:saturate(.7) brightness(.85);animation:hx-kenburns 28s ease-in-out infinite alternate}
 .hx-aura{position:absolute;left:50%;top:40%;width:min(90vw,900px);height:min(90vw,900px);transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,199,165,.22),rgba(0,199,165,.05) 45%,transparent 68%)}
