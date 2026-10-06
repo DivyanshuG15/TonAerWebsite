@@ -21,10 +21,10 @@ export default function EcosystemSection() {
     <section className="eco" id="devices" data-testid="ecosystem-section">
       <div className="section-shell split-heading">
         <div>
-          <p className="eyebrow teal">ONE CONNECTED ECOSYSTEM / 05</p>
-          <h2>From device<br />to <em>digital experience.</em></h2>
+          <p className="eyebrow teal">ONE CONNECTED ECOSYSTEM</p>
+          <h2>One gateway.<br /><em>An entire connected ecosystem.</em></h2>
         </div>
-        <p>Premium hardware and a powerful platform experience, connected by intelligence. Every layer is designed to work as one — hover any capability to see where it lives.</p>
+        <p>5G, eSIM, Wi-Fi 7, Tri-Band and EasyMesh working together to deliver a seamless connected experience — hover any capability to see where it lives.</p>
       </div>
 
       <motion.div
