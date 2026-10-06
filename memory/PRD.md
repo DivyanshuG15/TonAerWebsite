@@ -21,8 +21,9 @@ Create a completely new TonAer homepage from scratch for a premium global teleco
 
 ## Prioritized backlog
 - 2026-10-06 (V3 stage 1b): Final TonAer brand film integrated as the hero background (user-supplied `gemini_generated_video_ea85614d.mp4`) — autoplay/muted/loop/playsInline, poster + error fallback, verified playing on desktop and mobile.
+- 2026-10-06 (V3 stage 2): Interactive Ecosystem Story section — `TonAer Smart Gateway Ecosystem.png` in a clipped frame with 7 positioned hotspots (5G, eSIM, EasyMesh, Wi-Fi 7, Tri-Band, Cloud Managed, Mobile App); hover/tap dims the rest of the image with a spotlight mask, pulses a glow ring, shows a floating tooltip, and syncs with a pill chip rail + live description line. Replaces the old static showcase block at #devices.
 - P0 (awaiting hero approval, then next stage): AI/Platform section featuring `TonAer Smart Network Dashboard.png` large (60–75%) with floating indicators, connector lines, glow pulses, dark teal backdrop.
-- P0: Connectivity/Devices section featuring `TonAer Smart Gateway Ecosystem.png` with positioned glow/spotlight hover highlights (5G, eSIM, Wi-Fi 7, Tri-Band, EasyMesh, Cloud Managed, End User Mobile App).
+- P0: AI/Platform dashboard section (see above) — the remaining image-driven section.
 - P0: Hero video shipped — done. Next: dashboard + ecosystem sections below.
 - P1: Global density polish on remaining sections — pills, floating indicators, micro-panels; remove `/ 02`-style labels; Platform Capability Strip; dark Network Topology section with animated paths.
 - P1: Connect contact leads to the team’s CRM/email workflow after the destination is selected.

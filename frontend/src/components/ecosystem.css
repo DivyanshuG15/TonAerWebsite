@@ -1,0 +1,37 @@
+.eco{padding:150px 0 120px;background:var(--paper)}
+.eco h2{font-size:clamp(41px,4.5vw,65px)}
+.eco-stage{margin-top:70px}
+.eco-frame{position:relative;border-radius:14px;overflow:hidden;border:1px solid #dfe9e7;box-shadow:0 40px 90px rgba(14,48,46,.14),0 4px 18px rgba(14,48,46,.08);background:#fff}
+.eco-frame img{display:block;width:100%;height:auto}
+.eco-dim{position:absolute;inset:0;background:rgba(4,17,16,.58);opacity:0;transition:opacity .35s;pointer-events:none;-webkit-mask-image:radial-gradient(circle 170px at var(--sx) var(--sy),transparent 0 105px,black 185px);mask-image:radial-gradient(circle 170px at var(--sx) var(--sy),transparent 0 105px,black 185px)}
+.eco-dim.on{opacity:1}
+.eco-ring{position:absolute;left:var(--sx);top:var(--sy);transform:translate(-50%,-50%);pointer-events:none;z-index:3}
+.eco-ring i{display:block;width:118px;height:118px;border:1.5px solid rgba(0,199,165,.95);border-radius:50%;box-shadow:0 0 34px rgba(0,199,165,.5),inset 0 0 26px rgba(0,199,165,.28);animation:eco-pulse 1.9s ease-out infinite}
+.eco-dot{position:absolute;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;border:2px solid #fff;background:#00c7a5;box-shadow:0 0 0 4px rgba(0,199,165,.25),0 0 14px rgba(0,199,165,.6);cursor:pointer;z-index:4;padding:0;transition:transform .25s,box-shadow .25s}
+.eco-dot:hover,.eco-dot.on{transform:translate(-50%,-50%) scale(1.45);box-shadow:0 0 0 6px rgba(0,199,165,.3),0 0 22px rgba(0,199,165,.8)}
+.eco-tip{position:absolute;left:var(--sx);top:var(--sy);z-index:5;width:240px;background:rgba(5,24,23,.92);backdrop-filter:blur(8px);border:1px solid rgba(0,199,165,.45);border-radius:10px;padding:14px 16px;pointer-events:none;animation:eco-tipin .3s cubic-bezier(.16,1,.3,1)}
+.eco-tip.right{transform:translate(26px,-50%)}
+.eco-tip.left{transform:translate(calc(-100% - 26px),-50%)}
+.eco-tip b{display:block;font:700 11px Manrope,sans-serif;letter-spacing:1.4px;color:#00c7a5;margin-bottom:6px}
+.eco-tip span{display:block;font-size:12px;line-height:1.6;color:#d9eeea}
+.eco-badge{position:absolute;left:18px;bottom:14px;z-index:4;font:500 9px 'DM Mono',monospace;letter-spacing:2px;color:#5f7a75;background:rgba(247,251,250,.85);backdrop-filter:blur(6px);border:1px solid #dfe9e7;border-radius:100px;padding:7px 12px;pointer-events:none}
+.eco-rail{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
+.eco-chip{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:100px;border:1px solid #d5e2e0;background:#fff;font:600 10.5px 'DM Mono',monospace;letter-spacing:1.6px;color:#4b6560;cursor:pointer;transition:background-color .25s,color .25s,border-color .25s,transform .25s,box-shadow .25s}
+.eco-chip i{width:6px;height:6px;border-radius:50%;background:#9db8b3;transition:background-color .25s,box-shadow .25s}
+.eco-chip:hover{transform:translateY(-2px);border-color:#00c7a5;color:#0b3d36}
+.eco-chip.on{background:#00c7a5;border-color:#00c7a5;color:#03211c;box-shadow:0 10px 26px rgba(0,199,165,.3)}
+.eco-chip.on i{background:#03211c;box-shadow:none}
+.eco-desc{margin:26px auto 0;max-width:620px;text-align:center;font-size:14px;line-height:1.75;color:var(--muted);min-height:50px;transition:opacity .2s}
+@keyframes eco-pulse{0%{opacity:1;transform:scale(.82)}70%{opacity:.5;transform:scale(1.06)}100%{opacity:1;transform:scale(.82)}}
+@keyframes eco-tipin{from{opacity:0;margin-top:8px}to{opacity:1;margin-top:0}}
+@media(max-width:900px){
+  .eco{padding:100px 0 80px}
+  .eco-stage{margin-top:45px}
+  .eco-ring i{width:76px;height:76px}
+  .eco-dim{-webkit-mask-image:radial-gradient(circle 110px at var(--sx) var(--sy),transparent 0 62px,black 120px);mask-image:radial-gradient(circle 110px at var(--sx) var(--sy),transparent 0 62px,black 120px)}
+  .eco-tip{left:12px !important;right:12px;top:auto !important;bottom:12px;width:auto;transform:none !important}
+  .eco-badge{display:none}
+  .eco-rail{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:8px;margin-left:-21px;margin-right:-21px;padding-left:21px;scrollbar-width:none}
+  .eco-rail::-webkit-scrollbar{display:none}
+  .eco-chip{flex:0 0 auto}
+}
