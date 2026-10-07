@@ -1,171 +1,79 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Crosshair, Eye, Lightbulb, Router, Share2, ShieldAlert, Signal, Siren, Smartphone, TrendingUp, Wrench, Zap } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Crosshair, MessageSquare, Radar, TrendingUp, Zap } from "lucide-react";
 import { Reveal, SecHead } from "./SecHead";
 import "./home.css";
 
-const SCENARIOS = [
-  {
-    q: "Why is this customer's Wi-Fi performance degrading?",
-    lines: [
-      { crit: true, text: "Issue detected — high latency identified on the mesh path" },
-      { text: "Likely root cause: mesh node instability" },
-      { text: "Affected devices: 4" },
-    ],
-    action: "Recommended action: reconfigure mesh path",
-    trace: [
-      { Icon: Smartphone, label: "CUSTOMER" },
-      { Icon: Router, label: "GATEWAY" },
-      { Icon: Share2, label: "MESH NODE" },
-      { Icon: Siren, label: "ISSUE", issue: true },
-    ],
-  },
-  {
-    q: "Is there any security risk on this account right now?",
-    lines: [
-      { crit: true, text: "Network anomaly detected — unusual outbound traffic pattern" },
-      { text: "Potential vulnerability: outdated gateway firmware" },
-      { text: "Affected gateways: 2" },
-    ],
-    action: "Recommended action: schedule firmware update",
-    trace: [
-      { Icon: Smartphone, label: "CUSTOMER" },
-      { Icon: Router, label: "GATEWAY" },
-      { Icon: ShieldAlert, label: "ANOMALY" },
-      { Icon: Siren, label: "ISSUE", issue: true },
-    ],
-  },
-  {
-    q: "Will this site stay healthy over the next two weeks?",
-    lines: [
-      { text: "Forecast generated from live telemetry" },
-      { crit: true, text: "Watch condition — rising latency trend detected" },
-      { text: "Predicted impact: peak-hour degradation" },
-    ],
-    action: "Recommended action: optimize channel allocation",
-    trace: [
-      { Icon: Router, label: "GATEWAY" },
-      { Icon: Signal, label: "CHANNELS" },
-      { Icon: TrendingUp, label: "CONGESTION" },
-      { Icon: Siren, label: "RISK", issue: true },
-    ],
-  },
-];
+const AI_VIDEO = "/assets/ai-intelligence.mp4";
+const AI_POSTER = "/assets/ai-poster.jpg";
 
-const AI_CARDS = [
-  { Icon: Wrench, title: "Real-time Troubleshooting", text: "Understand and diagnose issues as they happen." },
-  { Icon: Zap, title: "AI Optimization", text: "Continuously identify opportunities to improve connectivity." },
-  { Icon: TrendingUp, title: "Forecasting", text: "Anticipate changes in network and account health." },
-  { Icon: Eye, title: "Predictive Insights", text: "Identify potential problems before they impact users." },
-  { Icon: Crosshair, title: "Root Cause Analysis", text: "Move from symptoms to likely causes faster." },
-  { Icon: Lightbulb, title: "Intelligent Recommendations", text: "Turn insights into actionable next steps." },
+const CARDS = [
+  { Icon: Radar, stage: "01", label: "DETECT", title: "See Problems as They Happen", text: "Detect anomalies before they become customer-impacting issues." },
+  { Icon: Crosshair, stage: "02", label: "DIAGNOSE", title: "Find the Root Cause Faster", text: "Connect network signals to uncover what's actually causing the issue." },
+  { Icon: MessageSquare, stage: "03", label: "UNDERSTAND", title: "Ask Your Network Anything", text: "Use natural language to turn complex network data into clear answers." },
+  { Icon: TrendingUp, stage: "04", label: "PREDICT", title: "Know What's Coming Next", text: "Forecast network health and emerging risks before they become problems." },
+  { Icon: Zap, stage: "05", label: "OPTIMIZE", title: "Continuously Improve Performance", text: "Identify opportunities to improve connectivity, stability and efficiency." },
+  { Icon: ArrowRight, stage: "06", label: "ACT", title: "Get the Next Best Action", text: "Turn AI insights into clear, actionable recommendations." },
 ];
 
 export default function AIIntelligence() {
-  const [index, setIndex] = useState(0);
-  const [manual, setManual] = useState(false);
-  const [hover, setHover] = useState(false);
-
-  useEffect(() => {
-    if (manual || hover) return;
-    const timer = setInterval(() => setIndex((i) => (i + 1) % SCENARIOS.length), 7000);
-    return () => clearInterval(timer);
-  }, [manual, hover]);
-
-  const scenario = SCENARIOS[index];
-  const fade = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -12 }, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } };
+  const [videoFailed, setVideoFailed] = useState(false);
 
   return (
-    <section className="sec sec-dark aint" id="ai" data-testid="ai-section">
+    <section className="sec aint" id="ai" data-testid="ai-section">
       <div className="section-shell">
         <SecHead
+          center
           eyebrow="AI INTELLIGENCE"
           title={<>From reactive troubleshooting<br /><em>to real-time intelligence.</em></>}
-          copy="Ask questions in natural language, understand what is happening across the network, identify root causes and act before connectivity problems become customer problems."
         />
+        <Reveal className="aiv-actions" delay={0.1}>
+          {["Ask.", "Understand.", "Predict.", "Act."].map((word) => (
+            <span className="aiv-chip" key={word}>{word}</span>
+          ))}
+        </Reveal>
+        <Reveal delay={0.16}>
+          <p className="aiv-copy">Your network doesn&rsquo;t just report what happened. TonAer helps you understand what&rsquo;s happening, why it matters, and what to do next.</p>
+        </Reveal>
 
-        <Reveal className="copilot" data-testid="ai-copilot">
-          <div className="cop-head">
-            <img src="/assets/favicon.png" alt="" />
-            TONAER AI COPILOT
-            <span className="cop-live"><i />{manual || hover ? "PAUSED" : "LIVE ANALYSIS"}</span>
-          </div>
-          <div className="cop-grid" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-            <div className="cop-chat">
-              <AnimatePresence mode="wait">
-                <motion.div key={index} className="cop-chat-inner" {...fade}>
-                  <div className="cop-q">
-                    &ldquo;{scenario.q}&rdquo;
-                    <small>NETWORK OPERATOR · JUST NOW</small>
-                  </div>
-                  <div className="cop-a">
-                    <b>TONAER AI</b>
-                    {scenario.lines.map((line) => (
-                      <p className="cop-line" key={line.text}><i className={`dot ${line.crit ? "crit" : ""}`} />{line.text}</p>
-                    ))}
-                    <p className="cop-line action"><Zap />{scenario.action}</p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            <div className="cop-side">
-              <div className="cop-panel">
-                <h4>ACCOUNT HEALTH FORECAST <small>ILLUSTRATIVE</small></h4>
-                <div className="fc-track" data-testid="ai-forecast">
-                  <div className="fc-bar" />
-                  <div className="fc-steps">
-                    <div className="fc-step"><i className="ok" /><b>Healthy</b><small>TODAY</small></div>
-                    <div className="fc-step"><i className="watch" /><b>Watch</b><small>+7 DAYS</small></div>
-                    <div className="fc-step"><i className="risk" /><b>Risk</b><small>+14 DAYS</small></div>
-                  </div>
-                </div>
-              </div>
-              <div className="cop-panel">
-                <h4>REAL-TIME INTELLIGENCE</h4>
-                <div className="cop-intel">
-                  <p className="warn-i"><Siren />Network anomaly detected</p>
-                  <p className="warn-i"><ShieldAlert />Potential vulnerability detected</p>
-                  <p><Crosshair />Root cause identified</p>
-                  <p><Lightbulb />Recommended action available</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="cop-trace" data-testid="ai-trace">
-            <AnimatePresence mode="wait">
-              <motion.span key={index} className="cop-trace-inner" {...fade}>
-                {scenario.trace.map((node, i) => (
-                  <span key={node.label} style={{ display: "contents" }}>
-                    <span className={`trace-node ${node.issue ? "issue" : ""}`}><node.Icon />{node.label}</span>
-                    {i < scenario.trace.length - 1 && <span className="trace-link" />}
-                  </span>
-                ))}
-              </motion.span>
-            </AnimatePresence>
-            <div className="cop-dots" data-testid="copilot-scenario-dots">
-              {SCENARIOS.map((s, i) => (
-                <button
-                  key={s.q}
-                  className={i === index ? "on" : ""}
-                  onClick={() => { setIndex(i); setManual(true); }}
-                  aria-label={`Copilot scenario ${i + 1}`}
-                  data-testid={`copilot-scenario-${i + 1}`}
-                />
-              ))}
-            </div>
+        <Reveal delay={0.22}>
+          <p className="aiv-line">FROM NETWORK DATA <span>→</span> TO ACTIONABLE INTELLIGENCE</p>
+          <div className="aiv-frame" data-testid="ai-video-frame">
+            {!videoFailed ? (
+              <video
+                src={AI_VIDEO}
+                poster={AI_POSTER}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                onError={() => setVideoFailed(true)}
+                data-testid="ai-video"
+              />
+            ) : (
+              <img src={AI_POSTER} alt="TonAer AI intelligence in action" data-testid="ai-video-poster" />
+            )}
           </div>
         </Reveal>
 
-        <div className="ai2-cards" data-testid="ai-capability-cards">
-          {AI_CARDS.map(({ Icon, title, text }, i) => (
-            <Reveal key={title} className="ai2-card" delay={i * 0.05}>
-              <Icon />
-              <h3>{title}</h3>
+        <Reveal className="sub-head center" delay={0.05}>
+          <h3>One AI engine. <em>Six ways to work smarter.</em></h3>
+        </Reveal>
+
+        <div className="aic-grid" data-testid="ai-capability-cards">
+          {CARDS.map(({ Icon, stage, label, title, text }, i) => (
+            <Reveal key={label} className="aic-card" delay={i * 0.06} data-testid={`ai-card-${label.toLowerCase()}`}>
+              <div className="aic-top">
+                <span className="aic-stage">{stage}</span>
+                {i < CARDS.length - 1 && <ArrowRight className="aic-flow-arrow" />}
+              </div>
+              <div className="aic-icon"><Icon /></div>
+              <span className="aic-label">{label}</span>
+              <h4>{title}</h4>
               <p>{text}</p>
             </Reveal>
           ))}
         </div>
-        <p className="ai-note">ILLUSTRATIVE AI INTERACTION — NOT REAL CUSTOMER DATA</p>
       </div>
     </section>
   );
