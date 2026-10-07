@@ -213,7 +213,7 @@
 .gw-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
 .gw-visual{position:relative;display:grid;place-items:center;padding:30px 0}
 .gw-visual::before{content:"";position:absolute;width:78%;height:42%;bottom:6%;background:radial-gradient(ellipse,rgba(0,199,165,.24),transparent 68%);filter:blur(10px)}
-.gw-img{position:relative;width:min(280px,64%);height:auto;filter:drop-shadow(0 40px 44px rgba(10,42,39,.24));animation:gwfloat 7s ease-in-out infinite}
+.gw-img{position:relative;width:min(320px,70%);height:auto;filter:drop-shadow(0 44px 40px rgba(10,42,39,.22));animation:gwfloat 7s ease-in-out infinite}
 @keyframes gwfloat{50%{transform:translateY(-12px)}}
 .gw-ring{position:absolute;width:min(420px,90%);aspect-ratio:1/1;border:1px dashed rgba(0,167,142,.4);border-radius:50%;animation:gwspin 40s linear infinite}
 @keyframes gwspin{to{transform:rotate(360deg)}}
