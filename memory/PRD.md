@@ -16,6 +16,7 @@ Create a completely new TonAer homepage from scratch for a premium global teleco
   - Section padding tightened to 96px/64px; no repeated dark bands, no cards-as-sections, duplicates removed (dropped standalone hub-spoke, layered stack, advantage formula, separate security/analytics/gateway/ecosystem sections).
   - Fixed Reveal component to forward data-testid/rest props.
   - Copilot auto-play: 3 rotating operator scenarios (Wi-Fi degradation, security risk, health forecast) with 7s cycle, per-scenario AI answers + network traces, pause on hover, scenario dots that lock auto-play on manual selection, LIVE/PAUSED indicator.
+  - Brand statement rebuilt: "From Connectivity to Intelligence" eyebrow, competitive headline (teal on "raising the bar." / "your turn."), restrained carrier proof row (official T-Mobile / AT&T / Verizon logos, user-supplied, trimmed) with "Built for the evolving standards of leading U.S. networks." (no partnership claims), micro CTA to platform, and the cloud-ecosystem visual (45/55 split) with animated teal network paths, glowing nodes and scroll parallax.
 - Earlier: hero video integration, ecosystem interactivity, contact modal with API + failure states.
 - Verified: every section screenshotted desktop + 375px mobile; hero video playing; contact API 200 post-rebuild.
 
