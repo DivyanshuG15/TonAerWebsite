@@ -11,12 +11,12 @@ Create a completely new TonAer homepage from scratch for a premium global teleco
 - FastAPI `POST /api/contact` stores validated leads in MongoDB.
 
 ## Implemented
-- 2026-10-06 (V3 full rebuild below hero, per user spec):
-  - Hero (approved, untouched): video background, centered masked-reveal headline, intro moment, marquee, overlay.
-  - S1 Brand statement with animated network lines; S2 Operator problem (4 varied editorial cards); S3 TonAer answer (dark hub-and-spoke with animated paths to MSO/ISP, Network, AI, Operations, Devices, Users, Analytics); S4 Platform showcase (real dashboard UI, large, perspective reveal, live browser chrome + floating KPI chips); S5 Six platform capability cards in varied bento sizes with micro-visuals (chains, meters, flows, charts); S6 Gateway product with real device render + 7 capability items; S7 Interactive smart-home ecosystem (spotlight hotspots + chip rail); S8 EasyMesh (dark, animated gateway→nodes→users path + 3 cards); S9 Existing-ecosystem integration journey (7-step connected flow, TonAer hub highlighted); S10 AI intelligence (dark, full dashboard composition + floating AI callouts + 6 AI cards); S11 Real-time operations (6 live-look mini dashboards, marked illustrative); S12 Security (dark radar visual + 4 cards); S13 Analytics board (charts, donut, trends, AI insights — illustrative); S14 Layered platform stack; S15 White-label flow (Operator → TonAer → Customer); S16 Business value (4 large cards); S17 TonAer advantage formula (= TONAER); Final CTA + footer.
-  - Header nav now: Platform, AI, Connectivity, Devices, Solutions, Resources, About + Talk to Us; no numbered labels anywhere.
+- 2026-10-07 (V4 structural correction — 10 major sections, per user spec):
+  - Hero (approved, untouched) → BrandStatement → OperatorProblem (4 cards) → PlatformSection (dark: large real dashboard + 6 capability cards with micro-visuals, one environment) → HardwareSection (gateway render + 7 capability items + interactive ecosystem spotlight explorer + EasyMesh path & cards, all one section) → EcosystemIntegration (7-step journey) → AIIntelligence (dark: conversational TonAer AI Copilot — operator question → AI analysis with root cause + recommended action, account health forecast timeline Healthy→Watch→Risk, real-time intelligence panel, network trace Customer→Gateway→Mesh→Issue, 6 compact AI cards; marked illustrative) → OperationsSection (integrated security flow + 6 live-look cards + analytics board, one section) → BusinessSection (white-label flow in dark inner panel + 4 business-value cards) → FinalCTA.
+  - Section padding tightened to 96px/64px; no repeated dark bands, no cards-as-sections, duplicates removed (dropped standalone hub-spoke, layered stack, advantage formula, separate security/analytics/gateway/ecosystem sections).
+  - Fixed Reveal component to forward data-testid/rest props.
 - Earlier: hero video integration, ecosystem interactivity, contact modal with API + failure states.
-- Verified: all 18 sections screenshotted on desktop; key sections on 375px mobile; hero video confirmed playing; contact API 200 post-rebuild.
+- Verified: every section screenshotted desktop + 375px mobile; hero video playing; contact API 200 post-rebuild.
 
 ## Prioritized backlog
 - P1: Gateway product render cleanup (current crop retains faint artwork wave edges) — replace with a dedicated render if supplied.

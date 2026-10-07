@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 
-export const Reveal = ({ children, className = "", delay = 0, style }) => (
+export const Reveal = ({ children, className = "", delay = 0, style, ...rest }) => (
   <motion.div
     className={className}
     style={style}
+    {...rest}
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-8%" }}

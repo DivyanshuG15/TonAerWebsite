@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
 import { Reveal, SecHead } from "./SecHead";
 import "./home.css";
 
@@ -10,8 +10,19 @@ export default function OperationsSection() {
           center
           eyebrow="REAL-TIME OPERATIONS"
           title={<>See everything.<br /><em>The moment it happens.</em></>}
-          copy="Gateway telemetry, network health, alerts, devices, performance, connectivity and user experience — streaming into one operational view."
+          copy="Monitoring, alerts, gateway telemetry, security and analytics — one operational environment for the entire connected ecosystem."
         />
+
+        <Reveal className="secflow" data-testid="security-flow">
+          <b><ShieldCheck />INTEGRATED SECURITY</b>
+          <div className="flow">
+            <span className="flow-step">NETWORK ACTIVITY</span><span className="flow-arrow" />
+            <span className="flow-step">DETECTION</span><span className="flow-arrow" />
+            <span className="flow-step">ALERT</span><span className="flow-arrow" />
+            <span className="flow-step hot">ACTION</span>
+          </div>
+        </Reveal>
+
         <div className="ops-grid">
           <Reveal className="fcard" delay={0}>
             <div className="fcard-vis vis-paper op-vis">
@@ -42,6 +53,21 @@ export default function OperationsSection() {
           </Reveal>
 
           <Reveal className="fcard" delay={0.12}>
+            <div className="fcard-vis vis-ink op-vis">
+              <div className="meters" style={{ color: "#8fb5ae" }}>
+                {[["SIGNAL", 70], ["WAN", 86], ["WI-FI", 62], ["UPTIME", 96], ["PERF", 78]].map(([label, h], i) => (
+                  <div className="meter" key={label}><i style={{ height: `${h}%`, animationDelay: `${-i * 0.6}s` }} /><small>{label}</small></div>
+                ))}
+              </div>
+            </div>
+            <div className="fcard-body">
+              <span className="fcard-tag">EVERY GATEWAY</span>
+              <h3>Gateway Telemetry</h3>
+              <p>Health, connectivity, performance and telemetry from every gateway, live.</p>
+            </div>
+          </Reveal>
+
+          <Reveal className="fcard" delay={0}>
             <div className="fcard-vis vis-paper op-vis">
               <div className="op-gauge">
                 <svg viewBox="0 0 110 110" aria-hidden="true">
@@ -56,21 +82,6 @@ export default function OperationsSection() {
               <span className="fcard-tag">FLEET CONDITION</span>
               <h3>Device Health</h3>
               <p>Every gateway and mesh node reports its condition, uptime and status continuously.</p>
-            </div>
-          </Reveal>
-
-          <Reveal className="fcard" delay={0}>
-            <div className="fcard-vis vis-ink op-vis">
-              <div className="meters" style={{ color: "#8fb5ae" }}>
-                {[["DL", 82], ["UL", 64], ["LAT", 38], ["JIT", 46], ["LOSS", 22]].map(([label, h], i) => (
-                  <div className="meter" key={label}><i style={{ height: `${h}%`, animationDelay: `${-i * 0.6}s` }} /><small>{label}</small></div>
-                ))}
-              </div>
-            </div>
-            <div className="fcard-body">
-              <span className="fcard-tag">THROUGHPUT</span>
-              <h3>Network Performance</h3>
-              <p>Throughput, latency, jitter and loss tracked live across every connected site.</p>
             </div>
           </Reveal>
 
@@ -90,16 +101,47 @@ export default function OperationsSection() {
 
           <Reveal className="fcard" delay={0.12}>
             <div className="fcard-vis vis-paper op-vis">
-              <div className="op-feed">
-                <p><CheckCircle2 />Mesh node reconnected automatically</p>
-                <p><CheckCircle2 />Configuration applied to 24 gateways</p>
-                <p><CheckCircle2 />Firmware rollout completed on schedule</p>
+              <div className="op-alerts">
+                <div className="op-alert"><i className="crit" />Suspicious activity flagged<small>LIVE</small></div>
+                <div className="op-alert"><i className="warn" />Traffic anomaly — investigating<small>LIVE</small></div>
+                <div className="op-alert"><i className="ok" />Threat contained automatically<small>4 MIN</small></div>
               </div>
             </div>
             <div className="fcard-body">
-              <span className="fcard-tag">ACTIONABLE FEED</span>
-              <h3>Operational Insights</h3>
-              <p>Events roll up into insights operations teams can act on immediately.</p>
+              <span className="fcard-tag">ALWAYS-ON PROTECTION</span>
+              <h3>Threat Detection</h3>
+              <p>Suspicious behaviour and network anomalies are surfaced and acted on as they emerge.</p>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="an-board" id="resources" data-testid="analytics-board">
+          <Reveal className="an-panel an-wide">
+            <h3>Network performance</h3>
+            <small>LAST 24 HOURS · DOWNLOAD / UPLOAD</small>
+            <svg className="an-chart" viewBox="0 0 560 190" aria-hidden="true">
+              {[40, 80, 120, 160].map((y) => <line key={y} className="grid-line" x1="0" y1={y} x2="560" y2={y} />)}
+              <polyline className="line-b" points="0,130 60,118 120,126 180,100 240,110 300,88 360,98 420,74 480,84 560,60" />
+              <polyline className="line-a" points="0,150 60,140 120,148 180,126 240,134 300,112 360,122 420,100 480,108 560,86" />
+            </svg>
+          </Reveal>
+          <Reveal className="an-panel an-side" delay={0.08}>
+            <h3>Device distribution</h3>
+            <small>BY CONNECTION TYPE</small>
+            <div className="an-donut">
+              <svg viewBox="0 0 110 110" aria-hidden="true">
+                <circle cx="55" cy="55" r="42" stroke="#e6efec" />
+                <circle cx="55" cy="55" r="42" stroke="#00c7a5" strokeDasharray="111 264" />
+                <circle cx="55" cy="55" r="42" stroke="#0d2b2e" strokeDasharray="48 264" strokeDashoffset="-111" />
+                <circle cx="55" cy="55" r="42" stroke="#7fdcc9" strokeDasharray="58 264" strokeDashoffset="-159" />
+                <circle cx="55" cy="55" r="42" stroke="#b9cec9" strokeDasharray="47 264" strokeDashoffset="-217" />
+              </svg>
+              <div className="an-legend">
+                <span><i style={{ background: "#00c7a5" }} />Wi-Fi 7</span>
+                <span><i style={{ background: "#0d2b2e" }} />5G</span>
+                <span><i style={{ background: "#7fdcc9" }} />Mesh</span>
+                <span><i style={{ background: "#b9cec9" }} />Others</span>
+              </div>
             </div>
           </Reveal>
         </div>
