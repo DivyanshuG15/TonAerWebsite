@@ -1,6 +1,56 @@
-import { Crosshair, Eye, Lightbulb, Router, Share2, ShieldAlert, Siren, Smartphone, TrendingUp, Wrench, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Crosshair, Eye, Lightbulb, Router, Share2, ShieldAlert, Signal, Siren, Smartphone, TrendingUp, Wrench, Zap } from "lucide-react";
 import { Reveal, SecHead } from "./SecHead";
 import "./home.css";
+
+const SCENARIOS = [
+  {
+    q: "Why is this customer's Wi-Fi performance degrading?",
+    lines: [
+      { crit: true, text: "Issue detected — high latency identified on the mesh path" },
+      { text: "Likely root cause: mesh node instability" },
+      { text: "Affected devices: 4" },
+    ],
+    action: "Recommended action: reconfigure mesh path",
+    trace: [
+      { Icon: Smartphone, label: "CUSTOMER" },
+      { Icon: Router, label: "GATEWAY" },
+      { Icon: Share2, label: "MESH NODE" },
+      { Icon: Siren, label: "ISSUE", issue: true },
+    ],
+  },
+  {
+    q: "Is there any security risk on this account right now?",
+    lines: [
+      { crit: true, text: "Network anomaly detected — unusual outbound traffic pattern" },
+      { text: "Potential vulnerability: outdated gateway firmware" },
+      { text: "Affected gateways: 2" },
+    ],
+    action: "Recommended action: schedule firmware update",
+    trace: [
+      { Icon: Smartphone, label: "CUSTOMER" },
+      { Icon: Router, label: "GATEWAY" },
+      { Icon: ShieldAlert, label: "ANOMALY" },
+      { Icon: Siren, label: "ISSUE", issue: true },
+    ],
+  },
+  {
+    q: "Will this site stay healthy over the next two weeks?",
+    lines: [
+      { text: "Forecast generated from live telemetry" },
+      { crit: true, text: "Watch condition — rising latency trend detected" },
+      { text: "Predicted impact: peak-hour degradation" },
+    ],
+    action: "Recommended action: optimize channel allocation",
+    trace: [
+      { Icon: Router, label: "GATEWAY" },
+      { Icon: Signal, label: "CHANNELS" },
+      { Icon: TrendingUp, label: "CONGESTION" },
+      { Icon: Siren, label: "RISK", issue: true },
+    ],
+  },
+];
 
 const AI_CARDS = [
   { Icon: Wrench, title: "Real-time Troubleshooting", text: "Understand and diagnose issues as they happen." },
@@ -12,6 +62,19 @@ const AI_CARDS = [
 ];
 
 export default function AIIntelligence() {
+  const [index, setIndex] = useState(0);
+  const [manual, setManual] = useState(false);
+  const [hover, setHover] = useState(false);
+
+  useEffect(() => {
+    if (manual || hover) return;
+    const timer = setInterval(() => setIndex((i) => (i + 1) % SCENARIOS.length), 7000);
+    return () => clearInterval(timer);
+  }, [manual, hover]);
+
+  const scenario = SCENARIOS[index];
+  const fade = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -12 }, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } };
+
   return (
     <section className="sec sec-dark aint" id="ai" data-testid="ai-section">
       <div className="section-shell">
@@ -25,21 +88,25 @@ export default function AIIntelligence() {
           <div className="cop-head">
             <img src="/assets/favicon.png" alt="" />
             TONAER AI COPILOT
-            <span className="cop-live"><i />LIVE ANALYSIS</span>
+            <span className="cop-live"><i />{manual || hover ? "PAUSED" : "LIVE ANALYSIS"}</span>
           </div>
-          <div className="cop-grid">
+          <div className="cop-grid" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <div className="cop-chat">
-              <div className="cop-q">
-                &ldquo;Why is this customer&rsquo;s Wi-Fi performance degrading?&rdquo;
-                <small>NETWORK OPERATOR · JUST NOW</small>
-              </div>
-              <div className="cop-a">
-                <b>TONAER AI</b>
-                <p className="cop-line"><i className="dot crit" />Issue detected — high latency identified on the mesh path</p>
-                <p className="cop-line"><i className="dot" />Likely root cause: mesh node instability</p>
-                <p className="cop-line"><i className="dot" />Affected devices: 4</p>
-                <p className="cop-line action"><Zap />Recommended action: reconfigure mesh path</p>
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div key={index} className="cop-chat-inner" {...fade}>
+                  <div className="cop-q">
+                    &ldquo;{scenario.q}&rdquo;
+                    <small>NETWORK OPERATOR · JUST NOW</small>
+                  </div>
+                  <div className="cop-a">
+                    <b>TONAER AI</b>
+                    {scenario.lines.map((line) => (
+                      <p className="cop-line" key={line.text}><i className={`dot ${line.crit ? "crit" : ""}`} />{line.text}</p>
+                    ))}
+                    <p className="cop-line action"><Zap />{scenario.action}</p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
             <div className="cop-side">
               <div className="cop-panel">
@@ -65,13 +132,27 @@ export default function AIIntelligence() {
             </div>
           </div>
           <div className="cop-trace" data-testid="ai-trace">
-            <span className="trace-node"><Smartphone />CUSTOMER</span>
-            <span className="trace-link" />
-            <span className="trace-node"><Router />GATEWAY</span>
-            <span className="trace-link" />
-            <span className="trace-node"><Share2 />MESH NODE</span>
-            <span className="trace-link" />
-            <span className="trace-node issue"><Siren />ISSUE</span>
+            <AnimatePresence mode="wait">
+              <motion.span key={index} className="cop-trace-inner" {...fade}>
+                {scenario.trace.map((node, i) => (
+                  <span key={node.label} style={{ display: "contents" }}>
+                    <span className={`trace-node ${node.issue ? "issue" : ""}`}><node.Icon />{node.label}</span>
+                    {i < scenario.trace.length - 1 && <span className="trace-link" />}
+                  </span>
+                ))}
+              </motion.span>
+            </AnimatePresence>
+            <div className="cop-dots" data-testid="copilot-scenario-dots">
+              {SCENARIOS.map((s, i) => (
+                <button
+                  key={s.q}
+                  className={i === index ? "on" : ""}
+                  onClick={() => { setIndex(i); setManual(true); }}
+                  aria-label={`Copilot scenario ${i + 1}`}
+                  data-testid={`copilot-scenario-${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </Reveal>
 

@@ -297,6 +297,13 @@
 .fcta-ghost{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:2px;border:1px solid #b9cec9;background:transparent;color:#12302c;font:700 12px Manrope,sans-serif;cursor:pointer;transition:border-color .25s,color .25s,transform .25s}
 .fcta-ghost:hover{border-color:#00c7a5;color:#008f7a;transform:translateY(-3px)}
 
+.cop-chat-inner{display:flex;flex-direction:column;gap:18px}
+.cop-trace-inner{display:contents}
+.cop-dots{margin-left:auto;display:flex;gap:8px;align-items:center}
+.cop-dots button{width:22px;height:4px;border-radius:2px;border:0;padding:0;background:rgba(0,199,165,.25);cursor:pointer;transition:background-color .3s,width .3s}
+.cop-dots button.on{background:#00c7a5;width:32px;box-shadow:0 0 10px rgba(0,199,165,.5)}
+.cop-dots button:hover{background:#00c7a5}
+
 /* ===== responsive ===== */
 @media(max-width:1080px){
   .gw-grid{grid-template-columns:1fr;gap:44px}
