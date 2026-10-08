@@ -11,6 +11,7 @@ import HardwareSection from "@/components/HardwareSection";
 import EcosystemIntegration from "@/components/EcosystemIntegration";
 import AIIntelligence from "@/components/AIIntelligence";
 import OperationsSection from "@/components/OperationsSection";
+import TestimonialSection from "@/components/TestimonialSection";
 import BusinessSection from "@/components/BusinessSection";
 import FinalCTA from "@/components/FinalCTA";
 
@@ -48,6 +49,7 @@ function Home() {
           <EcosystemIntegration />
           <AIIntelligence />
           <OperationsSection />
+          <TestimonialSection />
           <BusinessSection onContact={openContact} />
           <FinalCTA onContact={openContact} />
         </main>
